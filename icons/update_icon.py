@@ -1,6 +1,6 @@
 """
-Icon Updater for StoryScript
-Changes the active icon for .story files
+Icon Updater for Quill
+Changes the active icon for .quill files
 """
 
 import os
@@ -11,19 +11,19 @@ def get_icon_choice():
     """Let user choose which icon to use"""
     
     icons = {
-        '1': ('storyscript_icon.ico', 'Gradient Book (Default)'),
-        '2': ('storyscript_icon_minimalist.ico', 'Minimalist Flat Design'),
-        '3': ('storyscript_icon_neon.ico', 'Neon Cyberpunk'),
-        '4': ('storyscript_icon_retro.ico', 'Retro Pixel Art'),
+        '1': ('quill_icon.ico', 'Gradient Book (Default)'),
+        '2': ('quill_icon_minimalist.ico', 'Minimalist Flat Design'),
+        '3': ('quill_icon_neon.ico', 'Neon Cyberpunk'),
+        '4': ('quill_icon_retro.ico', 'Retro Pixel Art'),
     }
     
     print("\n" + "=" * 60)
-    print("  StoryScript Icon Selector")
+    print("  Quill Icon Selector")
     print("=" * 60 + "\n")
     
     print("Choose your icon style:\n")
     for key, (filename, desc) in icons.items():
-        status = "✓ CURRENT" if filename == 'storyscript_icon.ico' else ""
+        status = "✓ CURRENT" if filename == 'quill_icon.ico' else ""
         print(f"  [{key}] {desc} {status}")
         print(f"      {filename}")
         print()
@@ -44,16 +44,16 @@ def get_icon_choice():
 def backup_current_icon():
     """Backup the current icon before replacing"""
     
-    if os.path.exists('storyscript_icon.ico'):
-        backup_name = 'storyscript_icon_backup.ico'
+    if os.path.exists('quill_icon.ico'):
+        backup_name = 'quill_icon_backup.ico'
         
         # If backup already exists, add number
         counter = 1
         while os.path.exists(backup_name):
-            backup_name = f'storyscript_icon_backup_{counter}.ico'
+            backup_name = f'quill_icon_backup_{counter}.ico'
             counter += 1
         
-        shutil.copy2('storyscript_icon.ico', backup_name)
+        shutil.copy2('quill_icon.ico', backup_name)
         print(f"✓ Backed up current icon to: {backup_name}")
         return backup_name
     
@@ -72,7 +72,7 @@ def update_icon(icon_file):
     
     # Copy chosen icon
     try:
-        shutil.copy2(icon_file, 'storyscript_icon.ico')
+        shutil.copy2(icon_file, 'quill_icon.ico')
         print(f"✓ Icon updated to: {icon_file}")
         return True
     except Exception as e:
@@ -80,7 +80,7 @@ def update_icon(icon_file):
         
         # Restore backup if failed
         if backup:
-            shutil.copy2(backup, 'storyscript_icon.ico')
+            shutil.copy2(backup, 'quill_icon.ico')
             print("✓ Restored backup icon")
         
         return False
@@ -95,7 +95,7 @@ def update_registry():
     print("To apply the icon change system-wide:")
     print("\n1. Run the installer again:")
     print("   cd ..")
-    print("   install_storyscript.bat")
+    print("   install_Quill.bat")
     print("\n2. Or manually refresh Windows Explorer:")
     print("   - Press Ctrl+Shift+Esc (Task Manager)")
     print("   - Find 'Windows Explorer'")
@@ -106,7 +106,7 @@ def main():
     """Main function"""
     
     # Check if in icons directory
-    if not os.path.exists('storyscript_icon.ico'):
+    if not os.path.exists('quill_icon.ico'):
         print("\n❌ Error: Not in icons directory!")
         print("   cd icons")
         print("   python update_icon.py")

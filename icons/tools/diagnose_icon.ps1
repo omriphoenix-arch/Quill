@@ -6,8 +6,8 @@ Write-Host "   Icon Diagnostic Tool" -ForegroundColor Cyan
 Write-Host "========================================" -ForegroundColor Cyan
 Write-Host ""
 
-$iconPath = "$env:LOCALAPPDATA\StoryScript\storyscript_icon.ico"
-$installPath = "$env:LOCALAPPDATA\StoryScript"
+$iconPath = "$env:LOCALAPPDATA\Quill\quill_icon.ico"
+$installPath = "$env:LOCALAPPDATA\Quill"
 
 Write-Host "Checking installation..." -ForegroundColor Yellow
 Write-Host ""
@@ -28,22 +28,22 @@ Write-Host ""
 # Check 2: Registry keys
 Write-Host "[2] Registry check:" -ForegroundColor Green
 
-$ext = Get-ItemProperty -Path "HKCU:\Software\Classes\.story" -ErrorAction SilentlyContinue
+$ext = Get-ItemProperty -Path "HKCU:\Software\Classes\.quill" -ErrorAction SilentlyContinue
 if ($ext) {
-    Write-Host "    ✓ .story extension registered" -ForegroundColor White
+    Write-Host "    ✓ .quill extension registered" -ForegroundColor White
     Write-Host "      Points to: $($ext.'(default)')" -ForegroundColor Gray
 } else {
-    Write-Host "    ✗ .story extension NOT registered" -ForegroundColor Red
+    Write-Host "    ✗ .quill extension NOT registered" -ForegroundColor Red
 }
 
-$fileType = Get-ItemProperty -Path "HKCU:\Software\Classes\StoryScript.File" -ErrorAction SilentlyContinue
+$fileType = Get-ItemProperty -Path "HKCU:\Software\Classes\Quill.File" -ErrorAction SilentlyContinue
 if ($fileType) {
-    Write-Host "    ✓ StoryScript.File type registered" -ForegroundColor White
+    Write-Host "    ✓ Quill.File type registered" -ForegroundColor White
 } else {
-    Write-Host "    ✗ StoryScript.File type NOT registered" -ForegroundColor Red
+    Write-Host "    ✗ Quill.File type NOT registered" -ForegroundColor Red
 }
 
-$icon = Get-ItemProperty -Path "HKCU:\Software\Classes\StoryScript.File\DefaultIcon" -ErrorAction SilentlyContinue
+$icon = Get-ItemProperty -Path "HKCU:\Software\Classes\Quill.File\DefaultIcon" -ErrorAction SilentlyContinue
 if ($icon) {
     Write-Host "    ✓ Icon registered in registry" -ForegroundColor White
     Write-Host "      Path: $($icon.'(default)')" -ForegroundColor Gray
@@ -55,14 +55,14 @@ Write-Host ""
 
 # Check 3: File association
 Write-Host "[3] File association check:" -ForegroundColor Green
-$assoc = cmd /c assoc .story 2>$null
+$assoc = cmd /c assoc .quill 2>$null
 if ($assoc) {
     Write-Host "    ✓ Association: $assoc" -ForegroundColor White
 } else {
     Write-Host "    ⚠ No association found" -ForegroundColor Yellow
 }
 
-$ftype = cmd /c ftype StoryScript.File 2>$null
+$ftype = cmd /c ftype Quill.File 2>$null
 if ($ftype) {
     Write-Host "    ✓ File type: $ftype" -ForegroundColor White
 } else {
@@ -71,16 +71,16 @@ if ($ftype) {
 
 Write-Host ""
 
-# Check 4: Test .story file
+# Check 4: Test .quill file
 Write-Host "[4] Test file check:" -ForegroundColor Green
-$testFiles = Get-ChildItem -Path $PSScriptRoot -Filter "*.story" | Select-Object -First 3
+$testFiles = Get-ChildItem -Path $PSScriptRoot -Filter "*.quill" | Select-Object -First 3
 if ($testFiles) {
-    Write-Host "    Found .story files:" -ForegroundColor White
+    Write-Host "    Found .quill files:" -ForegroundColor White
     foreach ($file in $testFiles) {
         Write-Host "      - $($file.Name)" -ForegroundColor Gray
     }
 } else {
-    Write-Host "    ⚠ No .story files found in current directory" -ForegroundColor Yellow
+    Write-Host "    ⚠ No .quill files found in current directory" -ForegroundColor Yellow
 }
 
 Write-Host ""
@@ -130,7 +130,7 @@ if (Test-Path $iconPath) {
     Write-Host "✗ Installation problem detected!" -ForegroundColor Red
     Write-Host ""
     Write-Host "To fix:" -ForegroundColor Yellow
-    Write-Host "  1. Run: .\INSTALL_STORYSCRIPT_USER.bat" -ForegroundColor White
+    Write-Host "  1. Run: .\INSTALL_Quill_USER.bat" -ForegroundColor White
     Write-Host "  2. Make sure the install completes successfully" -ForegroundColor White
 }
 

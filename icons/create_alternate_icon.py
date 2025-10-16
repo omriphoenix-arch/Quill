@@ -1,6 +1,6 @@
 """
-Alternative Icon Generator for StoryScript
-Creates alternate icon designs for .story files
+Alternative Icon Generator for Quill
+Creates alternate icon designs for .quill files
 """
 
 try:
@@ -67,13 +67,13 @@ def create_minimalist_icon():
         images.append(img)
     
     images[0].save(
-        'storyscript_icon_minimalist.ico',
+        'quill_icon_minimalist.ico',
         format='ICO',
         sizes=[(img.width, img.height) for img in images],
         append_images=images[1:]
     )
     
-    print("✓ Minimalist icon created: storyscript_icon_minimalist.ico")
+    print("✓ Minimalist icon created: quill_icon_minimalist.ico")
 
 def create_neon_icon():
     """Create a cyberpunk/neon style icon"""
@@ -150,13 +150,13 @@ def create_neon_icon():
         images.append(img)
     
     images[0].save(
-        'storyscript_icon_neon.ico',
+        'quill_icon_neon.ico',
         format='ICO',
         sizes=[(img.width, img.height) for img in images],
         append_images=images[1:]
     )
     
-    print("✓ Neon icon created: storyscript_icon_neon.ico")
+    print("✓ Neon icon created: quill_icon_neon.ico")
 
 def create_retro_icon():
     """Create a retro/vintage pixel art style icon"""
@@ -220,17 +220,17 @@ def create_retro_icon():
         images.append(img)
     
     images[0].save(
-        'storyscript_icon_retro.ico',
+        'quill_icon_retro.ico',
         format='ICO',
         sizes=[(img.width, img.height) for img in images],
         append_images=images[1:]
     )
     
-    print("✓ Retro icon created: storyscript_icon_retro.ico")
+    print("✓ Retro icon created: quill_icon_retro.ico")
 
 if __name__ == '__main__':
     print("\n" + "=" * 50)
-    print("StoryScript Alternative Icon Generator")
+    print("Quill Alternative Icon Generator")
     print("=" * 50 + "\n")
     
     create_minimalist_icon()
@@ -241,8 +241,8 @@ if __name__ == '__main__':
     print("All alternative icons created successfully!")
     print("=" * 50)
     print("\nChoose your favorite icon style:")
-    print("  • storyscript_icon.ico (gradient book)")
-    print("  • storyscript_icon_minimalist.ico (flat design)")
-    print("  • storyscript_icon_neon.ico (cyberpunk)")
-    print("  • storyscript_icon_retro.ico (pixel art)")
-    print("\nRename your choice to 'storyscript_icon.ico' and run the installer!")
+    print("  • quill_icon.ico (gradient book)")
+    print("  • quill_icon_minimalist.ico (flat design)")
+    print("  • quill_icon_neon.ico (cyberpunk)")
+    print("  • quill_icon_retro.ico (pixel art)")
+    print("\nRename your choice to 'quill_icon.ico' and run the installer!")

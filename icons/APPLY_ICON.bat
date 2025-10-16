@@ -1,17 +1,17 @@
 @echo off
-REM Quick Icon Refresh for StoryScript
+REM Quick Icon Refresh for Quill
 REM Updates the file association to use the new icon
 
 echo ========================================
-echo StoryScript Icon Refresh
+echo Quill Icon Refresh
 echo ========================================
 echo.
-echo This will update .story files to use the new icon.
+echo This will update .quill files to use the new icon.
 echo.
 
 REM Get the absolute path to this script's directory
 set "SCRIPT_DIR=%~dp0"
-set "ICON_PATH=%SCRIPT_DIR%storyscript_icon.ico"
+set "ICON_PATH=%SCRIPT_DIR%quill_icon.ico"
 
 echo Icon location: %ICON_PATH%
 echo.
@@ -20,19 +20,19 @@ if not exist "%ICON_PATH%" (
     echo ERROR: Icon file not found!
     echo Expected location: %ICON_PATH%
     echo.
-    echo Please make sure storyscript_icon.ico exists in the icons folder.
+    echo Please make sure quill_icon.ico exists in the icons folder.
     pause
     exit /b 1
 )
 
 echo [1/3] Updating registry...
 powershell -ExecutionPolicy Bypass -Command ^
-    "New-Item -Path 'HKCU:\Software\Classes\.story' -Force | Out-Null; ^
-     Set-ItemProperty -Path 'HKCU:\Software\Classes\.story' -Name '(Default)' -Value 'StoryScript.File'; ^
-     New-Item -Path 'HKCU:\Software\Classes\StoryScript.File' -Force | Out-Null; ^
-     Set-ItemProperty -Path 'HKCU:\Software\Classes\StoryScript.File' -Name '(Default)' -Value 'StoryScript Program'; ^
-     New-Item -Path 'HKCU:\Software\Classes\StoryScript.File\DefaultIcon' -Force | Out-Null; ^
-     Set-ItemProperty -Path 'HKCU:\Software\Classes\StoryScript.File\DefaultIcon' -Name '(Default)' -Value '%ICON_PATH%,0'; ^
+    "New-Item -Path 'HKCU:\Software\Classes\.quill' -Force | Out-Null; ^
+     Set-ItemProperty -Path 'HKCU:\Software\Classes\.quill' -Name '(Default)' -Value 'Quill.File'; ^
+     New-Item -Path 'HKCU:\Software\Classes\Quill.File' -Force | Out-Null; ^
+     Set-ItemProperty -Path 'HKCU:\Software\Classes\Quill.File' -Name '(Default)' -Value 'Quill Program'; ^
+     New-Item -Path 'HKCU:\Software\Classes\Quill.File\DefaultIcon' -Force | Out-Null; ^
+     Set-ItemProperty -Path 'HKCU:\Software\Classes\Quill.File\DefaultIcon' -Name '(Default)' -Value '%ICON_PATH%,0'; ^
      Write-Host '  Registry updated successfully!' -ForegroundColor Green"
 
 echo.
@@ -50,7 +50,7 @@ echo ========================================
 echo Icon Refresh Complete!
 echo ========================================
 echo.
-echo Your .story files should now display the new icon!
+echo Your .quill files should now display the new icon!
 echo.
 echo If you don't see the icon change immediately:
 echo   1. Navigate away from the folder and back

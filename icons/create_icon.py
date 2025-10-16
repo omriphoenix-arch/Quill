@@ -1,6 +1,6 @@
 """
-Icon Generator for StoryScript
-Creates a custom .ico file for .story files
+Icon Generator for Quill
+Creates a custom .ico file for .quill files
 """
 
 try:
@@ -12,8 +12,8 @@ except ImportError:
 
 import struct
 
-def create_storyscript_icon():
-    """Create a modern icon for .story files with gradient and book design"""
+def create_quill_icon():
+    """Create a modern icon for .quill files with gradient and book design"""
     
     if PIL_AVAILABLE:
         # Create a high-quality icon with PIL
@@ -98,7 +98,7 @@ def create_storyscript_icon():
                     except:
                         font = ImageFont.load_default()
                 
-                # Draw "SS" for StoryScript
+                # Draw "SS" for Quill
                 text = "SS"
                 
                 # Calculate position
@@ -129,13 +129,13 @@ def create_storyscript_icon():
         
         # Save as ICO
         images[0].save(
-            'storyscript_icon.ico',
+            'quill_icon.ico',
             format='ICO',
             sizes=[(img.width, img.height) for img in images],
             append_images=images[1:]
         )
         
-        print("✓ Icon created successfully: storyscript_icon.ico")
+        print("✓ Icon created successfully: quill_icon.ico")
         print("  Sizes included: " + ", ".join([f"{s}x{s}" for s in sizes]))
         
     else:
@@ -172,7 +172,7 @@ def create_basic_icon():
                 icon_data.append(bytes([0, 0, 0, 0]))
     
     # Write ICO file
-    with open('storyscript_icon.ico', 'wb') as f:
+    with open('quill_icon.ico', 'wb') as f:
         # ICO header
         f.write(struct.pack('<HHH', 0, 1, 1))  # Reserved, Type, Count
         
@@ -197,23 +197,23 @@ def create_basic_icon():
         for row in reversed(icon_data):
             f.write(row)
     
-    print("✓ Basic icon created: storyscript_icon.ico")
+    print("✓ Basic icon created: quill_icon.ico")
 
 if __name__ == "__main__":
     print("=" * 50)
-    print("StoryScript Icon Generator")
+    print("Quill Icon Generator")
     print("=" * 50)
     print()
     
     try:
-        create_storyscript_icon()
+        create_quill_icon()
         print()
         print("Icon file ready for installation!")
         print()
-        print("The icon will be associated with .story files")
+        print("The icon will be associated with .quill files")
         print("when you run the installer.")
     except Exception as e:
         print(f"Error creating icon: {e}")
         print()
-        print("You can still use StoryScript without a custom icon,")
-        print("or manually create an icon file named 'storyscript_icon.ico'")
+        print("You can still use Quill without a custom icon,")
+        print("or manually create an icon file named 'quill_icon.ico'")

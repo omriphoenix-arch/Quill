@@ -1,5 +1,5 @@
 """
-Icon Preview Tool for StoryScript
+Icon Preview Tool for Quill
 Shows all icon styles in a visual grid
 """
 
@@ -19,15 +19,15 @@ import os
 class IconPreview:
     def __init__(self):
         self.root = tk.Tk()
-        self.root.title("StoryScript Icon Gallery")
+        self.root.title("Quill Icon Gallery")
         self.root.geometry("900x700")
         self.root.configure(bg='#1e1e1e')
         
         self.icons = [
-            ('storyscript_icon.ico', 'Gradient Book', 'Modern gradient\nPurple to pink\n"SS" glow effect'),
-            ('storyscript_icon_minimalist.ico', 'Minimalist Flat', 'Clean design\nFlat blue\nFolded corner'),
-            ('storyscript_icon_neon.ico', 'Neon Cyberpunk', 'Dark theme\nCyan glow\nFuturistic'),
-            ('storyscript_icon_retro.ico', 'Retro Pixel Art', 'Pixel style\nAmber/yellow\nVintage feel'),
+            ('quill_icon.ico', 'Gradient Book', 'Modern gradient\nPurple to pink\n"SS" glow effect'),
+            ('quill_icon_minimalist.ico', 'Minimalist Flat', 'Clean design\nFlat blue\nFolded corner'),
+            ('quill_icon_neon.ico', 'Neon Cyberpunk', 'Dark theme\nCyan glow\nFuturistic'),
+            ('quill_icon_retro.ico', 'Retro Pixel Art', 'Pixel style\nAmber/yellow\nVintage feel'),
         ]
         
         self.setup_ui()
@@ -38,7 +38,7 @@ class IconPreview:
         # Title
         title = tk.Label(
             self.root,
-            text="🎨 StoryScript Icon Gallery",
+            text="🎨 Quill Icon Gallery",
             font=('Arial', 24, 'bold'),
             bg='#1e1e1e',
             fg='#ffffff'
@@ -47,7 +47,7 @@ class IconPreview:
         
         subtitle = tk.Label(
             self.root,
-            text="Choose your favorite icon style for .story files",
+            text="Choose your favorite icon style for .quill files",
             font=('Arial', 12),
             bg='#1e1e1e',
             fg='#888888'
@@ -183,7 +183,7 @@ def main():
     """Main function"""
     
     print("\n" + "=" * 60)
-    print("  StoryScript Icon Preview")
+    print("  Quill Icon Preview")
     print("=" * 60 + "\n")
     
     print("Opening preview window...")

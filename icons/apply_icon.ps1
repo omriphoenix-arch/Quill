@@ -1,15 +1,15 @@
-# StoryScript Icon Applicator
-# Applies the current icon to .story file associations
+# Quill Icon Applicator
+# Applies the current icon to .quill file associations
 
 Write-Host ""
 Write-Host "========================================" -ForegroundColor Cyan
-Write-Host "   StoryScript Icon Refresh" -ForegroundColor Cyan
+Write-Host "   Quill Icon Refresh" -ForegroundColor Cyan
 Write-Host "========================================" -ForegroundColor Cyan
 Write-Host ""
 
 # Get script directory
 $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
-$iconPath = Join-Path $scriptDir "storyscript_icon.ico"
+$iconPath = Join-Path $scriptDir "quill_icon.ico"
 
 Write-Host "Icon location: " -NoNewline
 Write-Host $iconPath -ForegroundColor Yellow
@@ -20,14 +20,14 @@ if (-not (Test-Path $iconPath)) {
     Write-Host "ERROR: Icon file not found!" -ForegroundColor Red
     Write-Host "Expected: $iconPath" -ForegroundColor Gray
     Write-Host ""
-    Write-Host "Please make sure storyscript_icon.ico exists in the icons folder." -ForegroundColor Yellow
+    Write-Host "Please make sure quill_icon.ico exists in the icons folder." -ForegroundColor Yellow
     Write-Host ""
     Read-Host "Press Enter to exit"
     exit 1
 }
 
 Write-Host "[1/5] Checking current icon..." -ForegroundColor Green
-$currentIconPath = (Get-ItemProperty -Path "HKCU:\Software\Classes\StoryScript.File\DefaultIcon" -ErrorAction SilentlyContinue).'(Default)'
+$currentIconPath = (Get-ItemProperty -Path "HKCU:\Software\Classes\Quill.File\DefaultIcon" -ErrorAction SilentlyContinue).'(Default)'
 if ($currentIconPath) {
     Write-Host "  Current: $currentIconPath" -ForegroundColor Gray
 } else {
@@ -37,29 +37,29 @@ Write-Host ""
 
 Write-Host "[2/5] Updating registry..." -ForegroundColor Green
 
-# Register .story extension
-New-Item -Path "HKCU:\Software\Classes\.story" -Force | Out-Null
-Set-ItemProperty -Path "HKCU:\Software\Classes\.story" -Name "(Default)" -Value "StoryScript.File"
-Write-Host "  .story extension registered" -ForegroundColor Gray
+# Register .quill extension
+New-Item -Path "HKCU:\Software\Classes\.quill" -Force | Out-Null
+Set-ItemProperty -Path "HKCU:\Software\Classes\.quill" -Name "(Default)" -Value "Quill.File"
+Write-Host "  .quill extension registered" -ForegroundColor Gray
 
 # Create file type
-New-Item -Path "HKCU:\Software\Classes\StoryScript.File" -Force | Out-Null
-Set-ItemProperty -Path "HKCU:\Software\Classes\StoryScript.File" -Name "(Default)" -Value "StoryScript Program"
+New-Item -Path "HKCU:\Software\Classes\Quill.File" -Force | Out-Null
+Set-ItemProperty -Path "HKCU:\Software\Classes\Quill.File" -Name "(Default)" -Value "Quill Program"
 Write-Host "  File type created" -ForegroundColor Gray
 
 # Set icon
-New-Item -Path "HKCU:\Software\Classes\StoryScript.File\DefaultIcon" -Force | Out-Null
-Set-ItemProperty -Path "HKCU:\Software\Classes\StoryScript.File\DefaultIcon" -Name "(Default)" -Value "$iconPath,0"
+New-Item -Path "HKCU:\Software\Classes\Quill.File\DefaultIcon" -Force | Out-Null
+Set-ItemProperty -Path "HKCU:\Software\Classes\Quill.File\DefaultIcon" -Name "(Default)" -Value "$iconPath,0"
 Write-Host "  Icon path updated" -ForegroundColor Gray
 
 # Set open command (if Python is available)
 $pythonPath = (Get-Command python -ErrorAction SilentlyContinue).Source
 if ($pythonPath) {
-    $storyscriptPath = Join-Path (Split-Path -Parent (Split-Path -Parent $scriptDir)) "core\storyscript.py"
-    if (Test-Path $storyscriptPath) {
-        $openCommand = "python `"$storyscriptPath`" `"%1`""
-        New-Item -Path "HKCU:\Software\Classes\StoryScript.File\shell\open\command" -Force | Out-Null
-        Set-ItemProperty -Path "HKCU:\Software\Classes\StoryScript.File\shell\open\command" -Name "(Default)" -Value $openCommand
+    $QuillPath = Join-Path (Split-Path -Parent (Split-Path -Parent $scriptDir)) "core\Quill.py"
+    if (Test-Path $QuillPath) {
+        $openCommand = "python `"$QuillPath`" `"%1`""
+        New-Item -Path "HKCU:\Software\Classes\Quill.File\shell\open\command" -Force | Out-Null
+        Set-ItemProperty -Path "HKCU:\Software\Classes\Quill.File\shell\open\command" -Name "(Default)" -Value $openCommand
         Write-Host "  Open command configured" -ForegroundColor Gray
     }
 }
@@ -112,11 +112,11 @@ Write-Host "========================================" -ForegroundColor Green
 Write-Host "   Icon Refresh Complete!" -ForegroundColor Green
 Write-Host "========================================" -ForegroundColor Green
 Write-Host ""
-Write-Host "Your .story files should now display:" -ForegroundColor Cyan
+Write-Host "Your .quill files should now display:" -ForegroundColor Cyan
 Write-Host "  $(Split-Path -Leaf $iconPath)" -ForegroundColor White
 Write-Host ""
 Write-Host "If you don't see the icon immediately:" -ForegroundColor Yellow
-Write-Host "  1. Navigate to a folder with .story files" -ForegroundColor White
+Write-Host "  1. Navigate to a folder with .quill files" -ForegroundColor White
 Write-Host "  2. Press F5 to refresh" -ForegroundColor White
 Write-Host "  3. Try viewing as Large/Medium icons" -ForegroundColor White
 Write-Host "  4. Restart your computer if needed" -ForegroundColor White

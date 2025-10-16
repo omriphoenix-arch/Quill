@@ -55,9 +55,9 @@ Write-Host "========================================" -ForegroundColor Green
 Write-Host "   Refresh Complete!" -ForegroundColor Green
 Write-Host "========================================" -ForegroundColor Green
 Write-Host ""
-Write-Host "Now check your .story files in File Explorer!" -ForegroundColor Cyan
+Write-Host "Now check your .quill files in File Explorer!" -ForegroundColor Cyan
 Write-Host ""
 Write-Host "If icons still don't show:" -ForegroundColor Yellow
 Write-Host "  1. Try restarting your computer" -ForegroundColor White
-Write-Host "  2. Or right-click a .story file and check 'Opens with'" -ForegroundColor White
+Write-Host "  2. Or right-click a .quill file and check 'Opens with'" -ForegroundColor White
 Write-Host ""

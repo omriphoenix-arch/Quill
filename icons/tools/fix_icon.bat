@@ -3,7 +3,7 @@ echo ========================================
 echo    Manual Icon Fix
 echo ========================================
 echo.
-echo This will manually set the .story file icon.
+echo This will manually set the .quill file icon.
 echo.
 pause
 
@@ -12,16 +12,16 @@ echo Setting registry keys...
 echo.
 
 REM Set the file association
-reg add "HKCU\Software\Classes\.story" /ve /t REG_SZ /d "StoryScript.File" /f
+reg add "HKCU\Software\Classes\.quill" /ve /t REG_SZ /d "Quill.File" /f
 
 REM Set the file type description  
-reg add "HKCU\Software\Classes\StoryScript.File" /ve /t REG_SZ /d "StoryScript Program" /f
+reg add "HKCU\Software\Classes\Quill.File" /ve /t REG_SZ /d "Quill Program" /f
 
 REM Set the icon
-reg add "HKCU\Software\Classes\StoryScript.File\DefaultIcon" /ve /t REG_SZ /d "%LOCALAPPDATA%\StoryScript\storyscript_icon.ico,0" /f
+reg add "HKCU\Software\Classes\Quill.File\DefaultIcon" /ve /t REG_SZ /d "%LOCALAPPDATA%\Quill\quill_icon.ico,0" /f
 
 REM Set the open command
-reg add "HKCU\Software\Classes\StoryScript.File\shell\open\command" /ve /t REG_SZ /d "python \"%LOCALAPPDATA%\StoryScript\storyscript.py\" \"%%1\"" /f
+reg add "HKCU\Software\Classes\Quill.File\shell\open\command" /ve /t REG_SZ /d "python \"%LOCALAPPDATA%\Quill\Quill.py\" \"%%1\"" /f
 
 echo.
 echo Registry updated!
@@ -43,11 +43,11 @@ echo ========================================
 echo Done!
 echo ========================================
 echo.
-echo Check your .story files now!
+echo Check your .quill files now!
 echo.
 echo If still no icon, try:
 echo   1. Restarting your computer
-echo   2. Right-click a .story file -^> Properties
+echo   2. Right-click a .quill file -^> Properties
 echo      and check what icon is shown
 echo.
 pause
