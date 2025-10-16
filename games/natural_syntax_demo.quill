@@ -4,7 +4,7 @@
 # ====== OUTPUT COMMANDS ======
 speak "You can use 'speak' instead of 'say'"
 tell "Or use 'tell'"
-display "Or 'display'"
+# display "Or 'display'"  # Note: 'display' keyword not yet enabled
 print "Or 'print'"
 
 # ====== VARIABLES ======

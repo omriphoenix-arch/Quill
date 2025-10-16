@@ -14,9 +14,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### 🐛 Bug Fixes
 - Fixed crash when input ends unexpectedly (EOF error) in `ask` commands and choice menus
 - Programs now exit gracefully with a helpful message instead of crashing
+- Fixed example file `natural_syntax_demo.quill` using disabled keyword
+
+### ⚠️ Known Issues
+- Unicode encoding error on Windows with certain special characters (investigating)
+- Some experimental syntax in example files not fully implemented
 
 ### 📝 Documentation
-- (Add documentation improvements here)
+- Added testing results documentation
+- Created comprehensive test suite
 
 ### 🔧 Improvements
 - Better error handling for interactive programs
