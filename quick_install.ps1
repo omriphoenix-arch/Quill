@@ -1,5 +1,5 @@
 # Quill One-Line Installer for Windows
-# Usage: irm https://raw.githubusercontent.com/yourusername/quill/main/quick_install.ps1 | iex
+# Usage: irm https://raw.githubusercontent.com/omriphoenix-arch/Quill/main/quick_install.ps1 | iex
 # Or: powershell -ExecutionPolicy Bypass -File quick_install.ps1
 
 param(
@@ -37,7 +37,7 @@ Write-Host ""
 # Download
 Write-Host "Downloading Quill (0.77 MB)..." -ForegroundColor Yellow
 $tempZip = "$env:TEMP\quill-main.zip"
-$url = "https://github.com/yourusername/quill/archive/refs/heads/main.zip"
+$url = "https://github.com/omriphoenix-arch/Quill/archive/refs/heads/main.zip"
 
 try {
     Invoke-WebRequest -Uri $url -OutFile $tempZip -UseBasicParsing

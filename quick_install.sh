@@ -1,6 +1,6 @@
 #!/bin/bash
 # Quill One-Line Installer for Mac/Linux
-# Usage: curl -sSL https://raw.githubusercontent.com/yourusername/quill/main/quick_install.sh | bash
+# Usage: curl -sSL https://raw.githubusercontent.com/omriphoenix-arch/Quill/main/quick_install.sh | bash
 # Or: bash quick_install.sh
 
 INSTALL_DIR="$HOME/quill"
@@ -42,7 +42,7 @@ echo ""
 # Download
 echo -e "${YELLOW}Downloading Quill (0.77 MB)...${NC}"
 TEMP_ZIP="/tmp/quill-main.zip"
-URL="https://github.com/yourusername/quill/archive/refs/heads/main.zip"
+URL="https://github.com/omriphoenix-arch/Quill/archive/refs/heads/main.zip"
 
 if curl -sSL "$URL" -o "$TEMP_ZIP"; then
     echo -e "${GREEN}✓ Downloaded${NC}"
