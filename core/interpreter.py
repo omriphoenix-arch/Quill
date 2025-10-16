@@ -99,8 +99,12 @@ class Interpreter:
             prompt = self.evaluate(node.prompt)
             # Color the prompt in yellow with a nice arrow
             colored_prompt = colorize(f"❓ {prompt}", Colors.BRIGHT_YELLOW)
-            user_input = input(colored_prompt + colorize(" ➤ ", Colors.BRIGHT_GREEN))
-            self.variables[node.variable] = user_input
+            try:
+                user_input = input(colored_prompt + colorize(" ➤ ", Colors.BRIGHT_GREEN))
+                self.variables[node.variable] = user_input
+            except EOFError:
+                print(colorize("\n\n⚠ Input ended unexpectedly. Exiting program.", Colors.YELLOW))
+                exit(0)
         
         elif isinstance(node, SetNode):
             value = self.evaluate(node.expression)
@@ -199,6 +203,9 @@ class Interpreter:
                         print(warning(f"Please enter a number between 1 and {len(options_list)}"))
                 except ValueError:
                     print(error("Please enter a valid number"))
+                except EOFError:
+                    print(colorize("\n\n⚠ Input ended unexpectedly. Exiting program.", Colors.YELLOW))
+                    exit(0)
         
         elif isinstance(node, GotoNode):
             if node.label in self.labels:

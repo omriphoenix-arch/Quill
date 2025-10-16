@@ -12,13 +12,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.1] - TBD
 
 ### 🐛 Bug Fixes
-- (Add bug fixes here as you implement them)
+- Fixed crash when input ends unexpectedly (EOF error) in `ask` commands and choice menus
+- Programs now exit gracefully with a helpful message instead of crashing
 
 ### 📝 Documentation
 - (Add documentation improvements here)
 
 ### 🔧 Improvements
-- (Add minor improvements here)
+- Better error handling for interactive programs
+- More user-friendly exit messages
 
 ### 🎯 Community Feedback
 - (Add changes based on Reddit/GitHub feedback here)
