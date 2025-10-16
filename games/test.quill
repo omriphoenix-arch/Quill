@@ -1,0 +1,31 @@
+say "Hello, World!"
+say " ========================= "
+say " Welcome to StoryScript! "
+say " ========================= "
+
+# Ask for the player's name in the terminal
+ask "What's your name?" into player_name
+
+say ""
+say "Nice to meet you, " + player_name + "!"
+say ""
+Wait(1)
+
+choice "Say Hello!" or "Say Goodbye!" or "Exit"
+wait(1)
+if answer is "Say Hello!" then
+    say "Hello, " + player_name + "!"
+end
+if answer is "Say Goodbye!" then
+    say "Goodbye, " + player_name + "!"
+end
+if answer is "Exit" then
+    say "Goodbye, " + player_name + "!"
+    say "Exiting..."
+end
+say ""
+Wait(3)
+say " ==================== "
+say "      Thank you!      "
+say " ==================== "
+say ""

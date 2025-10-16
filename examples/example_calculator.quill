@@ -1,0 +1,80 @@
+# Calculator Program
+# A full calculator written in StoryScript
+
+function add(a, b)
+    return a + b
+end
+
+function subtract(a, b)
+    return a - b
+end
+
+function multiply(a, b)
+    return a * b
+end
+
+function divide(a, b)
+    if b == 0 then
+        say "Error: Cannot divide by zero!"
+        return 0
+    end
+    return a / b
+end
+
+say "================================"
+say "     STORYSCRIPT CALCULATOR"
+say "================================"
+say ""
+
+set running = true
+
+while running do
+    say "Operations:"
+    say "  1. Add"
+    say "  2. Subtract"
+    say "  3. Multiply"
+    say "  4. Divide"
+    say "  5. Power"
+    say "  6. Exit"
+    say ""
+    
+    ask "Choose operation (1-6):" into operation
+    
+    if operation == "6" then
+        say "Goodbye!"
+        running = false
+    else
+        ask "Enter first number:" into num1_str
+        ask "Enter second number:" into num2_str
+        
+        set num1 = float(num1_str)
+        set num2 = float(num2_str)
+        
+        if operation == "1" then
+            set result = add(num1, num2)
+            say str(num1) + " + " + str(num2) + " = " + str(result)
+        end
+        
+        if operation == "2" then
+            set result = subtract(num1, num2)
+            say str(num1) + " - " + str(num2) + " = " + str(result)
+        end
+        
+        if operation == "3" then
+            set result = multiply(num1, num2)
+            say str(num1) + " * " + str(num2) + " = " + str(result)
+        end
+        
+        if operation == "4" then
+            set result = divide(num1, num2)
+            say str(num1) + " / " + str(num2) + " = " + str(result)
+        end
+        
+        if operation == "5" then
+            set result = num1 ** num2
+            say str(num1) + " ^ " + str(num2) + " = " + str(result)
+        end
+        
+        say ""
+    end
+end

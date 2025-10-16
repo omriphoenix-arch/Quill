@@ -1,0 +1,65 @@
+{
+  "name": "quill",
+  "displayName": "Quill Language Support",
+  "description": "Syntax highlighting, color themes, and file icons for Quill programming language",
+  "version": "1.2.1",
+  "publisher": "quill",
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "icon": "icons/quill-icon.png",
+  "contributes": {
+    "languages": [
+      {
+        "id": "quill",
+        "aliases": [
+          "Quill",
+          "quill"
+        ],
+        "extensions": [
+          ".quill"
+        ],
+        "configuration": "./language-configuration.json",
+        "icon": {
+          "light": "./icons/quill-icon.svg",
+          "dark": "./icons/quill-icon.svg"
+        }
+      }
+    ],
+    "grammars": [
+      {
+        "language": "quill",
+        "scopeName": "source.quill",
+        "path": "./syntaxes/quill.tmLanguage.json"
+      }
+    ],
+    "iconThemes": [
+      {
+        "id": "quill-icons",
+        "label": "Quill File Icons",
+        "path": "./icons/quill-icon-theme-png.json"
+      }
+    ],
+    "themes": [
+      {
+        "label": "Quill Dark",
+        "uiTheme": "vs-dark",
+        "path": "./themes/quill-dark-theme.json"
+      },
+      {
+        "label": "Quill Neon",
+        "uiTheme": "vs-dark",
+        "path": "./themes/quill-neon-theme.json"
+      },
+      {
+        "label": "Quill Light",
+        "uiTheme": "vs",
+        "path": "./themes/quill-light-theme.json"
+      }
+    ]
+  }
+}
+

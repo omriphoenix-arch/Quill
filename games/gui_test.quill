@@ -1,0 +1,18 @@
+# Simple GUI Test - StoryScript
+
+# Create a basic window
+window "Hello GUI!" size "600x400" theme dark
+
+# Add some text
+textbox "StoryScript GUI Works!" at 150,100 color "#00ff00" size 24
+
+# Add a button
+button "Click Me!" at 200,200 width 200 height 50 bgcolor "#0e639c" color "#ffffff"
+
+# Display the window
+show
+
+say "✓ GUI window created successfully!"
+say "✓ Check your screen - you should see a window with text and a button."
+say ""
+say "This demonstrates that StoryScript can now create desktop applications!"

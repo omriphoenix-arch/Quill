@@ -1,0 +1,64 @@
+# Interactive Button Demo - StoryScript
+# Demonstrates button onclick callbacks
+
+# Initialize game state
+set score to 0
+set clicks to 0
+
+# Define functions that buttons will call
+function increment_score()
+    set score to score + 10
+    say "Score increased! New score: " + str(score)
+    update score_display to "Score: " + str(score)
+end
+
+function reset_game()
+    set score to 0
+    set clicks to 0
+    say "Game reset! Score: 0, Clicks: 0"
+    update score_display to "Score: 0"
+    update click_display to "Clicks: 0"
+end
+
+function count_click()
+    set clicks to clicks + 1
+    say "Button clicked " + str(clicks) + " times"
+    update click_display to "Clicks: " + str(clicks)
+end
+
+# Create the GUI
+window "Interactive Button Demo" width 700 height 500 theme game
+
+# Title
+textbox "Click the Buttons!" at 200,30 color "#ffd700" size 32 font "Arial"
+
+# Display current score (with ID so we can update it)
+textbox "Score: 0" at 200,100 color "#00ff00" size 18 id score_display
+
+# Display click counter
+textbox "Clicks: 0" at 200,140 color "#00aaff" size 18 id click_display
+
+# Interactive buttons with callbacks
+button "+10 Score" at 100,200 width 180 height 60 bgcolor "#0e639c" color "#ffffff" size 16 onclick increment_score
+
+button "Count Clicks" at 100,280 width 180 height 60 bgcolor "#16213e" color "#ffffff" size 16 onclick count_click
+
+button "Reset Game" at 100,360 width 180 height 60 bgcolor "#8b0000" color "#ffffff" size 16 onclick reset_game
+
+# Info text
+textbox "Click the buttons to see them in action!" at 150,430 color "#aaaaaa" size 14
+
+# Show the GUI
+show
+
+say ""
+say "===== Interactive Button Demo ====="
+say "The GUI window is open with interactive buttons."
+say "Click the buttons to see the callbacks work!"
+say ""
+say "Try clicking:"
+say "  - '+10 Score' to increase your score"
+say "  - 'Count Clicks' to count button presses"  
+say "  - 'Reset Game' to reset everything"
+say ""
+say "Watch this console for messages when you click!"

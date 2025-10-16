@@ -1,0 +1,197 @@
+say "================================================"
+say "        MISSION RANDOMIZER DEMO"
+say "   Success/Failure System Examples"
+say "================================================"
+say ""
+
+# Example 1: Simple 50/50 chance
+say "=== MISSION 1: Simple 50/50 Success ==="
+say "You attempt to hack the security system..."
+wait(1)
+
+set chance to randint(1, 2)
+if chance is 1 then
+    say "✓ SUCCESS! You bypassed the security."
+else
+    say "✗ FAILURE! Alarm triggered!"
+end
+
+wait(2)
+say ""
+
+# Example 2: Percentage-based (30% success rate)
+say "=== MISSION 2: Hard Mission (30% chance) ==="
+say "You attempt a risky infiltration..."
+wait(1)
+
+set roll to randint(1, 100)
+if roll <= 30 then
+    say "✓ SUCCESS! You made it through undetected."
+    say "Roll: " + str(roll) + "/100"
+else
+    say "✗ FAILURE! Guards spotted you!"
+    say "Roll: " + str(roll) + "/100 (needed 30 or less)"
+end
+
+wait(2)
+say ""
+
+# Example 3: Easy mission (80% success rate)
+say "=== MISSION 3: Easy Mission (80% chance) ==="
+say "You attempt to deliver supplies..."
+wait(1)
+
+set roll to randint(1, 100)
+if roll <= 80 then
+    say "✓ SUCCESS! Supplies delivered safely."
+    say "Roll: " + str(roll) + "/100"
+else
+    say "✗ FAILURE! Ambushed during delivery!"
+    say "Roll: " + str(roll) + "/100 (needed 80 or less)"
+end
+
+wait(2)
+say ""
+
+# Example 4: Skill-based (your skill affects success)
+say "=== MISSION 4: Skill-Based Success ==="
+say "Your combat skill affects the outcome..."
+wait(1)
+
+set combat_skill to 60
+say "Your combat skill: " + str(combat_skill)
+
+set roll to randint(1, 100)
+say "Rolling dice..."
+wait(1)
+
+if roll <= combat_skill then
+    say "✓ SUCCESS! Your training paid off."
+    say "Roll: " + str(roll) + "/" + str(combat_skill)
+else
+    say "✗ FAILURE! You need more training."
+    say "Roll: " + str(roll) + "/" + str(combat_skill)
+end
+
+wait(2)
+say ""
+
+# Example 5: Critical Success/Failure (with degrees)
+say "=== MISSION 5: Critical Success/Failure ==="
+say "Attempting diplomatic negotiation..."
+wait(1)
+
+set roll to randint(1, 100)
+say "Roll: " + str(roll)
+wait(1)
+
+if roll >= 95 then
+    say "🌟 CRITICAL SUCCESS! Beyond expectations!"
+    say "The ambassador is deeply impressed."
+else
+    if roll >= 60 then
+        say "✓ Success! Negotiations went well."
+    else
+        if roll >= 20 then
+            say "✗ Failure. Talks broke down."
+        else
+            say "💥 CRITICAL FAILURE! Diplomatic incident!"
+            say "War may be declared!"
+        end
+    end
+end
+
+wait(2)
+say ""
+
+# Example 6: Multiple factors affecting success
+say "=== MISSION 6: Multiple Factors ==="
+say "Stealth mission with equipment bonus..."
+wait(1)
+
+set base_chance to 40
+set equipment_bonus to 20
+set total_chance to base_chance + equipment_bonus
+
+say "Base chance: " + str(base_chance) + "%"
+say "Equipment bonus: +" + str(equipment_bonus) + "%"
+say "Total chance: " + str(total_chance) + "%"
+wait(1)
+
+set roll to randint(1, 100)
+
+if roll <= total_chance then
+    say "✓ SUCCESS! Your gear made the difference."
+    say "Roll: " + str(roll) + "/" + str(total_chance)
+else
+    say "✗ FAILURE! Even with gear, it wasn't enough."
+    say "Roll: " + str(roll) + "/" + str(total_chance)
+end
+
+wait(2)
+say ""
+
+# Example 7: Dice roll system (D20 style)
+say "=== MISSION 7: D20 Style Roll ==="
+say "You need to roll 15 or higher to succeed..."
+wait(1)
+
+set roll to randint(1, 20)
+set difficulty to 15
+
+say "Rolling a 20-sided die..."
+wait(1)
+say "You rolled: " + str(roll)
+wait(1)
+
+if roll >= difficulty then
+    say "✓ SUCCESS! (needed " + str(difficulty) + "+)"
+    if roll is 20 then
+        say "🌟 NATURAL 20! Critical success!"
+    end
+else
+    say "✗ FAILURE! (needed " + str(difficulty) + "+)"
+    if roll is 1 then
+        say "💥 NATURAL 1! Critical failure!"
+    end
+end
+
+wait(2)
+say ""
+
+# Example 8: Reusable function for missions
+say "=== MISSION 8: Reusable Function ==="
+say ""
+
+function check_mission_success(success_chance)
+    set roll to randint(1, 100)
+    say "Rolling... " + str(roll) + "/100"
+    wait(1)
+    
+    if roll <= success_chance then
+        say "✓ MISSION SUCCESS!"
+        return true
+    else
+        say "✗ MISSION FAILED!"
+        return false
+    end
+end
+
+say "Mission A: Rescue hostages (70% chance)"
+set result to check_mission_success(70)
+
+wait(2)
+say ""
+
+say "Mission B: Destroy enemy base (40% chance)"
+set result to check_mission_success(40)
+
+wait(2)
+say ""
+
+say "================================================"
+say "         MISSION SYSTEM COMPLETE"
+say "================================================"
+say ""
+say "You can now add randomized missions to your game!"
+say "Use these patterns in your Asson story."

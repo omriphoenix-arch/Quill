@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StoryScript Icon Gallery</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+        }
+        
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .icon-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+        
+        .icon-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+        
+        .icon-preview {
+            width: 128px;
+            height: 128px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f5f5f5;
+            border-radius: 10px;
+            padding: 20px;
+        }
+        
+        .icon-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
+        .icon-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .icon-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .badge-default {
+            background: #9333ea;
+            color: white;
+        }
+        
+        .badge-clean {
+            background: #3498db;
+            color: white;
+        }
+        
+        .badge-neon {
+            background: #141e1e;
+            color: #00ffff;
+            border: 2px solid #00ffff;
+        }
+        
+        .badge-retro {
+            background: #ffc107;
+            color: #8b4513;
+        }
+        
+        .icon-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .icon-filename {
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #999;
+            background: #f0f0f0;
+            padding: 8px;
+            border-radius: 5px;
+        }
+        
+        .features {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .features h2 {
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .feature-item {
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .feature-item h3 {
+            color: #667eea;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+        
+        .feature-item p {
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        .commands {
+            background: #2d3748;
+            color: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .commands h2 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .command-list {
+            display: grid;
+            gap: 15px;
+        }
+        
+        .command-item {
+            background: #1a202c;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 3px solid #48bb78;
+        }
+        
+        .command-item code {
+            color: #48bb78;
+            font-family: 'Courier New', monospace;
+            font-size: 1em;
+        }
+        
+        .command-item p {
+            color: #a0aec0;
+            margin-top: 8px;
+            font-size: 0.9em;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .icon-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎨 StoryScript Icon Gallery</h1>
+            <p>Choose Your Perfect Icon Style</p>
+        </div>
+        
+        <div class="icon-grid">
+            <div class="icon-card">
+                <div class="icon-preview">
+                    <img src="storyscript_icon.ico" alt="Gradient Book Icon">
+                </div>
+                <div class="icon-title">Gradient Book</div>
+                <span class="icon-badge badge-default">DEFAULT</span>
+                <div class="icon-description">
+                    Modern purple-to-pink gradient with glowing "SS" lettering. 
+                    Professional book design with spine detail. Perfect for colorful themes.
+                </div>
+                <div class="icon-filename">storyscript_icon.ico</div>
+            </div>
+            
+            <div class="icon-card">
+                <div class="icon-preview">
+                    <img src="storyscript_icon_minimalist.ico" alt="Minimalist Icon">
+                </div>
+                <div class="icon-title">Minimalist Flat</div>
+                <span class="icon-badge badge-clean">CLEAN</span>
+                <div class="icon-description">
+                    Clean blue Material Design with folded corner. Simple horizontal lines. 
+                    Professional and modern. Perfect for minimal aesthetics.
+                </div>
+                <div class="icon-filename">storyscript_icon_minimalist.ico</div>
+            </div>
+            
+            <div class="icon-card">
+                <div class="icon-preview" style="background: #1a1a1a;">
+                    <img src="storyscript_icon_neon.ico" alt="Neon Icon">
+                </div>
+                <div class="icon-title">Neon Cyberpunk</div>
+                <span class="icon-badge badge-neon">NEON</span>
+                <div class="icon-description">
+                    Dark background with cyan neon glow effect. Multiple glow layers for depth. 
+                    Glowing "S" symbol. Perfect for dark themes and cyberpunk fans.
+                </div>
+                <div class="icon-filename">storyscript_icon_neon.ico</div>
+            </div>
+            
+            <div class="icon-card">
+                <div class="icon-preview">
+                    <img src="storyscript_icon_retro.ico" alt="Retro Icon">
+                </div>
+                <div class="icon-title">Retro Pixel Art</div>
+                <span class="icon-badge badge-retro">RETRO</span>
+                <div class="icon-description">
+                    Vintage 8-bit pixel art style with amber colors. Pixelated "S" letter. 
+                    Nostalgic gaming aesthetic. Perfect for retro lovers.
+                </div>
+                <div class="icon-filename">storyscript_icon_retro.ico</div>
+            </div>
+        </div>
+        
+        <div class="features">
+            <h2>✨ Icon Features</h2>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <h3>📐 6 Resolutions</h3>
+                    <p>256, 128, 64, 48, 32, and 16 pixels for perfect display at any size</p>
+                </div>
+                <div class="feature-item">
+                    <h3>🎨 Full Color</h3>
+                    <p>32-bit RGBA with full alpha transparency support</p>
+                </div>
+                <div class="feature-item">
+                    <h3>🖼️ Professional Quality</h3>
+                    <p>Anti-aliased rendering with smooth edges and gradients</p>
+                </div>
+                <div class="feature-item">
+                    <h3>🌓 Theme Compatible</h3>
+                    <p>Works beautifully on both light and dark backgrounds</p>
+                </div>
+                <div class="feature-item">
+                    <h3>🔄 Easy Switching</h3>
+                    <p>Change icons anytime with simple Python tools</p>
+                </div>
+                <div class="feature-item">
+                    <h3>💾 Windows Native</h3>
+                    <p>Standard .ico format compatible with all Windows versions</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="commands">
+            <h2>⚡ Quick Commands</h2>
+            <div class="command-list">
+                <div class="command-item">
+                    <code>python preview_icons.py</code>
+                    <p>Open visual gallery showing all 4 icon styles</p>
+                </div>
+                <div class="command-item">
+                    <code>python update_icon.py</code>
+                    <p>Interactive menu to switch between icon styles</p>
+                </div>
+                <div class="command-item">
+                    <code>python create_icon.py</code>
+                    <p>Generate the default gradient book icon</p>
+                </div>
+                <div class="command-item">
+                    <code>python create_alternate_icon.py</code>
+                    <p>Generate all 3 alternative icon styles</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

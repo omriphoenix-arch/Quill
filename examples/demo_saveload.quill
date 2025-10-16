@@ -1,0 +1,159 @@
+# Save/Load System Demo
+# Test the new save and load features!
+
+say "========================================="
+say "   SAVE/LOAD SYSTEM DEMO"
+say "========================================="
+say ""
+
+say "Welcome to the Save/Load Demo!"
+say "Let's create a game state and save it."
+say ""
+
+# Check if there's an existing save
+if has_save("demo") then
+    say "Found an existing save file!"
+    choice "Load existing save" or "Start new game"
+    
+    if answer is "Load existing save" then
+        load_game("demo")
+        say ""
+        say "Game loaded! Here's your progress:"
+        say ""
+        say "Your stats:"
+        say "  Level: " + str(level)
+        say "  Gold: " + str(gold)
+        say "  Location: " + location
+        say ""
+        say "Your inventory:"
+        show_inventory()
+        
+        say ""
+        say "Continuing from where you left off..."
+        goto continue_game
+    end
+end
+
+# Start new game
+say "Starting a new adventure..."
+say ""
+
+ask "What is your character's name?" into player_name
+say "Welcome, " + player_name + "!"
+say ""
+
+# Initialize game variables
+set level = 1
+set gold = 100
+set health = 100
+set location = "Starting Village"
+
+# Add starting items
+add_item("wooden sword")
+add_item("leather armor")
+add_item("health potion")
+
+say "Your starting stats:"
+say "  Level: " + str(level)
+say "  Gold: " + str(gold)
+say "  Health: " + str(health)
+say "  Location: " + location
+say ""
+
+say "Your starting inventory:"
+show_inventory()
+
+label: continue_game
+
+say ""
+say "You explore the area and find treasure!"
+gold = gold + 50
+add_item("gold coin")
+add_item("gold coin")
+add_item("gold coin")
+
+say "You gained 50 gold!"
+say "Total gold: " + str(gold)
+say ""
+
+say "You found a merchant!"
+choice "Buy iron sword (30 gold)" or "Buy shield (20 gold)" or "Save for later"
+
+if answer is "Buy iron sword (30 gold)" then
+    if gold >= 30 then
+        gold = gold - 30
+        add_item("iron sword")
+        say "Purchased iron sword!"
+    else
+        say "Not enough gold!"
+    end
+end
+
+if answer is "Buy shield (20 gold)" then
+    if gold >= 20 then
+        gold = gold - 20
+        add_item("shield")
+        say "Purchased shield!"
+    else
+        say "Not enough gold!"
+    end
+end
+
+say ""
+say "You gained experience!"
+level = level + 1
+say "Level up! Now level " + str(level)
+
+set location = "Forest Path"
+say "You travel to: " + location
+say ""
+
+say "Current stats:"
+say "  Player: " + player_name
+say "  Level: " + str(level)
+say "  Gold: " + str(gold)
+say "  Location: " + location
+say ""
+
+say "Current inventory:"
+show_inventory()
+
+say ""
+say "========================================="
+say "   SAVE YOUR PROGRESS"
+say "========================================="
+say ""
+
+choice "Save game" or "Don't save"
+
+if answer is "Save game" then
+    say ""
+    say "Saving your game..."
+    save_game("demo")
+    say ""
+    say "Your progress has been saved!"
+    say "You can load it next time by running this demo again."
+else
+    say ""
+    say "Progress not saved."
+end
+
+say ""
+say "========================================="
+say "   DEMO COMPLETE!"
+say "========================================="
+say ""
+
+say "Save/Load Commands Available:"
+say "  • save_game('filename')    - Save progress"
+say "  • load_game('filename')    - Load saved game"
+say "  • has_save('filename')     - Check if save exists"
+say "  • delete_save('filename')  - Delete save file"
+say ""
+say "Save files are stored in: saves/"
+say ""
+
+if has_save("demo") then
+    say "Your demo save is available!"
+    say "Run this demo again to continue your adventure!"
+end

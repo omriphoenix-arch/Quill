@@ -1,0 +1,24 @@
+# Color Test - Testing the new styled output!
+
+say "Welcome to StoryScript with colors! 🎨"
+say "The text is now styled and beautiful!"
+
+ask "What's your favorite color?" into fav_color
+
+say "Nice choice! " + fav_color + " is a great color!"
+
+choice "Try red" or "Try blue" or "Try green"
+
+if answer is "Try red" then
+    say "Red is bold and energetic! ❤️"
+end
+
+if answer is "Try blue" then
+    say "Blue is calm and peaceful! 💙"
+end
+
+if answer is "Try green" then
+    say "Green is fresh and natural! 💚"
+end
+
+say "Thanks for testing the colorful output!"

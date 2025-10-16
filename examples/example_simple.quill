@@ -1,0 +1,32 @@
+# A Super Simple Example
+# Perfect for learning the basics!
+
+say "Hello! Let's learn Quill!"
+say ""
+
+# Getting input from the player
+ask "What's your favorite color?" into color
+say "Wow, " + color + " is a great color!"
+say ""
+
+# Using variables
+set score to 0
+say "Your score is: " + score
+
+set score to 100
+say "Now your score is: " + score
+say ""
+
+# Making choices
+say "Time for a quiz!"
+say "What is 2 + 2?"
+choice "3" or "4" or "5"
+
+if answer is "4" then
+    say "Correct! You're smart!"
+else
+    say "Oops! The answer is 4."
+end
+
+say ""
+say "That's the basics of Quill!"

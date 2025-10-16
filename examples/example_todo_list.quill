@@ -1,0 +1,89 @@
+# Todo List Manager
+# A complete todo list application
+
+set todos = []
+
+function show_menu()
+    say ""
+    say "================================"
+    say "      TODO LIST MANAGER"
+    say "================================"
+    say "1. Add task"
+    say "2. View tasks"
+    say "3. Remove task"
+    say "4. Exit"
+    say "================================"
+end
+
+function show_tasks()
+    say ""
+    if len(todos) == 0 then
+        say "No tasks yet! You're all caught up! 🎉"
+    else
+        say "Your tasks:"
+        for i in range(len(todos)) do
+            set task = todos[i]
+            set num = i + 1
+            say "  " + str(num) + ". " + task
+        end
+    end
+end
+
+function add_task()
+    ask "Enter new task:" into task
+    todos = todos + [task]
+    say "✓ Task added!"
+end
+
+function remove_task()
+    if len(todos) == 0 then
+        say "No tasks to remove!"
+        return
+    end
+    
+    show_tasks()
+    ask "Enter task number to remove:" into num_str
+    set num = int(num_str) - 1
+    
+    if num >= 0 and num < len(todos) then
+        set removed_task = todos[num]
+        say "✓ Removed: " + removed_task
+        
+        # Create new list without the removed item
+        set new_todos = []
+        for i in range(len(todos)) do
+            if i != num then
+                new_todos = new_todos + [todos[i]]
+            end
+        end
+        todos = new_todos
+    else
+        say "Invalid task number!"
+    end
+end
+
+say "Welcome to Todo List Manager!"
+
+set running = true
+while running do
+    show_menu()
+    ask "Choose option (1-4):" into user_choice
+    
+    if user_choice == "1" then
+        add_task()
+    end
+    
+    if user_choice == "2" then
+        show_tasks()
+    end
+    
+    if user_choice == "3" then
+        remove_task()
+    end
+    
+    if user_choice == "4" then
+        say ""
+        say "Goodbye! Stay productive! 💪"
+        running = false
+    end
+end

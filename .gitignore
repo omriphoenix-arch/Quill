@@ -1,0 +1,71 @@
+# Files to EXCLUDE from GitHub (add to .gitignore)
+
+# Python cache and compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.pyc
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+*.cover
+
+# Build and distribution
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Logs and databases
+*.log
+*.sqlite
+*.db
+
+# Temporary files
+*.tmp
+*.bak
+*.save
+*.old
+.temp/
+temp/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# User-specific files (keep these local)
+*.local
+.env
+
+# Internal planning documents (not for public repo)
+docs/REDDIT_STRATEGY.md
+docs/REDDIT_DISTRIBUTION_GUIDE.md
+docs/TEACHER_APPROACH_GUIDE.md
+MARKETING_STRATEGY.md
+ROADMAP.md
+INSTALLER_COMPLETE.md
+docs/GUI_FRAMEWORK_FUTURE.md

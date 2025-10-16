@@ -1,0 +1,190 @@
+# StoryScript Tutorial
+# Learn StoryScript step by step!
+
+say "================================================"
+say "  WELCOME TO STORYSCRIPT TUTORIAL"
+say "================================================"
+say ""
+say "StoryScript is a beginner-friendly programming"
+say "language that's easy to learn and fun to use!"
+say ""
+
+# ============================================
+# LESSON 1: VARIABLES
+# ============================================
+say "--- LESSON 1: Variables ---"
+say "Variables store information."
+say ""
+say "Examples:"
+say "  set name = \"Alice\""
+say "  set age = 25"
+say "  set score = 100.5"
+say ""
+
+set name = "Alice"
+set age = 25
+set score = 100.5
+
+say "We just created:"
+say "  name = " + name
+say "  age = " + str(age)
+say "  score = " + str(score)
+say ""
+
+# ============================================
+# LESSON 2: MATH
+# ============================================
+say "--- LESSON 2: Math Operations ---"
+say "You can do math in StoryScript!"
+say ""
+
+set x = 10
+set y = 3
+
+say "x = " + str(x) + ", y = " + str(y)
+say ""
+say "  x + y = " + str(x + y) + "  (addition)"
+say "  x - y = " + str(x - y) + "  (subtraction)"
+say "  x * y = " + str(x * y) + " (multiplication)"
+say "  x / y = " + str(x / y) + " (division)"
+say "  x % y = " + str(x % y) + "  (modulo/remainder)"
+say "  x ** y = " + str(x ** y) + " (power)"
+say ""
+
+# ============================================
+# LESSON 3: CONDITIONALS
+# ============================================
+say "--- LESSON 3: If Statements ---"
+say "Make decisions in your code!"
+say ""
+
+set temperature = 75
+
+say "Current temperature: " + str(temperature)
+if temperature > 80 then
+    say "It's hot! 🌞"
+else
+    if temperature > 60 then
+        say "It's nice! 😊"
+    else
+        say "It's cold! ❄️"
+    end
+end
+say ""
+
+# ============================================
+# LESSON 4: LOOPS
+# ============================================
+say "--- LESSON 4: Loops ---"
+say "Repeat code multiple times!"
+say ""
+
+say "Counting with a while loop:"
+set count = 1
+while count <= 5 do
+    say "  Count: " + str(count)
+    count = count + 1
+end
+say ""
+
+say "Counting with a for loop:"
+for i in range(1, 6) do
+    say "  Number: " + str(i)
+end
+say ""
+
+# ============================================
+# LESSON 5: LISTS
+# ============================================
+say "--- LESSON 5: Lists ---"
+say "Store multiple values together!"
+say ""
+
+set colors = ["red", "green", "blue"]
+say "colors = " + str(colors)
+say "First color: " + colors[0]
+say "Second color: " + colors[1]
+say "Number of colors: " + str(len(colors))
+say ""
+
+say "Loop through a list:"
+for color in colors do
+    say "  Color: " + color
+end
+say ""
+
+# ============================================
+# LESSON 6: FUNCTIONS
+# ============================================
+say "--- LESSON 6: Functions ---"
+say "Reusable blocks of code!"
+say ""
+
+function greet(person)
+    say "Hello, " + person + "! Nice to meet you!"
+end
+
+function calculate_area(width, height)
+    return width * height
+end
+
+say "Calling greet function:"
+greet("Bob")
+greet("Charlie")
+say ""
+
+say "Calling calculate_area function:"
+set area = calculate_area(5, 10)
+say "Area of 5x10 rectangle: " + str(area)
+say ""
+
+# ============================================
+# LESSON 7: PRACTICAL EXAMPLE
+# ============================================
+say "--- LESSON 7: Practical Example ---"
+say "Let's build something useful!"
+say ""
+
+function is_prime(n)
+    if n <= 1 then
+        return false
+    end
+    
+    set i = 2
+    while i * i <= n do
+        if n % i == 0 then
+            return false
+        end
+        i = i + 1
+    end
+    
+    return true
+end
+
+say "Finding prime numbers from 1 to 20:"
+for num in range(1, 21) do
+    if is_prime(num) then
+        say "  " + str(num) + " is prime"
+    end
+end
+say ""
+
+# ============================================
+# FINAL MESSAGE
+# ============================================
+say "================================================"
+say "  TUTORIAL COMPLETE!"
+say "================================================"
+say ""
+say "You've learned:"
+say "  ✓ Variables"
+say "  ✓ Math operations"
+say "  ✓ If statements"
+say "  ✓ Loops (while and for)"
+say "  ✓ Lists"
+say "  ✓ Functions"
+say ""
+say "Now you're ready to write your own programs!"
+say "Check out the example files for more ideas."
+say ""
+say "Happy coding! 🚀"

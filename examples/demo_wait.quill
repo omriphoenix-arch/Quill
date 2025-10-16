@@ -1,0 +1,74 @@
+say "================================================"
+say "        WAIT FUNCTION DEMO"
+say "   Pausing Between Dialogue"
+say "================================================"
+say ""
+
+say "This demo shows how to use wait() to add pauses."
+say ""
+
+say "Watch as the story unfolds with dramatic timing..."
+wait(2)
+
+say ""
+say "Three years ago..."
+wait(1.5)
+
+say "A hero was born."
+wait(1.5)
+
+say "But darkness was rising."
+wait(2)
+
+say ""
+say "================================================"
+say "           DRAMATIC SCENE"
+say "================================================"
+say ""
+
+say "The door creaks open slowly..."
+wait(2)
+
+say "You see a shadowy figure."
+wait(1.5)
+
+say "They turn to face you."
+wait(2)
+
+say ""
+say "Mysterious Figure: 'I've been expecting you...'"
+wait(2)
+
+say ""
+say "================================================"
+say ""
+
+say "The wait() function takes a number of seconds:"
+say "  wait(1)      - Waits 1 second"
+say "  wait(2.5)    - Waits 2.5 seconds"
+say "  wait(0.5)    - Waits half a second"
+say ""
+
+say "Use it to:"
+say "  • Add dramatic pauses"
+say "  • Create suspense"
+say "  • Control pacing"
+say "  • Make dialogue feel natural"
+say ""
+
+say "================================================"
+say "           COUNTDOWN DEMO"
+say "================================================"
+say ""
+
+set countdown to 3
+while countdown > 0 do
+    say countdown
+    wait(1)
+    set countdown to countdown - 1
+end
+
+say "Blast off!"
+say ""
+
+say "Demo complete! Try adding wait() to your stories."

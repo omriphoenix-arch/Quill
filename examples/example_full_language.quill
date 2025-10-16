@@ -1,0 +1,161 @@
+# Full Language Features Demo
+# This showcases StoryScript as a complete programming language!
+
+say "================================"
+say "  STORYSCRIPT FULL DEMO"
+say "================================"
+say ""
+
+# ========== VARIABLES ==========
+say "=== Variables ==="
+set x = 10
+set y = 20
+set name = "Alice"
+
+say "x = " + str(x)
+say "y = " + str(y)
+say "name = " + name
+say ""
+
+# ========== ARITHMETIC ==========
+say "=== Arithmetic ==="
+set sum = x + y
+set diff = y - x
+set product = x * y
+set quotient = y / x
+set power = x ** 2
+
+say str(x) + " + " + str(y) + " = " + str(sum)
+say str(y) + " - " + str(x) + " = " + str(diff)
+say str(x) + " * " + str(y) + " = " + str(product)
+say str(y) + " / " + str(x) + " = " + str(quotient)
+say str(x) + " ** 2 = " + str(power)
+say ""
+
+# ========== COMPARISONS ==========
+say "=== Comparisons ==="
+say "x > y: " + str(x > y)
+say "x < y: " + str(x < y)
+say "x == 10: " + str(x == 10)
+say "x != y: " + str(x != y)
+say ""
+
+# ========== LOGIC ==========
+say "=== Boolean Logic ==="
+set a = true
+set b = false
+say "a and b: " + str(a and b)
+say "a or b: " + str(a or b)
+say "not b: " + str(not b)
+say ""
+
+# ========== LISTS ==========
+say "=== Lists ==="
+set numbers = [1, 2, 3, 4, 5]
+set fruits = ["apple", "banana", "cherry"]
+
+say "Numbers: " + str(numbers)
+say "Fruits: " + str(fruits)
+say "First fruit: " + fruits[0]
+say "Last number: " + str(numbers[4])
+say "Length of fruits: " + str(len(fruits))
+say ""
+
+# ========== LOOPS ==========
+say "=== Loops ==="
+
+say "While loop (countdown):"
+set counter = 5
+while counter > 0 do
+    say "  " + str(counter)
+    counter = counter - 1
+end
+say "  Blast off!"
+say ""
+
+say "For loop (iterate list):"
+for fruit in fruits do
+    say "  I like " + fruit
+end
+say ""
+
+say "For loop (with range):"
+for i in range(1, 6) do
+    say "  Count: " + str(i)
+end
+say ""
+
+# ========== FUNCTIONS ==========
+say "=== Functions ==="
+
+function greet(person)
+    say "Hello, " + person + "!"
+end
+
+function add(a, b)
+    return a + b
+end
+
+function factorial(n)
+    if n <= 1 then
+        return 1
+    end
+    return n * factorial(n - 1)
+end
+
+greet("Bob")
+greet("Charlie")
+
+set result = add(15, 25)
+say "15 + 25 = " + str(result)
+
+set fact5 = factorial(5)
+say "5! = " + str(fact5)
+say ""
+
+# ========== NESTED CONDITIONALS ==========
+say "=== Conditionals ==="
+set score = 85
+
+if score >= 90 then
+    say "Grade: A"
+else
+    if score >= 80 then
+        say "Grade: B"
+    else
+        if score >= 70 then
+            say "Grade: C"
+        else
+            say "Grade: F"
+        end
+    end
+end
+say ""
+
+# ========== BUILT-IN FUNCTIONS ==========
+say "=== Built-in Functions ==="
+say "min(5, 2, 8): " + str(min(5, 2, 8))
+say "max(5, 2, 8): " + str(max(5, 2, 8))
+say "abs(-42): " + str(abs(-42))
+say "sum([1,2,3,4]): " + str(sum([1, 2, 3, 4]))
+say ""
+
+# ========== COMPLEX EXAMPLE ==========
+say "=== Complex Example: Fibonacci ==="
+
+function fibonacci(n)
+    if n <= 1 then
+        return n
+    end
+    return fibonacci(n - 1) + fibonacci(n - 2)
+end
+
+say "First 10 Fibonacci numbers:"
+for i in range(10) do
+    say "  fib(" + str(i) + ") = " + str(fibonacci(i))
+end
+say ""
+
+say "================================"
+say "  Demo Complete!"
+say "================================"

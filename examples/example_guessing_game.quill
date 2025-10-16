@@ -1,0 +1,49 @@
+# Number Guessing Game
+# Guess the random number!
+
+say "================================"
+say "   NUMBER GUESSING GAME"
+say "================================"
+say ""
+
+# Generate random number between 1 and 100
+set secret = randint(1, 100)
+set attempts = 0
+set max_attempts = 10
+set guessed = false
+
+say "I'm thinking of a number between 1 and 100."
+say "You have " + str(max_attempts) + " attempts to guess it!"
+say ""
+
+while attempts < max_attempts and not guessed do
+    set remaining = max_attempts - attempts
+    say "Attempts remaining: " + str(remaining)
+    
+    ask "Enter your guess:" into guess_str
+    set guess = int(guess_str)
+    attempts = attempts + 1
+    
+    if guess == secret then
+        say "🎉 Congratulations! You guessed it!"
+        say "The number was " + str(secret)
+        say "It took you " + str(attempts) + " attempts."
+        guessed = true
+    else
+        if guess < secret then
+            say "Too low! Try higher."
+        else
+            say "Too high! Try lower."
+        end
+        say ""
+    end
+end
+
+if not guessed then
+    say ""
+    say "Game Over! You ran out of attempts."
+    say "The number was " + str(secret)
+end
+
+say ""
+say "Thanks for playing!"

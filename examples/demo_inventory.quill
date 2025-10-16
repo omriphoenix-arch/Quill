@@ -1,0 +1,87 @@
+# Inventory System Demo
+# Test the new inventory features!
+
+say "========================================="
+say "   INVENTORY SYSTEM DEMO"
+say "========================================="
+say ""
+
+say "You wake up in a dungeon cell..."
+say ""
+
+# Add some starting items
+add_item("rusty key")
+add_item("torch")
+
+say "You search your pockets and find:"
+show_inventory()
+
+say "You notice a sword on the ground."
+add_item("iron sword")
+
+say ""
+say "There's also a potion on the shelf."
+choice "Take the potion" or "Leave it"
+
+if answer is "Take the potion" then
+    add_item("health potion")
+    say "You might need this later!"
+end
+
+say ""
+say "Let's check what you have now:"
+show_inventory()
+
+say ""
+say "You try the rusty key on the door..."
+
+if has_item("rusty key") then
+    say "The key works! The door opens."
+    remove_item("rusty key")
+    say "(The key breaks and falls apart)"
+else
+    say "You don't have a key!"
+end
+
+say ""
+say "You enter the armory and find treasure:"
+add_item("gold coin")
+add_item("gold coin")
+add_item("gold coin")
+add_item("silver dagger")
+add_item("shield")
+
+say ""
+say "Your full inventory:"
+show_inventory()
+
+say ""
+say "Total items: " + str(item_count())
+
+say ""
+say "You can check if you have specific items:"
+if has_item("iron sword") then
+    say "✓ You have a sword to defend yourself"
+end
+
+if has_item("health potion") then
+    say "✓ You have a potion for emergencies"
+end
+
+if has_item("shield") then
+    say "✓ You have a shield for protection"
+end
+
+say ""
+say "========================================="
+say "   INVENTORY DEMO COMPLETE!"
+say "========================================="
+say ""
+
+say "New commands available:"
+say "  • add_item('name')     - Add item"
+say "  • remove_item('name')  - Remove item"
+say "  • has_item('name')     - Check if have item"
+say "  • show_inventory()     - Display inventory"
+say "  • item_count()         - Count total items"
+say "  • clear_inventory()    - Remove all items"

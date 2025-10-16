@@ -1,0 +1,81 @@
+# Natural Language Syntax Demo
+# This shows all the alternative keywords you can use!
+
+# ====== OUTPUT COMMANDS ======
+speak "You can use 'speak' instead of 'say'"
+tell "Or use 'tell'"
+display "Or 'display'"
+print "Or 'print'"
+
+# ====== VARIABLES ======
+let player_score equals 0
+make player_name to "Hero"
+create health_points to 100
+
+# ====== INPUT ======
+prompt "What's your favorite color?" into favorite_color
+question "How old are you?" into age
+
+# ====== CONDITIONALS ======
+when health_points is 100 then
+    speak "You're at full health!"
+otherwise
+    speak "You're injured!"
+finish
+
+# ====== CHOICES ======
+choose "Attack" or "Defend" or "Run"
+when answer is "Attack" then
+    speak "You attacked!"
+done
+
+# ====== LOOPS ======
+repeat while player_score is 0 do
+    make player_score to 10
+finish
+
+# ====== FUNCTIONS ======
+define greet_player()
+    speak "Hello, " + player_name + "!"
+    give "Greeting complete"
+finish
+
+# Call the function
+greet_player()
+
+# ====== GUI COMMANDS (with natural alternatives) ======
+
+# Create a window
+screen "Natural Language Demo" width 600 height 400
+
+# Add text
+text "Welcome!" position 50,30 colour "#00ff00" size 24
+
+# Add a button
+btn "Click Me" pos 50,100 background "#0066cc" colour "#ffffff" click my_function
+
+# Add an input field
+field player_input pos 50,200 width 300
+
+# Update display
+change score_display to "Score: 100"
+
+# Show the window
+open
+
+speak ""
+speak "====================================="
+speak "  Natural Language Syntax Demo"
+speak "====================================="
+speak ""
+speak "You can now use more natural words:"
+speak "  - 'speak', 'tell', 'display' for output"
+speak "  - 'let', 'make', 'create' for variables"  
+speak "  - 'prompt', 'question' for input"
+speak "  - 'when', 'otherwise' for conditionals"
+speak "  - 'choose', 'select' for choices"
+speak "  - 'define' for functions"
+speak "  - 'screen', 'btn', 'text' for GUI"
+speak ""
+speak "All original keywords still work too!"
+speak "====================================="

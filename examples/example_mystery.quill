@@ -1,0 +1,104 @@
+# Mystery Mansion - A Detective Game
+# Can you solve the mystery?
+
+say "==============================="
+say "   MYSTERY AT BLACKWOOD MANOR"
+say "==============================="
+say ""
+
+ask "Detective, what is your name?" into detective
+say "Detective " + detective + ", we need your help!"
+say ""
+
+say "Lord Blackwood has been found unconscious in his study."
+say "We suspect foul play. You must find the culprit!"
+say ""
+
+set clues to 0
+set suspect to "unknown"
+
+label: hallway
+say "You are in the grand hallway."
+say "Clues found: " + clues
+say ""
+say "Where do you want to investigate?"
+choice "The Study" or "The Kitchen" or "The Garden" or "Solve the case"
+
+if answer is "The Study" then
+    goto study
+end
+
+if answer is "The Kitchen" then
+    goto kitchen
+end
+
+if answer is "The Garden" then
+    goto garden
+end
+
+if answer is "Solve the case" then
+    goto solve
+end
+
+label: study
+say ""
+say "In the study, you find Lord Blackwood's desk."
+say "There's a half-empty teacup and a strange smell..."
+set clues to 1
+say "You found a clue! The tea smells suspicious."
+say ""
+goto hallway
+
+label: kitchen
+say ""
+say "In the kitchen, you meet the cook, Mrs. Patterson."
+ask "Do you want to question her? (yes/no)" into question
+
+if question is "yes" then
+    say "Mrs. Patterson: 'I made Lord Blackwood's tea this afternoon.'"
+    say "Mrs. Patterson: 'But the gardener brought the tea leaves!'"
+    set clues to 2
+    say "Important information discovered!"
+end
+say ""
+goto hallway
+
+label: garden
+say ""
+say "In the garden, you find the gardener, Mr. Green."
+say "He seems nervous and is holding a strange plant."
+say "The plant looks like it could be poisonous!"
+set clues to 3
+set suspect to "gardener"
+say "You've identified the poisonous plant!"
+say ""
+goto hallway
+
+label: solve
+say ""
+say "==============================="
+say "      TIME TO SOLVE THE CASE"
+say "==============================="
+say ""
+
+if clues is 3 then
+    say "Detective " + detective + ", you've gathered all the clues!"
+    say ""
+    say "The poisonous plant from the garden..."
+    say "The suspicious tea..."
+    say "The gardener who brought the tea leaves..."
+    say ""
+    say "It was Mr. Green, the gardener, in the study, with the poison tea!"
+    say ""
+    say "CASE SOLVED! Excellent work, detective!"
+else
+    say "You need to gather more clues before solving the case."
+    say "Current clues: " + clues + " / 3"
+    say ""
+    goto hallway
+end
+
+say ""
+say "==============================="
+say "     Thanks for playing!"
+say "==============================="

@@ -1,0 +1,22 @@
+# Simple Natural Language Test
+
+say "Testing original keywords first..."
+
+ask "What's your name?" into player_name
+
+say "Nice to meet you, " + player_name + "!"
+
+choice "Say Hello" or "Say Goodbye"
+
+if answer is "Say Hello" then
+    say "Hello, " + player_name + "!"
+end
+
+if answer is "Say Goodbye" then
+    say "Goodbye, " + player_name + "!"
+end
+
+say "Now testing NEW natural keywords:"
+speak "The word 'speak' works!"
+tell "The word 'tell' works!"
+write "The word 'write' works!"

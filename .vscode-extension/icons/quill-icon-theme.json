@@ -1,0 +1,14 @@
+{
+  "hidesExplorerArrows": false,
+  "iconDefinitions": {
+    "quill-file": {
+      "iconPath": "./quill-icon.svg"
+    }
+  },
+  "fileExtensions": {
+    "quill": "quill-file"
+  },
+  "file": "default-file",
+  "folder": "default-folder",
+  "folderExpanded": "default-folder-expanded"
+}
