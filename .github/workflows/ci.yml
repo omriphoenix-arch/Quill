@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    name: Tests (Windows, Ubuntu)
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest]
+        python-version: ["3.11"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pillow
+
+      - name: Run comprehensive test
+        run: |
+          python core\quill.py tests\comprehensive_test.quill
+        shell: pwsh
+        if: matrix.os == 'windows-latest'
+
+      - name: Run comprehensive test (Ubuntu)
+        run: |
+          python core/quill.py tests/comprehensive_test.quill
+        if: matrix.os == 'ubuntu-latest'
