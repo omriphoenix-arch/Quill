@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [1.0.1] - TBD
+## [1.0.1-beta] - 2025-10-16
 
 ### 🐛 Bug Fixes
 - Fixed crash when input ends unexpectedly (EOF error) in `ask` commands and choice menus
