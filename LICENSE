@@ -33,3 +33,13 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 For commercial licensing inquiries, please contact: 
 Quill.Contact94@gmail.com
+
+## Dependencies
+
+Quill requires Python 3.8+ and uses the following standard libraries:
+- Python Standard Library (PSF License)
+- Tkinter for GUI support (optional)
+
+All dependencies are freely available and open source.
+
+Copyright ©️ 2025 Omri Morgan All Rights Reerved
