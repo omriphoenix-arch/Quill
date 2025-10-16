@@ -88,6 +88,15 @@ v1.0.1_*.md
 # User-generated files
 saves/
 
+# Build artifacts
+*.vsix
+*.zip
+vsix_temp/
+
+# Scripts
+rebrand_icons.ps1
+REDDIT_POST_DRAFTS.md
+
 # Legacy/unnecessary folders
 installers/
 syntax-highlighting/
