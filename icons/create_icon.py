@@ -98,8 +98,8 @@ def create_quill_icon():
                     except:
                         font = ImageFont.load_default()
                 
-                # Draw "SS" for Quill
-                text = "SS"
+                # Draw "Q" for Quill
+                text = "Q"
                 
                 # Calculate position
                 try:

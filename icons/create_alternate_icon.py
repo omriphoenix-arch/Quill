@@ -123,7 +123,7 @@ def create_neon_icon():
                 except:
                     font = ImageFont.load_default()
             
-            text = "S"
+            text = "Q"
             
             try:
                 bbox = draw.textbbox((0, 0), text, font=font)

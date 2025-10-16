@@ -24,7 +24,7 @@ class IconPreview:
         self.root.configure(bg='#1e1e1e')
         
         self.icons = [
-            ('quill_icon.ico', 'Gradient Book', 'Modern gradient\nPurple to pink\n"SS" glow effect'),
+            ('quill_icon.ico', 'Gradient Book', 'Modern gradient\nPurple to pink\n"Q" glow effect'),
             ('quill_icon_minimalist.ico', 'Minimalist Flat', 'Clean design\nFlat blue\nFolded corner'),
             ('quill_icon_neon.ico', 'Neon Cyberpunk', 'Dark theme\nCyan glow\nFuturistic'),
             ('quill_icon_retro.ico', 'Retro Pixel Art', 'Pixel style\nAmber/yellow\nVintage feel'),
