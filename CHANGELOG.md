@@ -7,12 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Planned
-- Web-based playground/editor
-- More built-in functions
-- Package manager for sharing .quill files
-- Debugger with breakpoints
-- Performance optimizations
+---
+
+## [1.0.1] - TBD
+
+### 🐛 Bug Fixes
+- (Add bug fixes here as you implement them)
+
+### 📝 Documentation
+- (Add documentation improvements here)
+
+### 🔧 Improvements
+- (Add minor improvements here)
+
+### 🎯 Community Feedback
+- (Add changes based on Reddit/GitHub feedback here)
 
 ---
 

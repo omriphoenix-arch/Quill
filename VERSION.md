@@ -1,17 +1,17 @@
-# Quill v1.0.0
+# Quill v1.0.1 (Development)
 
-**Version:** 1.0.0  
-**Release Date:** October 15, 2025  
-**Status:** Stable Release  
-**License:** MIT  
+**Version:** 1.0.1-dev  
+**Release Date:** TBD  
+**Status:** Development (Patch Release)  
+**License:** Custom (See LICENSE)  
 
 ---
 
 ## Version Information
 
-### Current Version: 1.0.0
+### Current Version: 1.0.1-dev
 
-This is the first stable public release of Quill!
+This is a patch release focusing on bug fixes and minor improvements based on community feedback from v1.0.0.
 
 ### Version Format
 

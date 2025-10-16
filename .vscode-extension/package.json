@@ -2,7 +2,7 @@
   "name": "quill",
   "displayName": "Quill Language Support",
   "description": "Syntax highlighting, color themes, and file icons for Quill programming language",
-  "version": "1.2.1",
+  "version": "1.0.1",
   "publisher": "quill",
   "engines": {
     "vscode": "^1.60.0"
