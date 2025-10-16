@@ -69,3 +69,23 @@ MARKETING_STRATEGY.md
 ROADMAP.md
 INSTALLER_COMPLETE.md
 docs/GUI_FRAMEWORK_FUTURE.md
+
+# Internal development/status files (not needed for public)
+REBRAND_COMPLETE.md
+RELEASE_CHECKLIST.md
+FINALIZATION_CHECKLIST.md
+PROJECT_COMPLETE.md
+PROJECT_STRUCTURE.md
+ISSUE_1_FIXED.md
+LAUNCH_READY.md
+QUILL_READY.md
+READY_FOR_RELEASE.md
+rebrand_to_quill.ps1
+
+# User-generated files
+saves/
+
+# Legacy/unnecessary folders
+installers/
+syntax-highlighting/
+tools/
