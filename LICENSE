@@ -1,21 +1,35 @@
-MIT License
+Quill Programming Language License
 
-Copyright (c) 2025 StoryScript Contributors
+Copyright (c) 2025 Omri Morgan (omriphoenix-arch)
+All Rights Reserved.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+THE QUILL PROGRAMMING LANGUAGE, INCLUDING ITS NAME, LOGO, INTERPRETER, 
+AND ASSOCIATED DOCUMENTATION, IS THE INTELLECTUAL PROPERTY OF OMRI MORGAN.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+PERMITTED USE:
+- Personal use for learning and educational purposes
+- Running and creating programs using the Quill language
+- Sharing programs written in Quill (.quill files)
+- Contributing improvements via pull requests (contributions become part of this project)
 
+NOT PERMITTED WITHOUT WRITTEN PERMISSION:
+- Claiming ownership or creation of the Quill language
+- Creating derivative programming languages based on Quill's design
+- Redistributing modified versions under a different name
+- Commercial use of the Quill interpreter or language without permission
+- Removing or altering copyright notices
+
+ATTRIBUTION:
+Any use of Quill must include clear attribution to Omri Morgan as the original creator.
+The name "Quill" and associated branding remain the property of Omri Morgan.
+
+DISCLAIMER:
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+AUTHOR BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+For commercial licensing inquiries, please contact: 
+Quill.Contact94@gmail.com
