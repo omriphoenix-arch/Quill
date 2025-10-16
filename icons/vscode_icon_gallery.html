@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quill VS Code Icon Gallery</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e1e1e 0%, #2d2d30 100%);
+            color: #cccccc;
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        h1 {
+            color: #ffffff;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .subtitle {
+            color: #8a8a8a;
+            font-size: 1.1em;
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .icon-card {
+            background: #252526;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 2px solid #3c3c3c;
+        }
+        
+        .icon-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(138, 43, 226, 0.3);
+            border-color: #8a2be2;
+        }
+        
+        .icon-name {
+            font-size: 1.4em;
+            color: #ffffff;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .icon-description {
+            color: #8a8a8a;
+            margin-bottom: 20px;
+            font-size: 0.95em;
+            line-height: 1.4;
+        }
+        
+        .icon-preview {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding: 20px;
+            background: #1e1e1e;
+            border-radius: 8px;
+        }
+        
+        .icon-preview-dark {
+            background: #1e1e1e;
+        }
+        
+        .icon-preview-light {
+            background: #f3f3f3;
+        }
+        
+        .preview-section {
+            text-align: center;
+        }
+        
+        .preview-label {
+            color: #8a8a8a;
+            font-size: 0.85em;
+            margin-bottom: 8px;
+        }
+        
+        .icon-preview img {
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+        }
+        
+        .size-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            padding: 15px;
+            background: #1e1e1e;
+            border-radius: 8px;
+        }
+        
+        .size-item {
+            text-align: center;
+        }
+        
+        .size-label {
+            color: #8a8a8a;
+            font-size: 0.75em;
+            margin-top: 5px;
+        }
+        
+        .filename {
+            font-family: 'Consolas', 'Courier New', monospace;
+            background: #1e1e1e;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            color: #4ec9b0;
+            word-break: break-all;
+            border: 1px solid #3c3c3c;
+        }
+        
+        .instructions {
+            background: #252526;
+            border-left: 4px solid #8a2be2;
+            padding: 25px;
+            margin-top: 40px;
+            border-radius: 8px;
+        }
+        
+        .instructions h2 {
+            color: #ffffff;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+        
+        .instructions ol {
+            margin-left: 20px;
+            line-height: 1.8;
+        }
+        
+        .instructions li {
+            margin-bottom: 10px;
+            color: #cccccc;
+        }
+        
+        .instructions code {
+            background: #1e1e1e;
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #4ec9b0;
+            font-family: 'Consolas', 'Courier New', monospace;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: #8a2be2;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.75em;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+        
+        .recommended {
+            background: #0e7a0d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎨 Quill VS Code Icon Gallery</h1>
+            <p class="subtitle">Choose your favorite icon design for the VS Code extension</p>
+        </header>
+        
+        <div class="gallery">
+            <!-- Minimal -->
+            <div class="icon-card">
+                <div class="icon-name">
+                    Minimal
+                    <span class="badge recommended">RECOMMENDED</span>
+                </div>
+                <div class="icon-description">
+                    Clean, modern book design with rounded corners. Perfect for VS Code's flat design language.
+                </div>
+                <div class="icon-preview icon-preview-dark">
+                    <div class="preview-section">
+                        <div class="preview-label">Dark Theme</div>
+                        <img src="quill_vscode_minimal_128.png" width="128" height="128" alt="Minimal icon">
+                    </div>
+                </div>
+                <div class="size-grid">
+                    <div class="size-item">
+                        <img src="quill_vscode_minimal_16.png" width="16" height="16" alt="16x16">
+                        <div class="size-label">16×16</div>
+                    </div>
+                    <div class="size-item">
+                        <img src="quill_vscode_minimal_32.png" width="32" height="32" alt="32x32">
+                        <div class="size-label">32×32</div>
+                    </div>
+                    <div class="size-item">
+                        <img src="quill_vscode_minimal_128.png" width="64" height="64" alt="128x128">
+                        <div class="size-label">128×128</div>
+                    </div>
+                    <div class="size-item">
+                        <img src="quill_vscode_minimal_256.png" width="64" height="64" alt="256x256">
+                        <div class="size-label">256×256</div>
+                    </div>
+                </div>
+                <div class="filename">quill_vscode_minimal_128.png</div>
+            </div>
+            
+            <!-- Gradient -->
+            <div class="icon-card">
+                <div class="icon-name">Gradient</div>
+                <div class="icon-description">
+                    Vibrant circular gradient from purple to blue. Eye-catching with depth and dimension.
+                </div>
+                <div class="icon-preview icon-preview-dark">
+                    <div class="preview-section">
+                        <div class="preview-label">Dark Theme</div>
+                        <img src="quill_vscode_gradient_128.png" width="128" height="128" alt="Gradient icon">
+                    </div>
+                </div>
+                <div class="size-grid">
+                    <div class="size-item">
+                        <img src="quill_vscode_gradient_16.png" width="16" height="16" alt="16x16">
+                        <div class="size-label">16×16</div>
+                    </div>
+                    <div class="size-item">
+                        <img src="quill_vscode_gradient_32.png" width="32" height="32" alt="32x32">
+                        <div class="size-label">32×32</div>
+                    </div>
+                    <div class="size-item">
+                        <img src="quill_vscode_gradient_128.png" width="64" height="64" alt="128x128">
+                        <div class="size-label">128×128</div>
+                    </div>
+                    <div class="size-item">
+                        <img src="quill_vscode_gradient_256.png" width="64" height="64" alt="256x256">
+                        <div class="size-label">256×256</div>
+                    </div>
+                </div>
+                <div class="filename">quill_vscode_gradient_128.png</div>
+            </div>
+            
+            <!-- Flat -->
+            <div class="icon-card">
+                <div class="icon-name">Flat</div>
+                <div class="icon-description">
+                    Ultra-flat design with rounded square. Matches modern marketplace aesthetics perfectly.
+                </div>
+                <div class="icon-preview icon-preview-dark">
+                    <div class="preview-section">
+                        <div class="preview-label">Dark Theme</div>
+                        <img src="quill_vscode_flat_128.png" width="128" height="128" alt="Flat icon">
+                    </div>
+                </div>
+                <div class="size-grid">
+                    <div class="size-item">
+                        <img src="quill_vscode_flat_16.png" width="16" height="16" alt="16x16">
+                        <div class="size-label">16×16</div>
+                    </div>
+                    <div class="size-item">
+                        <img src="quill_vscode_flat_32.png" width="32" height="32" alt="32x32">
+                        <div class="size-label">32×32</div>
+                    </div>
+                    <div class="size-item">
+                        <img src="quill_vscode_flat_128.png" width="64" height="64" alt="128x128">
+                        <div class="size-label">128×128</div>
+                    </div>
+                    <div class="size-item">
+                        <img src="quill_vscode_flat_256.png" width="64" height="64" alt="256x256">
+                        <div class="size-label">256×256</div>
+                    </div>
+                </div>
+                <div class="filename">quill_vscode_flat_128.png</div>
+            </div>
+            
+            <!-- Book Pages -->
+            <div class="icon-card">
+                <div class="icon-name">Book Pages</div>
+                <div class="icon-description">
+                    Open book with two pages and center binding. Literary and distinctive design.
+                </div>
+                <div class="icon-preview icon-preview-dark">
+                    <div class="preview-section">
+                        <div class="preview-label">Dark Theme</div>
+                        <img src="quill_vscode_book_128.png" width="128" height="128" alt="Book icon">
+                    </div>
+                </div>
+                <div class="size-grid">
+                    <div class="size-item">
+                        <img src="quill_vscode_book_16.png" width="16" height="16" alt="16x16">
+                        <div class="size-label">16×16</div>
+                    </div>
+                    <div class="size-item">
+                        <img src="quill_vscode_book_32.png" width="32" height="32" alt="32x32">
+                        <div class="size-label">32×32</div>
+                    </div>
+                    <div class="size-item">
+                        <img src="quill_vscode_book_128.png" width="64" height="64" alt="128x128">
+                        <div class="size-label">128×128</div>
+                    </div>
+                    <div class="size-item">
+                        <img src="quill_vscode_book_256.png" width="64" height="64" alt="256x256">
+                        <div class="size-label">256×256</div>
+                    </div>
+                </div>
+                <div class="filename">quill_vscode_book_128.png</div>
+            </div>
+            
+            <!-- Neon -->
+            <div class="icon-card">
+                <div class="icon-name">
+                    Neon
+                    <span class="badge">DARK THEME</span>
+                </div>
+                <div class="icon-description">
+                    Glowing neon effect on dark background. Stands out dramatically in dark themes.
+                </div>
+                <div class="icon-preview icon-preview-dark">
+                    <div class="preview-section">
+                        <div class="preview-label">Dark Theme</div>
+                        <img src="quill_vscode_neon_128.png" width="128" height="128" alt="Neon icon">
+                    </div>
+                </div>
+                <div class="size-grid">
+                    <div class="size-item">
+                        <img src="quill_vscode_neon_16.png" width="16" height="16" alt="16x16">
+                        <div class="size-label">16×16</div>
+                    </div>
+                    <div class="size-item">
+                        <img src="quill_vscode_neon_32.png" width="32" height="32" alt="32x32">
+                        <div class="size-label">32×32</div>
+                    </div>
+                    <div class="size-item">
+                        <img src="quill_vscode_neon_128.png" width="64" height="64" alt="128x128">
+                        <div class="size-label">128×128</div>
+                    </div>
+                    <div class="size-item">
+                        <img src="quill_vscode_neon_256.png" width="64" height="64" alt="256x256">
+                        <div class="size-label">256×256</div>
+                    </div>
+                </div>
+                <div class="filename">quill_vscode_neon_128.png</div>
+            </div>
+            
+            <!-- Monochrome -->
+            <div class="icon-card">
+                <div class="icon-name">Monochrome</div>
+                <div class="icon-description">
+                    Simple grayscale design. Works universally on any theme or background color.
+                </div>
+                <div class="icon-preview icon-preview-dark">
+                    <div class="preview-section">
+                        <div class="preview-label">Dark Theme</div>
+                        <img src="quill_vscode_mono_128.png" width="128" height="128" alt="Mono icon">
+                    </div>
+                </div>
+                <div class="size-grid">
+                    <div class="size-item">
+                        <img src="quill_vscode_mono_16.png" width="16" height="16" alt="16x16">
+                        <div class="size-label">16×16</div>
+                    </div>
+                    <div class="size-item">
+                        <img src="quill_vscode_mono_32.png" width="32" height="32" alt="32x32">
+                        <div class="size-label">32×32</div>
+                    </div>
+                    <div class="size-item">
+                        <img src="quill_vscode_mono_128.png" width="64" height="64" alt="128x128">
+                        <div class="size-label">128×128</div>
+                    </div>
+                    <div class="size-item">
+                        <img src="quill_vscode_mono_256.png" width="64" height="64" alt="256x256">
+                        <div class="size-label">256×256</div>
+                    </div>
+                </div>
+                <div class="filename">quill_vscode_mono_128.png</div>
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <h2>📋 How to Apply Your Chosen Icon</h2>
+            <ol>
+                <li>Choose your favorite design from the gallery above</li>
+                <li>Note the filename (e.g., <code>quill_vscode_minimal_128.png</code>)</li>
+                <li>The 128×128 version is required for VS Code extensions</li>
+                <li>Tell me which one you prefer, and I'll apply it automatically!</li>
+            </ol>
+            
+            <h2 style="margin-top: 25px;">💡 Recommendation</h2>
+            <p style="line-height: 1.6; margin-top: 10px;">
+                The <strong>Minimal</strong> design is recommended because it:
+                <ul style="margin-left: 20px; margin-top: 10px; line-height: 1.8;">
+                    <li>Matches VS Code's modern flat design language</li>
+                    <li>Scales well at all sizes (16px to 256px)</li>
+                    <li>Works perfectly on both light and dark themes</li>
+                    <li>Has clean, professional appearance</li>
+                </ul>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

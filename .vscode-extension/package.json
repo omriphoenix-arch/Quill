@@ -10,7 +10,7 @@
   "categories": [
     "Programming Languages"
   ],
-  "icon": "icons/quill-icon.png",
+  "icon": "icon.png",
   "contributes": {
     "languages": [
       {
