@@ -9,7 +9,7 @@ ask "What's your name?" into player_name
 say ""
 say "Nice to meet you, " + player_name + "!"
 say ""
-Wait(1)
+wait(1)
 
 choice "Say Hello!" or "Say Goodbye!" or "Exit"
 wait(1)
@@ -24,7 +24,7 @@ if answer is "Exit" then
     say "Exiting..."
 end
 say ""
-Wait(3)
+wait(3)
 say " ==================== "
 say "      Thank you!      "
 say " ==================== "

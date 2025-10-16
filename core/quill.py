@@ -4,6 +4,13 @@ Main entry point for the interpreter
 """
 
 import sys
+import io
+
+# Fix Unicode encoding issues on Windows
+if sys.platform == 'win32':
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
+
 from lexer import Lexer
 from parser import Parser
 from interpreter import Interpreter
