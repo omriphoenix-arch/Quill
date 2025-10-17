@@ -13,7 +13,8 @@ from pathlib import Path
 class QuillInstaller:
     def __init__(self):
         self.system = platform.system()
-        self.quill_dir = Path(__file__).parent.absolute()
+        # Get project root (parent of installer directory)
+        self.quill_dir = Path(__file__).parent.parent.absolute()
         self.is_admin = self.check_admin()
         
     def check_admin(self):

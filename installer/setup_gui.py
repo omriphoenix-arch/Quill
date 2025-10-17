@@ -39,7 +39,8 @@ class QuillInstallerGUI:
         
         # Installer state
         self.system = platform.system()
-        self.quill_dir = Path(__file__).parent.absolute()
+        # Get project root (parent of installer directory)
+        self.quill_dir = Path(__file__).parent.parent.absolute()
         self.install_dir = None
         self.current_page = 0
         
@@ -585,30 +586,66 @@ Click Install to begin installation."""
             installer = QuillInstaller()
             
             self.update_status("Creating installation directory...", 10)
+            self.log(f"Source directory: {self.quill_dir}")
             self.log(f"Installation directory: {self.install_dir}")
+            
+            # Verify source directory exists
+            if not self.quill_dir.exists():
+                raise FileNotFoundError(f"Source directory not found: {self.quill_dir}")
             
             # Create install directory
             if self.install_dir.exists():
+                self.log(f"Removing existing installation at {self.install_dir}")
                 shutil.rmtree(self.install_dir)
+            
+            self.log(f"Creating directory: {self.install_dir}")
             self.install_dir.mkdir(parents=True, exist_ok=True)
             
+            # Copy core files
             self.update_status("Copying core files...", 20)
-            shutil.copytree(self.quill_dir / "core", self.install_dir / "core")
+            core_src = self.quill_dir / "core"
+            core_dst = self.install_dir / "core"
+            self.log(f"Copying: {core_src} -> {core_dst}")
+            if not core_src.exists():
+                raise FileNotFoundError(f"Core directory not found: {core_src}")
+            shutil.copytree(core_src, core_dst)
             self.log("✓ Core files copied")
             
+            # Copy examples
             self.update_status("Copying examples...", 40)
-            shutil.copytree(self.quill_dir / "examples", self.install_dir / "examples")
+            examples_src = self.quill_dir / "examples"
+            examples_dst = self.install_dir / "examples"
+            self.log(f"Copying: {examples_src} -> {examples_dst}")
+            if not examples_src.exists():
+                raise FileNotFoundError(f"Examples directory not found: {examples_src}")
+            shutil.copytree(examples_src, examples_dst)
             self.log("✓ Examples copied")
             
+            # Copy API documentation
             self.update_status("Copying API documentation...", 50)
-            if (self.quill_dir / "docs").exists():
-                shutil.copytree(self.quill_dir / "docs", self.install_dir / "docs")
-                self.log("✓ API documentation copied")
+            docs_src = self.quill_dir / "docs"
+            if docs_src.exists():
+                try:
+                    self.log(f"Copying: {docs_src} -> {self.install_dir / 'docs'}")
+                    shutil.copytree(docs_src, self.install_dir / "docs")
+                    self.log("✓ API documentation copied")
+                except Exception as e:
+                    self.log(f"⚠ Could not copy API docs: {e}")
+            else:
+                self.log("⊘ API documentation not found, skipping")
             
+            # Copy project documentation
             self.update_status("Copying project documentation...", 55)
-            if (self.quill_dir / "documentation").exists():
-                shutil.copytree(self.quill_dir / "documentation", self.install_dir / "documentation")
-                self.log("✓ Project documentation copied")
+            doc_src = self.quill_dir / "documentation"
+            if doc_src.exists():
+                try:
+                    self.log(f"Copying: {doc_src} -> {self.install_dir / 'documentation'}")
+                    shutil.copytree(doc_src, self.install_dir / "documentation")
+                    self.log("✓ Project documentation copied")
+                except Exception as e:
+                    self.log(f"⚠ Could not copy project docs: {e}")
+            else:
+                self.log("⊘ Project documentation not found, skipping")
             
             # Optional components
             self.update_status("Copying optional components...", 60)
@@ -622,12 +659,16 @@ Click Install to begin installation."""
             
             for component, display_name in optional_components.items():
                 src = self.quill_dir / component
+                dst = self.install_dir / component
                 if src.exists():
                     try:
-                        shutil.copytree(src, self.install_dir / component)
+                        self.log(f"Copying: {src} -> {dst}")
+                        shutil.copytree(src, dst)
                         self.log(f"✓ {display_name} copied")
                     except Exception as e:
                         self.log(f"⚠ Could not copy {display_name}: {e}")
+                else:
+                    self.log(f"⊘ {display_name} not found, skipping")
             
             self.update_status("Copying root files...", 70)
             root_files = ["README.md", "LICENSE", "requirements.txt", "CHANGELOG.md", 
