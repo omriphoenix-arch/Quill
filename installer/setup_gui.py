@@ -240,7 +240,45 @@ Click Next to continue."""
             with open(license_file, 'r', encoding='utf-8') as f:
                 license_text.insert(tk.END, f.read())
         else:
-            license_text.insert(tk.END, "MIT License\n\nCopyright (c) 2025 Quill Language\n\nPermission is hereby granted...")
+            # Quill Programming Language License
+            license_text.insert(tk.END, """Quill Programming Language License
+
+Copyright (c) 2025 Omri Morgan (omriphoenix-arch)
+All Rights Reserved.
+
+THE QUILL PROGRAMMING LANGUAGE, INCLUDING ITS NAME, LOGO, INTERPRETER, 
+AND ASSOCIATED DOCUMENTATION, IS THE INTELLECTUAL PROPERTY OF OMRI MORGAN.
+
+PERMITTED USE:
+- Personal use for learning and educational purposes
+- Running and creating programs using the Quill language
+- Sharing programs written in Quill (.quill files)
+- Contributing improvements via pull requests (contributions become part of this project)
+
+NOT PERMITTED WITHOUT WRITTEN PERMISSION:
+- Claiming ownership or creation of the Quill language
+- Creating derivative programming languages based on Quill's design
+- Redistributing modified versions under a different name
+- Commercial use of the Quill interpreter or language without permission
+- Removing or altering copyright notices
+
+ATTRIBUTION:
+Any use of Quill must include clear attribution to Omri Morgan as the original creator.
+The name "Quill" and associated branding remain the property of Omri Morgan.
+
+DISCLAIMER:
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHOR BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+For commercial licensing inquiries, please contact: 
+Quill.Contact94@gmail.com
+
+Copyright © 2025 Omri Morgan All Rights Reserved
+""")
         
         license_text.config(state=tk.DISABLED)
         
@@ -562,23 +600,49 @@ Click Install to begin installation."""
             shutil.copytree(self.quill_dir / "examples", self.install_dir / "examples")
             self.log("✓ Examples copied")
             
-            self.update_status("Copying documentation...", 60)
-            shutil.copytree(self.quill_dir / "docs", self.install_dir / "docs")
-            self.log("✓ Documentation copied")
+            self.update_status("Copying API documentation...", 50)
+            if (self.quill_dir / "docs").exists():
+                shutil.copytree(self.quill_dir / "docs", self.install_dir / "docs")
+                self.log("✓ API documentation copied")
+            
+            self.update_status("Copying project documentation...", 55)
+            if (self.quill_dir / "documentation").exists():
+                shutil.copytree(self.quill_dir / "documentation", self.install_dir / "documentation")
+                self.log("✓ Project documentation copied")
             
             # Optional components
-            for component in ["icons", "scripts", "tests", "games"]:
+            self.update_status("Copying optional components...", 60)
+            optional_components = {
+                "resources": "Resources",
+                "scripts": "Scripts",
+                "tests": "Tests",
+                "games": "Games",
+                "installer": "Installer"
+            }
+            
+            for component, display_name in optional_components.items():
                 src = self.quill_dir / component
                 if src.exists():
-                    shutil.copytree(src, self.install_dir / component)
-                    self.log(f"✓ {component.capitalize()} copied")
+                    try:
+                        shutil.copytree(src, self.install_dir / component)
+                        self.log(f"✓ {display_name} copied")
+                    except Exception as e:
+                        self.log(f"⚠ Could not copy {display_name}: {e}")
             
-            self.update_status("Copying documentation files...", 70)
-            for doc_file in ["README.md", "documentation/QUICK_START.md", "LICENSE", "requirements.txt"]:
+            self.update_status("Copying root files...", 70)
+            root_files = ["README.md", "LICENSE", "requirements.txt", "CHANGELOG.md", 
+                         "CONTRIBUTING.md", "CODE_OF_CONDUCT.md", "STRUCTURE.md",
+                         "quill.bat", "quill"]
+            for doc_file in root_files:
                 src = self.quill_dir / doc_file
                 if src.exists():
-                    shutil.copy(src, self.install_dir / doc_file)
-            self.log("✓ Documentation files copied")
+                    try:
+                        dest = self.install_dir / doc_file
+                        dest.parent.mkdir(parents=True, exist_ok=True)
+                        shutil.copy(src, dest)
+                    except Exception as e:
+                        self.log(f"⚠ Could not copy {doc_file}: {e}")
+            self.log("✓ Root files copied")
             
             # System integration
             if getattr(self, 'add_to_path_var', tk.BooleanVar(value=True)).get():

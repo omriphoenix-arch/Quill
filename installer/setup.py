@@ -63,25 +63,31 @@ class QuillInstaller:
         # Core directories (required)
         shutil.copytree(self.quill_dir / "core", install_dir / "core")
         shutil.copytree(self.quill_dir / "examples", install_dir / "examples")
-        shutil.copytree(self.quill_dir / "docs", install_dir / "docs")
+        if (self.quill_dir / "docs").exists():
+            shutil.copytree(self.quill_dir / "docs", install_dir / "docs")
         
-        # Optional directories (copy if they exist)
-        if (self.quill_dir / "icons").exists():
-            shutil.copytree(self.quill_dir / "icons", install_dir / "icons")
-        if (self.quill_dir / "scripts").exists():
-            shutil.copytree(self.quill_dir / "scripts", install_dir / "scripts")
-        if (self.quill_dir / "tests").exists():
-            shutil.copytree(self.quill_dir / "tests", install_dir / "tests")
-        if (self.quill_dir / "games").exists():
-            shutil.copytree(self.quill_dir / "games", install_dir / "games")
+        # Optional directories (copy if they exist) - using new structure
+        optional_dirs = ["documentation", "resources", "scripts", "tests", "games", "installer"]
+        for dir_name in optional_dirs:
+            src_dir = self.quill_dir / dir_name
+            if src_dir.exists():
+                shutil.copytree(src_dir, install_dir / dir_name)
         
         # Copy launcher scripts
-        shutil.copy(self.quill_dir / "quill.bat", install_dir / "quill.bat")
+        if (self.quill_dir / "quill.bat").exists():
+            shutil.copy(self.quill_dir / "quill.bat", install_dir / "quill.bat")
+        if (self.quill_dir / "quill").exists():
+            shutil.copy(self.quill_dir / "quill", install_dir / "quill")
         
-        # Copy documentation files
-        for doc_file in ["README.md", "documentation/QUICK_START.md", "LICENSE", "requirements.txt", "CHANGELOG.md"]:
-            if (self.quill_dir / doc_file).exists():
-                shutil.copy(self.quill_dir / doc_file, install_dir / doc_file)
+        # Copy root files
+        root_files = ["README.md", "LICENSE", "requirements.txt", "CHANGELOG.md", 
+                     "CONTRIBUTING.md", "CODE_OF_CONDUCT.md", "STRUCTURE.md"]
+        for doc_file in root_files:
+            src = self.quill_dir / doc_file
+            if src.exists():
+                dest = install_dir / doc_file
+                dest.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy(src, dest)
         
         print(f"✓ Copied {len(list(install_dir.rglob('*')))} files")
         
@@ -164,22 +170,25 @@ class QuillInstaller:
         # Core directories (required)
         shutil.copytree(self.quill_dir / "core", install_dir / "core")
         shutil.copytree(self.quill_dir / "examples", install_dir / "examples")
-        shutil.copytree(self.quill_dir / "docs", install_dir / "docs")
+        if (self.quill_dir / "docs").exists():
+            shutil.copytree(self.quill_dir / "docs", install_dir / "docs")
         
-        # Optional directories (copy if they exist)
-        if (self.quill_dir / "icons").exists():
-            shutil.copytree(self.quill_dir / "icons", install_dir / "icons")
-        if (self.quill_dir / "scripts").exists():
-            shutil.copytree(self.quill_dir / "scripts", install_dir / "scripts")
-        if (self.quill_dir / "tests").exists():
-            shutil.copytree(self.quill_dir / "tests", install_dir / "tests")
-        if (self.quill_dir / "games").exists():
-            shutil.copytree(self.quill_dir / "games", install_dir / "games")
+        # Optional directories (copy if they exist) - using new structure
+        optional_dirs = ["documentation", "resources", "scripts", "tests", "games", "installer"]
+        for dir_name in optional_dirs:
+            src_dir = self.quill_dir / dir_name
+            if src_dir.exists():
+                shutil.copytree(src_dir, install_dir / dir_name)
         
-        # Copy documentation files
-        for doc_file in ["README.md", "documentation/QUICK_START.md", "LICENSE", "requirements.txt", "CHANGELOG.md"]:
-            if (self.quill_dir / doc_file).exists():
-                shutil.copy(self.quill_dir / doc_file, install_dir / doc_file)
+        # Copy root files
+        root_files = ["README.md", "LICENSE", "requirements.txt", "CHANGELOG.md", 
+                     "CONTRIBUTING.md", "CODE_OF_CONDUCT.md", "STRUCTURE.md"]
+        for doc_file in root_files:
+            src = self.quill_dir / doc_file
+            if src.exists():
+                dest = install_dir / doc_file
+                dest.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy(src, dest)
         
         print(f"✓ Copied {len(list(install_dir.rglob('*')))} files")
         
