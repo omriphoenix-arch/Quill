@@ -1,0 +1,6 @@
+# Test parser errors
+set x to 5
+
+if x is 5
+    say "Five"
+end

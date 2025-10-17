@@ -1,12 +1,22 @@
 """
-Parser for StoryScript
+Parser for Quill
 Builds an Abstract Syntax Tree (AST) from tokens
 """
 
 from lexer import TokenType, Token
 
 class ASTNode:
-    pass
+    """Base class for AST nodes with optional line/column tracking"""
+    def __init__(self):
+        self.line = 0
+        self.column = 0
+    
+    def set_location(self, token):
+        """Set location from a token"""
+        if token:
+            self.line = token.line
+            self.column = token.column
+        return self
 
 class SayNode(ASTNode):
     def __init__(self, expression):
@@ -145,9 +155,10 @@ class UpdateNode(ASTNode):
         self.new_text = new_text
 
 class Parser:
-    def __init__(self, tokens):
+    def __init__(self, tokens, source=""):
         self.tokens = tokens
         self.pos = 0
+        self.source = source  # Store source for error context
     
     def current_token(self):
         if self.pos >= len(self.tokens):
@@ -166,7 +177,17 @@ class Parser:
     def expect(self, token_type):
         token = self.current_token()
         if token.type != token_type:
-            raise SyntaxError(f"Expected {token_type}, got {token.type} at line {token.line}")
+            from errors import QuillSyntaxError, get_hint
+            source_lines = self.source.split('\n')
+            source_line = source_lines[token.line - 1] if token.line <= len(source_lines) else ""
+            error_msg = f"Expected {token_type.name}, got {token.type.name}"
+            raise QuillSyntaxError(
+                error_msg,
+                line=token.line,
+                column=token.column,
+                source_line=source_line,
+                hint=get_hint(error_msg)
+            )
         self.advance()
         return token
     
@@ -548,9 +569,10 @@ class Parser:
                 right = self.parse_power()
                 left = BinaryOpNode(left, '*', right)
             elif self.current_token().type == TokenType.DIVIDE:
+                op_token = self.current_token()
                 self.advance()
                 right = self.parse_power()
-                left = BinaryOpNode(left, '/', right)
+                left = BinaryOpNode(left, '/', right).set_location(op_token)
             elif self.current_token().type == TokenType.MODULO:
                 self.advance()
                 right = self.parse_power()
@@ -636,7 +658,7 @@ class Parser:
             return expr
         elif token.type == TokenType.IDENTIFIER:
             self.advance()
-            return VariableNode(token.value)
+            return VariableNode(token.value).set_location(token)
         else:
             raise SyntaxError(f"Unexpected token {token.type} at line {token.line}")
     

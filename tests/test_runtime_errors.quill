@@ -1,0 +1,5 @@
+# Test runtime errors
+set x to 10
+set y to 0
+
+say x / y

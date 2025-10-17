@@ -32,11 +32,11 @@ def run_file(filename):
         tokens = lexer.tokenize()
         
         # Parsing
-        parser = Parser(tokens)
+        parser = Parser(tokens, source)
         ast = parser.parse()
         
         # Interpreting
-        interpreter = Interpreter()
+        interpreter = Interpreter(source)
         interpreter.run(ast)
         
         # Success message

@@ -6,7 +6,7 @@ ask "What's your name?" into player_name
 
 say "Nice to meet you, " + player_name + "!"
 
-choice "Say Hello" or "Say Goodbye"
+choice "Say Hello" or "Say Goodbye" 
 
 if answer is "Say Hello" then
     say "Hello, " + player_name + "!"

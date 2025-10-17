@@ -203,5 +203,5 @@ def print_logo():
     """Print the Quill logo"""
     print(LOGO)
     print(colorize("    Write Your Programs Like Stories", Colors.BRIGHT_CYAN))
-    print(colorize("    Version 1.0.0-beta", Colors.BRIGHT_BLACK))
+    print(colorize("    Version 1.0.1-beta", Colors.BRIGHT_BLACK))
     print()

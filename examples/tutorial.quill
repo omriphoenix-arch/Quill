@@ -1,11 +1,11 @@
-# StoryScript Tutorial
-# Learn StoryScript step by step!
+# Quill Tutorial
+# Learn Quill step by step!
 
 say "================================================"
-say "  WELCOME TO STORYSCRIPT TUTORIAL"
+say "  WELCOME TO QUILL TUTORIAL"
 say "================================================"
 say ""
-say "StoryScript is a beginner-friendly programming"
+say "Quill is a beginner-friendly programming"
 say "language that's easy to learn and fun to use!"
 say ""
 
@@ -35,7 +35,7 @@ say ""
 # LESSON 2: MATH
 # ============================================
 say "--- LESSON 2: Math Operations ---"
-say "You can do math in StoryScript!"
+say "You can do math in Quill!"
 say ""
 
 set x = 10

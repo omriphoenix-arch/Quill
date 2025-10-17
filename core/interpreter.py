@@ -1,5 +1,5 @@
 """
-Interpreter for StoryScript
+Interpreter for Quill
 Executes the AST
 """
 
@@ -30,7 +30,7 @@ class Function:
         self.closure = closure
 
 class Interpreter:
-    def __init__(self):
+    def __init__(self, source=""):
         self.variables = {}
         self.functions = {}
         self.labels = {}
@@ -38,6 +38,7 @@ class Interpreter:
         self.current_pos = 0
         self.inventory = []  # Player's inventory
         self.gui = GUIEngine(interpreter=self)  # GUI engine for desktop apps
+        self.source = source  # Store source for error context
         
         # Built-in functions
         self.builtins = {
@@ -69,6 +70,21 @@ class Interpreter:
             'has_save': lambda filename: self._has_save(filename),
             'delete_save': lambda filename: self._delete_save(filename),
         }
+    
+    def runtime_error(self, message, node=None, hint=None):
+        """Raise a rich runtime error with context"""
+        from errors import QuillRuntimeError, get_hint
+        line = getattr(node, 'line', 0) if node else 0
+        column = getattr(node, 'column', 0) if node else 0
+        source_lines = self.source.split('\n')
+        source_line = source_lines[line - 1] if line <= len(source_lines) else ""
+        raise QuillRuntimeError(
+            message,
+            line=line,
+            column=column,
+            source_line=source_line,
+            hint=hint or get_hint(message)
+        )
     
     def run(self, statements):
         self.statements = statements
@@ -265,7 +281,7 @@ class Interpreter:
             if node.name in self.variables:
                 return self.variables[node.name]
             else:
-                raise RuntimeError(f"Variable '{node.name}' is not defined")
+                self.runtime_error(f"Variable '{node.name}' is not defined", node, "Make sure the variable is declared with 'set' before using it")
         
         elif isinstance(node, BinaryOpNode):
             left = self.evaluate(node.left)
@@ -283,7 +299,7 @@ class Interpreter:
                 return left * right
             elif node.operator == '/':
                 if right == 0:
-                    raise RuntimeError("Division by zero")
+                    self.runtime_error("Division by zero", node, "Check that the divisor is not zero before dividing")
                 return left / right
             elif node.operator == '%':
                 return left % right
@@ -324,9 +340,9 @@ class Interpreter:
                 try:
                     return obj[int(index)]
                 except IndexError:
-                    raise RuntimeError(f"Index {index} out of range")
+                    self.runtime_error(f"Index {index} out of range for {type(obj).__name__} of length {len(obj)}", node, "Array/string indices must be within bounds (0 to length-1)")
             else:
-                raise RuntimeError(f"Cannot index {type(obj).__name__}")
+                self.runtime_error(f"Cannot index {type(obj).__name__}", node)
         
         elif isinstance(node, FunctionCallNode):
             # Check built-in functions first

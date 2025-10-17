@@ -1,0 +1,5 @@
+say "yes"
+tell "yes"
+speak "yes"
+print "yes"
+write "yes"

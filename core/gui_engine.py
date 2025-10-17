@@ -1,5 +1,5 @@
 """
-GUI Engine for StoryScript
+GUI Engine for Quill
 Handles window creation and widget rendering using Tkinter
 """
 

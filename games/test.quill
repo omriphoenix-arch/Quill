@@ -1,6 +1,6 @@
 say "Hello, World!"
 say " ========================= "
-say " Welcome to StoryScript! "
+say " Welcome to Quill! "
 say " ========================= "
 
 # Ask for the player's name in the terminal

@@ -1,0 +1,7 @@
+say "Please fill out all following information."
+
+ask "Whats your name?" into name
+
+Name = name
+
+say (Name) 
