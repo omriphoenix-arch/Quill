@@ -1,0 +1,22 @@
+# File I/O Example
+say "File I/O Demo"
+
+set filename = "output/demo.txt"
+
+say "Writing lines to file..."
+write_lines(filename, ["Line 1", "Line 2", "Line 3"])
+
+say "Appending a line..."
+append_text(filename, "\nAppended Line")
+
+say "Reading file as text:"
+set content = read_text(filename)
+say content
+
+say "Reading file as lines:"
+set lines = read_lines(filename)
+for l in lines do
+    say "- " + l
+end
+
+say "File I/O demo complete!"

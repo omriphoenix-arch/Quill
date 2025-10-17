@@ -11,6 +11,7 @@ import random
 import json
 import os
 import time
+import sys
 
 class BreakException(Exception):
     pass
@@ -30,7 +31,7 @@ class Function:
         self.closure = closure
 
 class Interpreter:
-    def __init__(self, source=""):
+    def __init__(self, source="", legacy_mode=False):
         self.variables = {}
         self.functions = {}
         self.labels = {}
@@ -39,11 +40,12 @@ class Interpreter:
         self.inventory = []  # Player's inventory
         self.gui = GUIEngine(interpreter=self)  # GUI engine for desktop apps
         self.source = source  # Store source for error context
+        self.legacy_mode = legacy_mode  # Auto-import game/io in legacy mode
         
         # Import standard library
         from stdlib import get_stdlib_functions
         
-        # Built-in functions (core + stdlib)
+        # Built-in functions (CORE ONLY - no game/io by default)
         self.builtins = {
             # Basic type functions
             'len': lambda x: len(x),
@@ -53,24 +55,33 @@ class Interpreter:
             'type': lambda x: type(x).__name__,
             'range': lambda *args: list(range(*args)),
             'abs': lambda x: abs(x),
-            # Timing functions
-            'wait': lambda seconds: self._wait(seconds),
-            # Inventory functions
-            'add_item': lambda item: self._add_item(item),
-            'remove_item': lambda item: self._remove_item(item),
-            'has_item': lambda item: self._has_item(item),
-            'show_inventory': lambda: self._show_inventory(),
-            'item_count': lambda: len(self.inventory),
-            'clear_inventory': lambda: self._clear_inventory(),
-            # Save/Load functions
-            'save_game': lambda filename: self._save_game(filename),
-            'load_game': lambda filename: self._load_game(filename),
-            'has_save': lambda filename: self._has_save(filename),
-            'delete_save': lambda filename: self._delete_save(filename),
         }
         
-        # Add stdlib functions
-        self.builtins.update(get_stdlib_functions())
+        # Add stdlib functions (pass interpreter to allow rich error wrapping)
+        try:
+            self.builtins.update(get_stdlib_functions(self))
+        except Exception:
+            # Fallback if stdlib import fails for any reason
+            try:
+                self.builtins.update(get_stdlib_functions())
+            except Exception:
+                pass
+        
+        # Initialize module system
+        try:
+            from modules import ModuleLoader
+            self.module_loader = ModuleLoader(self)
+        except Exception as e:
+            print(f"Warning: Could not initialize module system: {e}")
+            self.module_loader = None
+        
+        # Legacy mode: auto-import game and io modules
+        if self.legacy_mode and self.module_loader:
+            try:
+                self.module_loader.import_from('game', '*')
+                self.module_loader.import_from('io', '*')
+            except Exception:
+                pass
     
     def runtime_error(self, message, node=None, hint=None):
         """Raise a rich runtime error with context"""
@@ -190,6 +201,26 @@ class Interpreter:
         
         elif isinstance(node, ContinueNode):
             raise ContinueException()
+        
+        elif isinstance(node, ImportNode):
+            # Handle import statements
+            if self.module_loader is None:
+                raise RuntimeError("Module system not available")
+            
+            try:
+                if node.from_import:
+                    # from module import ...
+                    self.module_loader.import_from(node.module_name, node.import_names)
+                    if '*' in node.import_names:
+                        print(f"✓ Imported all from '{node.module_name}'")
+                    else:
+                        print(f"✓ Imported {', '.join(node.import_names)} from '{node.module_name}'")
+                else:
+                    # import module
+                    self.module_loader.import_module(node.module_name, into_globals=False)
+                    print(f"✓ Loaded module '{node.module_name}'")
+            except Exception as e:
+                self.runtime_error(f"Failed to import module '{node.module_name}': {e}", node)
         
         elif isinstance(node, ChoiceNode):
             # Styled choice menu

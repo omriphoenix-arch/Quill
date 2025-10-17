@@ -5,6 +5,9 @@ Common utility functions available to all scripts
 
 import random
 import math
+import os
+
+from typing import Iterable
 
 class QuillStdlib:
     """Standard library functions for Quill"""
@@ -177,50 +180,124 @@ class QuillStdlib:
             return value == 0
         return False
 
+    # File I/O utilities
+    @staticmethod
+    def read_text(path):
+        """Read entire text file and return as string"""
+        with open(str(path), 'r', encoding='utf-8') as f:
+            return f.read()
 
-def get_stdlib_functions():
-    """Return dictionary of all stdlib functions for interpreter"""
+    @staticmethod
+    def write_text(path, content):
+        """Write text to a file (overwrites). Creates parent dirs if needed."""
+        path = str(path)
+        dirpath = os.path.dirname(path)
+        if dirpath and not os.path.exists(dirpath):
+            os.makedirs(dirpath, exist_ok=True)
+        with open(path, 'w', encoding='utf-8') as f:
+            f.write(str(content))
+        return True
+
+    @staticmethod
+    def append_text(path, content):
+        """Append text to a file. Creates parent dirs if needed."""
+        path = str(path)
+        dirpath = os.path.dirname(path)
+        if dirpath and not os.path.exists(dirpath):
+            os.makedirs(dirpath, exist_ok=True)
+        with open(path, 'a', encoding='utf-8') as f:
+            f.write(str(content))
+        return True
+
+    @staticmethod
+    def read_lines(path):
+        """Read a file and return a list of lines (without trailing newlines)"""
+        with open(str(path), 'r', encoding='utf-8') as f:
+            return [line.rstrip('\n') for line in f.readlines()]
+
+    @staticmethod
+    def write_lines(path, lines: Iterable):
+        """Write an iterable of lines to a file. Each item will become a line."""
+        path = str(path)
+        dirpath = os.path.dirname(path)
+        if dirpath and not os.path.exists(dirpath):
+            os.makedirs(dirpath, exist_ok=True)
+        with open(path, 'w', encoding='utf-8') as f:
+            for item in lines:
+                f.write(str(item) + '\n')
+        return True
+
+
+def get_stdlib_functions(interpreter=None):
+    """Return dictionary of all stdlib functions for interpreter.
+
+    If an Interpreter instance is provided, wrappers will convert exceptions
+    into rich runtime errors via interpreter.runtime_error(message).
+    """
     stdlib = QuillStdlib()
+
+    def wrap(name, fn):
+        if interpreter is None:
+            return fn
+        def wrapped(*args, **kwargs):
+            try:
+                return fn(*args, **kwargs)
+            except Exception as e:
+                # Use interpreter's runtime_error to raise a QuillRuntimeError
+                try:
+                    interpreter.runtime_error(f"Error in stdlib function '{name}': {e}")
+                except Exception:
+                    # If runtime_error itself fails, fall back to raising the original exception
+                    raise
+        return wrapped
+
     return {
         # Math utilities
-        'clamp': stdlib.clamp,
-        'min': stdlib.min_val,
-        'max': stdlib.max_val,
-        'sum': stdlib.sum_val,
-        'average': stdlib.average,
-        'avg': stdlib.average,  # Alias
-        'round': stdlib.round_val,
-        'floor': stdlib.floor,
-        'ceil': stdlib.ceil,
-        'sqrt': stdlib.sqrt,
-        'pow': stdlib.pow_val,
+        'clamp': wrap('clamp', stdlib.clamp),
+        'min': wrap('min', stdlib.min_val),
+        'max': wrap('max', stdlib.max_val),
+        'sum': wrap('sum', stdlib.sum_val),
+        'average': wrap('average', stdlib.average),
+        'avg': wrap('avg', stdlib.average),  # Alias
+        'round': wrap('round', stdlib.round_val),
+        'floor': wrap('floor', stdlib.floor),
+        'ceil': wrap('ceil', stdlib.ceil),
+        'sqrt': wrap('sqrt', stdlib.sqrt),
+        'pow': wrap('pow', stdlib.pow_val),
         
         # Random
-        'random_choice': stdlib.random_choice,
-        'random_int': stdlib.random_int,
-        'random_float': stdlib.random_float,
-        'choice': stdlib.random_choice,  # Alias
+        'random_choice': wrap('random_choice', stdlib.random_choice),
+        'random_int': wrap('random_int', stdlib.random_int),
+        'random_float': wrap('random_float', stdlib.random_float),
+        'choice': wrap('choice', stdlib.random_choice),  # Alias
         
         # String utilities
-        'trim': stdlib.trim,
-        'lower': stdlib.lower,
-        'upper': stdlib.upper,
-        'capitalize': stdlib.capitalize,
-        'title': stdlib.title,
-        'split': stdlib.split,
-        'join': stdlib.join,
-        'replace': stdlib.replace,
-        'starts_with': stdlib.starts_with,
-        'ends_with': stdlib.ends_with,
-        'contains': stdlib.contains,
+        'trim': wrap('trim', stdlib.trim),
+        'lower': wrap('lower', stdlib.lower),
+        'upper': wrap('upper', stdlib.upper),
+        'capitalize': wrap('capitalize', stdlib.capitalize),
+        'title': wrap('title', stdlib.title),
+        'split': wrap('split', stdlib.split),
+        'join': wrap('join', stdlib.join),
+        'replace': wrap('replace', stdlib.replace),
+        'starts_with': wrap('starts_with', stdlib.starts_with),
+        'ends_with': wrap('ends_with', stdlib.ends_with),
+        'contains': wrap('contains', stdlib.contains),
+        
+        # File I/O
+        'read_text': wrap('read_text', stdlib.read_text),
+        'write_text': wrap('write_text', stdlib.write_text),
+        'append_text': wrap('append_text', stdlib.append_text),
+        'read_lines': wrap('read_lines', stdlib.read_lines),
+        'write_lines': wrap('write_lines', stdlib.write_lines),
         
         # List utilities
-        'reverse': stdlib.reverse,
-        'sort': stdlib.sort,
+        'reverse': wrap('reverse', stdlib.reverse),
+        'sort': wrap('sort', stdlib.sort),
         
         # Type checking
-        'is_number': stdlib.is_number,
-        'is_string': stdlib.is_string,
-        'is_list': stdlib.is_list,
-        'is_empty': stdlib.is_empty,
+        'is_number': wrap('is_number', stdlib.is_number),
+        'is_string': wrap('is_string', stdlib.is_string),
+        'is_list': wrap('is_list', stdlib.is_list),
+        'is_empty': wrap('is_empty', stdlib.is_empty),
     }

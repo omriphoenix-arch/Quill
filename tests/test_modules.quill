@@ -1,0 +1,25 @@
+# Test Module System
+
+# Test 1: Import io module
+say "=== Testing io module ==="
+from io import write_text, read_text
+
+write_text("test_output.txt", "Hello from modular Quill!")
+set content = read_text("test_output.txt")
+say "Read from file: " + content
+
+# Test 2: Import game module
+say ""
+say "=== Testing game module ==="
+from game import add_item, has_item, show_inventory
+
+add_item("Magic Sword")
+add_item("Health Potion")
+show_inventory()
+
+if has_item("Magic Sword") then
+    say "✓ Inventory system working!"
+end
+
+say ""
+say "✓ Module system test complete!"

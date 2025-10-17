@@ -37,6 +37,7 @@ class TokenType(Enum):
     BREAK = auto()
     CONTINUE = auto()
     IMPORT = auto()
+    FROM = auto()
     
     # GUI Keywords (Optional - uncomment if using GUI features)
     # WINDOW = auto()
@@ -126,7 +127,7 @@ class Lexer:
             # Connectors
             'into': TokenType.INTO,
             'in': TokenType.IN,
-            'from': TokenType.IN,
+            'from': TokenType.FROM,
             
             # Variables
             'set': TokenType.SET,

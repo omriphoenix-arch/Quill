@@ -110,6 +110,13 @@ class UnaryOpNode(ASTNode):
         self.operator = operator
         self.operand = operand
 
+class ImportNode(ASTNode):
+    def __init__(self, module_name, from_import=False, import_names=None):
+        super().__init__()
+        self.module_name = module_name
+        self.from_import = from_import  # True for "from X import Y"
+        self.import_names = import_names or []  # List of names to import, or ['*'] for wildcard
+
 # GUI Nodes
 class WindowNode(ASTNode):
     def __init__(self, title, properties=None):
@@ -238,6 +245,8 @@ class Parser:
         elif token.type == TokenType.CONTINUE:
             self.advance()
             return ContinueNode()
+        elif token.type == TokenType.IMPORT or token.type == TokenType.FROM:
+            return self.parse_import()
         # GUI features commented out - uncomment to enable
         # elif token.type == TokenType.WINDOW:
         #     return self.parse_window()
@@ -451,6 +460,44 @@ class Parser:
             return ReturnNode(None)
         expression = self.parse_expression()
         return ReturnNode(expression)
+    
+    def parse_import(self):
+        """
+        Parse import statements:
+        - import module_name
+        - from module_name import function1, function2
+        - from module_name import *
+        """
+        token = self.current_token()
+        
+        # Check if it's "from X import Y" or just "import X"
+        if token.type == TokenType.FROM:
+            # from module_name import ...
+            self.advance()  # consume 'from'
+            module_name = self.expect(TokenType.IDENTIFIER).value
+            self.expect(TokenType.IMPORT)
+            
+            # Parse import names
+            import_names = []
+            if self.current_token().type == TokenType.MULTIPLY:  # * for wildcard
+                self.advance()
+                import_names = ['*']
+            else:
+                import_names.append(self.expect(TokenType.IDENTIFIER).value)
+                while self.current_token().type == TokenType.COMMA:
+                    self.advance()
+                    import_names.append(self.expect(TokenType.IDENTIFIER).value)
+            
+            node = ImportNode(module_name, from_import=True, import_names=import_names)
+            node.set_location(token)
+            return node
+        else:
+            # import module_name
+            self.expect(TokenType.IMPORT)
+            module_name = self.expect(TokenType.IDENTIFIER).value
+            node = ImportNode(module_name, from_import=False)
+            node.set_location(token)
+            return node
     
     def parse_function_call(self):
         name = self.expect(TokenType.IDENTIFIER).value

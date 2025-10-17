@@ -16,11 +16,13 @@ from parser import Parser
 from interpreter import Interpreter
 from colors import *
 
-def run_file(filename):
+def run_file(filename, legacy_mode=False):
     try:
         # Show mini banner
         print(divider('═', 60, Colors.BRIGHT_MAGENTA))
         print(colorize(f"  📖 Running: {filename}", Colors.BRIGHT_CYAN))
+        if legacy_mode:
+            print(colorize("  ⚠ Legacy mode: game/io modules auto-imported", Colors.YELLOW))
         print(divider('═', 60, Colors.BRIGHT_MAGENTA))
         print()
         
@@ -36,7 +38,7 @@ def run_file(filename):
         ast = parser.parse()
         
         # Interpreting
-        interpreter = Interpreter(source)
+        interpreter = Interpreter(source, legacy_mode=legacy_mode)
         interpreter.run(ast)
         
         # Success message
@@ -88,20 +90,36 @@ def run_interactive():
         print(f"Error: {e}")
 
 def main():
-    if len(sys.argv) < 2:
+    # Parse arguments
+    legacy_mode = False
+    filename = None
+    
+    for arg in sys.argv[1:]:
+        if arg == '--legacy':
+            legacy_mode = True
+        elif arg.startswith('-'):
+            print(error(f"Unknown option: {arg}"))
+            sys.exit(1)
+        else:
+            filename = arg
+    
+    if filename is None:
         # Show logo
         print_logo()
         print(colorize("Usage:", Colors.BOLD + Colors.BRIGHT_YELLOW))
-        print(colorize("  quill <filename.quill>", Colors.BRIGHT_CYAN) + "  - Run a Quill program")
+        print(colorize("  quill <filename.quill> [--legacy]", Colors.BRIGHT_CYAN) + "  - Run a Quill program")
+        print()
+        print(colorize("Options:", Colors.BOLD + Colors.BRIGHT_YELLOW))
+        print(colorize("  --legacy", Colors.BRIGHT_CYAN) + "  - Auto-import game/io modules (for old scripts)")
         print()
         print(colorize("Examples:", Colors.BOLD + Colors.BRIGHT_YELLOW))
         print(colorize("  quill adventure.quill", Colors.BRIGHT_GREEN))
         print(colorize("  quill examples/demo.quill", Colors.BRIGHT_GREEN))
+        print(colorize("  quill old_game.quill --legacy", Colors.BRIGHT_GREEN))
         print()
         sys.exit(0)
     
-    filename = sys.argv[1]
-    run_file(filename)
+    run_file(filename, legacy_mode=legacy_mode)
 
 if __name__ == "__main__":
     main()

@@ -393,6 +393,8 @@ See `docs/ICONS.md` for complete icon documentation and customization options.
 
 ### Getting Started
 - **[QUICK_START.md](QUICK_START.md)** - Get running in 5 minutes! ⚡
+- **Core Language Guide** - **[docs/core/guide.md](docs/core/guide.md)**
+- **Game Utilities Guide** - **[docs/game/guide.md](docs/game/guide.md)** (optional game features)
 - **[TUTORIAL.md](docs/TUTORIAL.md)** - Complete beginner's guide (start here!)
 - **[ERROR_MESSAGES.md](docs/ERROR_MESSAGES.md)** - Error reference and debugging tips
 - **[Quill_KEYWORDS_REFERENCE.md](docs/Quill_KEYWORDS_REFERENCE.md)** - Every keyword explained
