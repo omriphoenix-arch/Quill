@@ -104,7 +104,7 @@ if ($vscodeInstalled) {
         Write-Host "  (Configured in .vscode/extensions.json)" -ForegroundColor Gray
     } else {
         Write-Host "⚠ Extension configuration not found" -ForegroundColor Yellow
-        Write-Host "  You may need to manually install from .vscode-extension/" -ForegroundColor Gray
+        Write-Host "  You may need to manually install from tools/vscode-extension/" -ForegroundColor Gray
     }
 } else {
     Write-Host "🟡 VS Code not detected (optional)" -ForegroundColor Gray

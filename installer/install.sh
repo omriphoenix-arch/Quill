@@ -131,7 +131,7 @@ if command -v code &> /dev/null; then
         echo -e "  ${YELLOW}(Configured in .vscode/extensions.json)${NC}"
     else
         echo -e "${YELLOW}⚠ Extension configuration not found${NC}"
-        echo -e "  ${YELLOW}You may need to manually install from .vscode-extension/${NC}"
+        echo -e "  ${YELLOW}You may need to manually install from tools/vscode-extension/${NC}"
     fi
 else
     echo -e "${YELLOW}🟡 VS Code not detected (optional)${NC}"

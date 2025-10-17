@@ -25,8 +25,17 @@ class QuillInstallerGUI:
     def __init__(self, root):
         self.root = root
         self.root.title("Quill Language Installer")
-        self.root.geometry("600x500")
-        self.root.resizable(False, False)
+        self.root.geometry("700x600")  # Increased size
+        self.root.resizable(True, True)  # Allow resizing
+        self.root.minsize(650, 550)  # Minimum size to keep UI usable
+        
+        # Center window on screen
+        self.root.update_idletasks()
+        width = 700
+        height = 600
+        x = (self.root.winfo_screenwidth() // 2) - (width // 2)
+        y = (self.root.winfo_screenheight() // 2) - (height // 2)
+        self.root.geometry(f'{width}x{height}+{x}+{y}')
         
         # Installer state
         self.system = platform.system()
@@ -68,12 +77,38 @@ class QuillInstallerGUI:
         )
         title_label.pack(pady=20)
         
-        # Main content area
-        self.content_frame = tk.Frame(self.root, bg="white")
-        self.content_frame.pack(fill=tk.BOTH, expand=True, padx=20, pady=20)
+        # Main content area with scrollbar
+        content_container = tk.Frame(self.root, bg="white")
+        content_container.pack(fill=tk.BOTH, expand=True, padx=20, pady=20)
+        
+        # Create canvas and scrollbar for scrollable content
+        self.canvas = tk.Canvas(content_container, bg="white", highlightthickness=0)
+        scrollbar = tk.Scrollbar(content_container, orient=tk.VERTICAL, command=self.canvas.yview)
+        self.content_frame = tk.Frame(self.canvas, bg="white")
+        
+        # Configure scrolling
+        self.content_frame.bind(
+            "<Configure>",
+            lambda e: self.canvas.configure(scrollregion=self.canvas.bbox("all"))
+        )
+        
+        self.canvas_frame = self.canvas.create_window((0, 0), window=self.content_frame, anchor="nw")
+        self.canvas.configure(yscrollcommand=scrollbar.set)
+        
+        # Bind canvas width to content frame width
+        self.canvas.bind('<Configure>', lambda e: self.canvas.itemconfig(self.canvas_frame, width=e.width))
+        
+        # Pack scrollbar and canvas
+        scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+        self.canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+        
+        # Bind mouse wheel for scrolling
+        def _on_mousewheel(event):
+            self.canvas.yview_scroll(int(-1*(event.delta/120)), "units")
+        self.canvas.bind_all("<MouseWheel>", _on_mousewheel)
         
         # Footer with buttons
-        footer_frame = tk.Frame(self.root, bg="#f0f0f0", height=60)
+        footer_frame = tk.Frame(self.root, bg="#f0f0f0", height=80)
         footer_frame.pack(fill=tk.X, side=tk.BOTTOM)
         footer_frame.pack_propagate(False)
         
@@ -85,8 +120,12 @@ class QuillInstallerGUI:
             button_frame,
             text="< Back",
             command=self.go_back,
-            width=10,
-            state=tk.DISABLED
+            width=12,
+            height=2,
+            state=tk.DISABLED,
+            font=("Arial", 10),
+            relief=tk.RAISED,
+            bd=2
         )
         self.back_button.pack(side=tk.LEFT, padx=5)
         
@@ -94,10 +133,16 @@ class QuillInstallerGUI:
             button_frame,
             text="Next >",
             command=self.go_next,
-            width=10,
-            bg="#4A148C",
+            width=12,
+            height=2,
+            bg="#6A1B9A",  # Lighter purple for better visibility
             fg="white",
-            font=("Arial", 10, "bold")
+            font=("Arial", 10, "bold"),
+            relief=tk.RAISED,
+            bd=2,
+            activebackground="#8E24AA",  # Even lighter when clicked
+            activeforeground="white",
+            cursor="hand2"
         )
         self.next_button.pack(side=tk.LEFT, padx=5)
         
@@ -105,7 +150,12 @@ class QuillInstallerGUI:
             button_frame,
             text="Cancel",
             command=self.cancel_install,
-            width=10
+            width=12,
+            height=2,
+            font=("Arial", 10),
+            relief=tk.RAISED,
+            bd=2,
+            cursor="hand2"
         )
         self.cancel_button.pack(side=tk.LEFT, padx=5)
     
@@ -524,7 +574,7 @@ Click Install to begin installation."""
                     self.log(f"✓ {component.capitalize()} copied")
             
             self.update_status("Copying documentation files...", 70)
-            for doc_file in ["README.md", "QUICK_START.md", "LICENSE", "requirements.txt"]:
+            for doc_file in ["README.md", "documentation/QUICK_START.md", "LICENSE", "requirements.txt"]:
                 src = self.quill_dir / doc_file
                 if src.exists():
                     shutil.copy(src, self.install_dir / doc_file)
@@ -587,7 +637,7 @@ To get started:
 
 Documentation:
   {self.install_dir / 'README.md'}
-  {self.install_dir / 'QUICK_START.md'}
+  {self.install_dir / 'documentation/QUICK_START.md'}
 
 Thank you for installing Quill!"""
         

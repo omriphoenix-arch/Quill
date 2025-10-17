@@ -7,7 +7,7 @@ Just like Python's installer, Quill now features a professional graphical setup 
 ## Launch the Installer
 
 ```bash
-python setup_gui.py
+python installer/setup_gui.py
 ```
 
 ## Installer Wizard Pages
@@ -54,11 +54,11 @@ License Agreement
 ┌─────────────────────────────────────────────────┐
 │ MIT License                                     │
 │                                                 │
-│ Copyright (c) 2025 Quill Language              │
+│ Copyright (c) 2025 Quill Language               │
 │                                                 │
-│ Permission is hereby granted, free of charge,  │
-│ to any person obtaining a copy of this         │
-│ software and associated documentation files... │
+│ Permission is hereby granted, free of charge,   │
+│ to any person obtaining a copy of this          │
+│ software and associated documentation files...  │
 │                                                 │
 │                 (Scrollable)                    │
 └─────────────────────────────────────────────────┘
@@ -91,7 +91,7 @@ Choose Installation Type
 ╔════════════════════════════════════════════════╗
 ║ Custom Installation                            ║
 ╠════════════════════════════════════════════════╣
-║ ○ Choose installation location and options    ║
+║ ○ Choose installation location and options     ║
 ╚════════════════════════════════════════════════╝
 
         [ < Back ]  [ Next > ]  [ Cancel ]
@@ -208,7 +208,7 @@ To get started:
 
 Documentation:
   C:\Program Files\Quill\README.md
-  C:\Program Files\Quill\QUICK_START.md
+  C:\Program Files\Quill\documentation/QUICK_START.md
 
 Thank you for installing Quill!
 
@@ -258,13 +258,13 @@ Thank you for installing Quill!
 ### Fallback
 If tkinter is not available:
 ```bash
-python setup_gui.py
+python installer/setup_gui.py
 # Automatically falls back to console installer
 ```
 
 Or force console mode:
 ```bash
-python setup_gui.py --console
+python installer/setup_gui.py --console
 ```
 
 ## Comparison to Python's Installer
@@ -295,4 +295,4 @@ python setup_gui.py --console
 ✅ Works cross-platform  
 ✅ Falls back to console if needed  
 
-Just run: `python setup_gui.py` 🚀
+Just run: `python installer/setup_gui.py` 🚀

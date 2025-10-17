@@ -22,13 +22,13 @@ Perfect for learning programming, automation, data processing, and interactive a
 
 **Windows:**
 ```powershell
-powershell -ExecutionPolicy Bypass -File install.ps1
+powershell -ExecutionPolicy Bypass -File installer/install.ps1
 ```
 
 **macOS/Linux:**
 ```bash
-chmod +x install.sh
-./install.sh
+chmod +x installer/install.sh
+./installer/install.sh
 ```
 
 The installer does everything: checks Python, adds to PATH, and tests your setup.

@@ -392,7 +392,7 @@ See `docs/ICONS.md` for complete icon documentation and customization options.
 ## Documentation
 
 ### Getting Started
-- **[QUICK_START.md](QUICK_START.md)** - Get running in 5 minutes! ⚡
+- **[documentation/QUICK_START.md](documentation/QUICK_START.md)** - Get running in 5 minutes! ⚡
 - **Core Language Guide** - **[docs/core/guide.md](docs/core/guide.md)**
 - **Game Utilities Guide** - **[docs/game/guide.md](docs/game/guide.md)** (optional game features)
 - **[TUTORIAL.md](docs/TUTORIAL.md)** - Complete beginner's guide (start here!)
@@ -407,18 +407,19 @@ See `docs/ICONS.md` for complete icon documentation and customization options.
 - **[ICONS.md](docs/ICONS.md)** - Custom file icons guide
 
 ### Development
-- **[INSTALL.md](INSTALL.md)** - Installation instructions
+- **[STRUCTURE.md](STRUCTURE.md)** - Project organization
+- **[documentation/documentation/INSTALLATION_GUIDE.md](documentation/documentation/INSTALLATION_GUIDE.md)** - Installation instructions
 - **[CONTRIBUTING.md](CONTRIBUTING.md)** - How to contribute
 - **[CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)** - Community guidelines
 - **[CHANGELOG.md](CHANGELOG.md)** - Version history
-- **[VERSION.md](VERSION.md)** - Current version info
+- **[documentation/documentation/VERSION.md](documentation/documentation/VERSION.md)** - Current version info
 
 ## Installation
 
 ### Requirements
 
 **Minimum (Required):**
-- ✅ Python 3.8 or higher - [Download Python](https://www.python.org/downloads/)
+- ✅ Python 3.7 or higher - [Download Python](https://www.python.org/downloads/)
 
 **Optional (For Better Experience):**
 - 🟡 VS Code - [Download VS Code](https://code.visualstudio.com/) (syntax highlighting, themes, icons)
@@ -426,50 +427,79 @@ See `docs/ICONS.md` for complete icon documentation and customization options.
 
 > **Note:** Quill works perfectly without VS Code! You only need Python to run programs.
 
-### Quick Install (Recommended)
+### Option 1: GUI Installer (Recommended)
+Professional installer with visual wizard (like Python's installer):
+```bash
+python installer/installer/setup_gui.py
+```
+- ✅ Easy step-by-step wizard
+- ✅ Custom installation options
+- ✅ Progress tracking
+- ✅ Automatic PATH setup
+- ✅ File association registration
+
+### Option 2: Console Installer
+Interactive command-line installer:
+```bash
+python installer/installer/setup.py
+```
+- ✅ Full-featured installation
+- ✅ Works without GUI
+- ✅ Custom component selection
+- ✅ Uninstaller included
+
+### Option 3: Quick Install Scripts
 
 **Windows:**
 ```powershell
-powershell -ExecutionPolicy Bypass -File install.ps1
+powershell -ExecutionPolicy Bypass -File installer/quick_installer/install.ps1
 ```
 
 **macOS/Linux:**
 ```bash
-chmod +x install.sh
-./install.sh
+chmod +x installer/quick_installer/install.sh
+./installer/quick_installer/install.sh
 ```
 
-The installer will:
-- ✅ Check Python version (requires 3.8+)
-- ✅ Create launcher commands (`quill.bat` / `quill`)
-- ✅ Register `.quill` file association (Windows)
-- ✅ Add to PATH (optional)
-- ✅ Configure VS Code extension (if VS Code is installed)
-- ✅ Test your installation
-
-### Manual Install (Without Installer)
+### Option 4: Manual Install (No Installer)
 
 **Minimum steps to run Quill:**
 1. Download/clone this repository
-2. Ensure Python 3.8+ is installed
+2. Ensure Python 3.7+ is installed
 3. Run programs:
    ```bash
    python core/quill.py examples/example_simple.quill
    ```
 
-That's it! No VS Code, no installers, no complex setup needed.
+That's it! No installers, no complex setup needed.
 
-**For more convenience:**
-- Run the installer scripts above, or
-- See [INSTALL.md](INSTALL.md) for detailed manual setup
+**For detailed installation instructions**, see:
+- [documentation/documentation/QUICK_START.md](documentation/documentation/QUICK_START.md) - Get started quickly
+- [documentation/documentation/INSTALLATION_GUIDE.md](documentation/documentation/INSTALLATION_GUIDE.md) - Complete guide
+- [documentation/documentation/INSTALLER_OPTIONS.md](documentation/documentation/INSTALLER_OPTIONS.md) - Compare installers
+
+## Project Structure
+
+For a detailed overview of the project organization, see [STRUCTURE.md](STRUCTURE.md).
+
+Quick reference:
+- `core/` - Language implementation (lexer, parser, interpreter)
+- `examples/` - Example programs
+- `games/` - Full game examples
+- `installer/` - Installation tools (GUI, console, scripts)
+- `docs/` - API documentation
+- `documentation/` - Guides and project docs
+- `tools/` - Development utilities and VS Code extension
+- `resources/` - Icons and assets
 
 ## Learn More
 
 Check out the example files to see real programs in action:
-1. Start with `example_simple.quill` for basics
-2. Try `example_guessing_game.quill` for interactive fun
+1. Start with `examples/example_simple.quill` for basics
+2. Try `examples/example_guessing_game.quill` for interactive fun
 3. Read **[docs/TUTORIAL.md](docs/TUTORIAL.md)** for step-by-step learning
 4. Explore other examples to see advanced features
+5. See [documentation/documentation/QUICK_START.md](documentation/documentation/QUICK_START.md) for quick reference
 
 ## Contributing
 
@@ -481,8 +511,8 @@ MIT License - See [LICENSE](LICENSE) for details.
 
 ## Version
 
-**Current Version:** 1.0.0 (October 15, 2025)
+**Current Version:** 1.0.2 (October 17, 2025)
 
-See [VERSION.md](VERSION.md) for details and [CHANGELOG.md](CHANGELOG.md) for release notes.
+See [documentation/documentation/VERSION.md](documentation/documentation/VERSION.md) for details and [CHANGELOG.md](CHANGELOG.md) for release notes.
 
 Happy coding! 🚀

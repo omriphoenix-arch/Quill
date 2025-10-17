@@ -2,7 +2,7 @@
 
 ## What Gets Installed
 
-The Quill installer (`setup.py`) provides a **complete, professional installation** that includes:
+The Quill installer (`installer/setup.py`) provides a **complete, professional installation** that includes:
 
 ### ✅ Core Components (Always Installed)
 - **`core/`** - Quill interpreter, lexer, parser, standard library, module system
@@ -10,14 +10,14 @@ The Quill installer (`setup.py`) provides a **complete, professional installatio
 - **`docs/`** - Complete documentation (MODULE_SYSTEM.md, tutorials, references)
 
 ### ✅ Optional Components (Installed if Present)
-- **`icons/`** - Custom .quill file icons for Windows Explorer
+- **`resources/icons/`** - Custom .quill file icons for Windows Explorer
 - **`scripts/`** - Utility scripts (testing, migration, etc.)
 - **`tests/`** - Test suite for validation
 - **`games/`** - Example game projects
 
 ### ✅ Documentation Files
 - **`README.md`** - Main documentation
-- **`QUICK_START.md`** - 5-minute quick start guide
+- **`documentation/QUICK_START.md`** - 5-minute quick start guide
 - **`LICENSE`** - Software license
 - **`requirements.txt`** - Optional dependencies (PIL/Pillow)
 - **`CHANGELOG.md`** - Version history
@@ -44,14 +44,14 @@ The Quill installer (`setup.py`) provides a **complete, professional installatio
 ```powershell
 # Right-click PowerShell -> "Run as Administrator"
 cd C:\path\to\Quill
-python setup.py
+python installer/setup.py
 # Choose option 1 (Install)
 ```
 
 **Windows (User - No Admin)**:
 ```powershell
 cd C:\path\to\Quill
-python setup.py
+python installer/setup.py
 # Choose option 1 (Install)
 # Installs to: %USERPROFILE%\Quill
 ```
@@ -59,7 +59,7 @@ python setup.py
 **Linux/macOS (System-wide)**:
 ```bash
 cd /path/to/Quill
-sudo python3 setup.py
+sudo python3 installer/setup.py
 # Choose option 1 (Install)
 # Installs to: /usr/local/lib/quill
 ```
@@ -67,7 +67,7 @@ sudo python3 setup.py
 **Linux/macOS (User)**:
 ```bash
 cd /path/to/Quill
-python3 setup.py
+python3 installer/setup.py
 # Choose option 1 (Install)
 # Installs to: ~/.local/lib/quill
 ```
@@ -173,13 +173,13 @@ The installer checks for Python 3.7+. Update Python:
 ### "Module 'io' not found"
 The module system requires the new file structure. Reinstall:
 ```bash
-python setup.py
+python installer/setup.py
 # Choose option 1 (Install)
 ```
 
 ### "Permission denied"
 **Windows**: Run as Administrator  
-**Linux/macOS**: Use `sudo python3 setup.py`
+**Linux/macOS**: Use `sudo python3 installer/setup.py`
 
 ### Old scripts with game/io functions fail
 Use legacy mode:
@@ -198,7 +198,7 @@ from io import *
 
 Run the installer again:
 ```bash
-python setup.py
+python installer/setup.py
 # Choose option 2 (Uninstall)
 ```
 
@@ -238,7 +238,7 @@ C:\Program Files\Quill\
 ├── games\          # Example games
 ├── quill.bat       # Windows launcher
 ├── README.md
-├── QUICK_START.md
+├── documentation/QUICK_START.md
 └── LICENSE
 
 Linux/macOS (sudo):
@@ -255,7 +255,7 @@ Linux/macOS (sudo):
 
 ## Summary
 
-**YES**, the `setup.py` installer installs **everything necessary** for Quill:
+**YES**, the `installer/setup.py` installer installs **everything necessary** for Quill:
 - ✅ Complete interpreter and module system
 - ✅ All examples and documentation
 - ✅ System integration (PATH, file associations)

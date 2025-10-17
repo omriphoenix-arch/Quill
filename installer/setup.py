@@ -79,7 +79,7 @@ class QuillInstaller:
         shutil.copy(self.quill_dir / "quill.bat", install_dir / "quill.bat")
         
         # Copy documentation files
-        for doc_file in ["README.md", "QUICK_START.md", "LICENSE", "requirements.txt", "CHANGELOG.md"]:
+        for doc_file in ["README.md", "documentation/QUICK_START.md", "LICENSE", "requirements.txt", "CHANGELOG.md"]:
             if (self.quill_dir / doc_file).exists():
                 shutil.copy(self.quill_dir / doc_file, install_dir / doc_file)
         
@@ -177,7 +177,7 @@ class QuillInstaller:
             shutil.copytree(self.quill_dir / "games", install_dir / "games")
         
         # Copy documentation files
-        for doc_file in ["README.md", "QUICK_START.md", "LICENSE", "requirements.txt", "CHANGELOG.md"]:
+        for doc_file in ["README.md", "documentation/QUICK_START.md", "LICENSE", "requirements.txt", "CHANGELOG.md"]:
             if (self.quill_dir / doc_file).exists():
                 shutil.copy(self.quill_dir / doc_file, install_dir / doc_file)
         
@@ -375,7 +375,7 @@ main()
         # Check if core directory exists
         if not (self.quill_dir / "core").exists():
             print(f"❌ Core directory not found in {self.quill_dir}")
-            print("   Make sure you're running setup.py from the Quill root directory")
+            print("   Make sure you're running installer/setup.py from the Quill root directory")
             return False
         print(f"✓ Core files found")
         

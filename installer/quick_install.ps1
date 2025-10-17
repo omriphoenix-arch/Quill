@@ -1,6 +1,6 @@
 # Quill One-Line Installer for Windows
-# Usage: irm https://raw.githubusercontent.com/omriphoenix-arch/Quill/main/quick_install.ps1 | iex
-# Or: powershell -ExecutionPolicy Bypass -File quick_install.ps1
+# Usage: irm https://raw.githubusercontent.com/omriphoenix-arch/Quill/main/quick_installer/install.ps1 | iex
+# Or: powershell -ExecutionPolicy Bypass -File quick_installer/install.ps1
 
 param(
     [string]$InstallDir = "$env:USERPROFILE\quill"
@@ -76,7 +76,7 @@ Write-Host "Configuring Quill..." -ForegroundColor Yellow
 Push-Location $InstallDir
 
 try {
-    & powershell -NoProfile -ExecutionPolicy Bypass -File ".\install.ps1"
+    & powershell -NoProfile -ExecutionPolicy Bypass -File ".\installer/install.ps1"
 } catch {
     Write-Host "⚠ Configuration had issues, but core files are installed" -ForegroundColor Yellow
 }

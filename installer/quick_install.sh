@@ -1,7 +1,7 @@
 #!/bin/bash
 # Quill One-Line Installer for Mac/Linux
-# Usage: curl -sSL https://raw.githubusercontent.com/omriphoenix-arch/Quill/main/quick_install.sh | bash
-# Or: bash quick_install.sh
+# Usage: curl -sSL https://raw.githubusercontent.com/omriphoenix-arch/Quill/main/quick_installer/install.sh | bash
+# Or: bash quick_installer/install.sh
 
 INSTALL_DIR="$HOME/quill"
 CYAN='\033[0;36m'
@@ -86,9 +86,9 @@ echo ""
 echo -e "${YELLOW}Configuring Quill...${NC}"
 cd "$INSTALL_DIR"
 
-if [ -f "install.sh" ]; then
-    chmod +x install.sh
-    bash install.sh
+if [ -f "installer/install.sh" ]; then
+    chmod +x installer/install.sh
+    bash installer/install.sh
 else
     echo -e "${YELLOW}⚠ Installer not found, but core files are installed${NC}"
 fi
