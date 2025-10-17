@@ -1,3 +1,6 @@
+# Import game module for wait function
+from game import wait
+
 say "================================================"
 say "        MISSION RANDOMIZER DEMO"
 say "   Success/Failure System Examples"

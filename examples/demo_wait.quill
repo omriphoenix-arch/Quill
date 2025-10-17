@@ -1,3 +1,6 @@
+# Import game module for wait function
+from game import wait
+
 say "i will say 'this' in 5 seconds"
 say""
 wait(5)

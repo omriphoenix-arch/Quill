@@ -1,0 +1,138 @@
+# Module System Demo
+# Demonstrates the new import system in Quill v1.0.2
+
+say "========================================="
+say "   MODULE SYSTEM DEMO"
+say "========================================="
+say ""
+
+say "Quill v1.0.2 introduces a modular import system!"
+say "You can now import functions from modules:"
+say ""
+
+# Option 1: Import specific functions
+say "Option 1: Import specific functions"
+say "  from game import wait, add_item"
+say "  from io import read_text, write_text"
+say ""
+
+# Option 2: Import everything
+say "Option 2: Import everything with *"
+say "  from game import *"
+say "  from io import *"
+say ""
+
+# Option 3: Import entire module
+say "Option 3: Import entire module"
+say "  import game"
+say "  game.wait(1)"
+say ""
+
+say "Let's see it in action!"
+say ""
+
+# Import what we need
+from game import wait, add_item, show_inventory
+from io import write_text, read_text, file_exists
+
+say "========================================="
+say "   GAME MODULE FUNCTIONS"
+say "========================================="
+say ""
+
+say "Adding items to inventory..."
+add_item("Module Badge")
+add_item("Import Token")
+add_item("Function Key")
+say ""
+
+show_inventory()
+say ""
+
+say "Waiting 2 seconds..."
+wait(2)
+say "Done!"
+say ""
+
+say "========================================="
+say "   IO MODULE FUNCTIONS"
+say "========================================="
+say ""
+
+set module_file = "output/module_demo.txt"
+say "Writing to file: " + module_file
+
+set demo_text = "This file was created using the io module!\nImports make code cleaner and more organized."
+write_text(module_file, demo_text)
+say "File written!"
+say ""
+
+say "Reading back the file..."
+set content = read_text(module_file)
+say content
+say ""
+
+say "========================================="
+say "   BENEFITS OF MODULES"
+say "========================================="
+say ""
+
+say "✓ Cleaner code - import only what you need"
+say "✓ Better organization - functions grouped by purpose"
+say "✓ Faster loading - modules loaded on demand"
+say "✓ Namespace separation - avoid naming conflicts"
+say "✓ Backward compatible - use --legacy for old scripts"
+say ""
+
+say "========================================="
+say "   AVAILABLE MODULES"
+say "========================================="
+say ""
+
+say "📦 game module:"
+say "   • wait(seconds) - Pause execution"
+say "   • add_item(name) - Add to inventory"
+say "   • remove_item(name) - Remove from inventory"
+say "   • has_item(name) - Check if item exists"
+say "   • show_inventory() - Display inventory"
+say "   • item_count() - Count items"
+say "   • clear_inventory() - Remove all items"
+say "   • save_game(filename) - Save game state"
+say "   • load_game(filename) - Load game state"
+say "   • has_save(filename) - Check if save exists"
+say "   • delete_save(filename) - Delete save file"
+say ""
+
+say "📦 io module:"
+say "   • read_text(filename) - Read file as string"
+say "   • write_text(filename, text) - Write string to file"
+say "   • append_text(filename, text) - Append to file"
+say "   • read_lines(filename) - Read file as list of lines"
+say "   • write_lines(filename, lines) - Write list to file"
+say "   • file_exists(filename) - Check if file exists"
+say "   • delete_file(filename) - Delete a file"
+say "   • list_files(directory) - List files in directory"
+say "   • create_directory(path) - Create directory"
+say ""
+
+say "========================================="
+say "   LEGACY MODE"
+say "========================================="
+say ""
+
+say "For backward compatibility, run with --legacy:"
+say "  python core/quill.py --legacy old_script.quill"
+say ""
+say "This automatically imports game and io modules,"
+say "so old scripts work without modification!"
+say ""
+
+say "========================================="
+say "   MODULE SYSTEM COMPLETE!"
+say "========================================="
+say ""
+say "For more information, see:"
+say "  • docs/MODULE_SYSTEM.md"
+say "  • docs/core/guide.md"
+say "  • docs/game/guide.md"
+say ""

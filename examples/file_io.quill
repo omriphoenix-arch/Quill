@@ -1,4 +1,8 @@
 # File I/O Example
+
+# Import io module for file operations
+from io import read_text, write_text, append_text, read_lines, write_lines, file_exists, create_directory
+
 say "File I/O Demo"
 
 set filename = "output/demo.txt"

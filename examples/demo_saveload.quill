@@ -1,6 +1,9 @@
 # Save/Load System Demo
 # Test the new save and load features!
 
+# Import game module for save/load functions
+from game import save_game, load_game, has_save, delete_save, add_item, show_inventory
+
 say "========================================="
 say "   SAVE/LOAD SYSTEM DEMO"
 say "========================================="

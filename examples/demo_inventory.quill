@@ -1,6 +1,9 @@
 # Inventory System Demo
 # Test the new inventory features!
 
+# Import game module for inventory functions
+from game import add_item, remove_item, has_item, show_inventory, item_count, clear_inventory
+
 say "========================================="
 say "   INVENTORY SYSTEM DEMO"
 say "========================================="
