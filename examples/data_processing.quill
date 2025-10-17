@@ -1,0 +1,77 @@
+# Data Processing Example
+# Demonstrates Quill for general scripting tasks
+
+print "=== Data Processing Demo ==="
+print ""
+
+# Read and process a list of numbers
+print "Processing sales data..."
+set sales = [450, 320, 580, 210, 490, 670, 310]
+
+print "Weekly Sales: " + str(sales)
+print ""
+
+# Calculate statistics
+print "Sales Analysis:"
+print "  Total Sales: $" + str(sum(sales))
+print "  Average: $" + str(round(average(sales), 2))
+print "  Best Day: $" + str(max(sales))
+print "  Worst Day: $" + str(min(sales))
+print ""
+
+# Sort and display
+set sorted_sales = sort(sales)
+print "Sorted (ascending): " + str(sorted_sales)
+set sorted_desc = sort(sales, true)
+print "Sorted (descending): " + str(reverse(sorted_sales))
+print ""
+
+# Find days above average
+print "Days Above Average:"
+set avg = average(sales)
+set day = 1
+for sale in sales do
+    if sale > avg then
+        print "  Day " + str(day) + ": $" + str(sale)
+    end
+    set day = day + 1
+end
+print ""
+
+# Text processing
+print "=== Text Processing Demo ==="
+print ""
+
+set raw_data = "  PRODUCT-A,PRODUCT-B,PRODUCT-C  "
+print "Raw input: '" + raw_data + "'"
+
+set clean = trim(raw_data)
+print "Trimmed: '" + clean + "'"
+
+set products = split(clean, ",")
+print "Split into list: " + str(products)
+
+# Process each product
+print ""
+print "Formatted Products:"
+for product in products do
+    set formatted = title(replace(product, "-", " "))
+    print "  • " + formatted
+end
+print ""
+
+# Generate report
+print "=== Summary Report ==="
+print ""
+
+function generate_report(title, value)
+    set line = title + ": " + str(value)
+    return line
+end
+
+print generate_report("Total Items", len(products))
+print generate_report("Data Points", len(sales))
+print generate_report("Processing Complete", true)
+print ""
+
+print "✓ Data processing complete!"

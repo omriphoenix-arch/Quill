@@ -1,0 +1,88 @@
+# Calculator Application
+# Interactive calculator demonstrating user input and math operations
+
+print "================================"
+print "   QUILL CALCULATOR"
+print "================================"
+print ""
+
+function show_menu()
+    print "Operations:"
+    print "  1. Add"
+    print "  2. Subtract"
+    print "  3. Multiply"
+    print "  4. Divide"
+    print "  5. Power"
+    print "  6. Square Root"
+    print "  7. Exit"
+    print ""
+end
+
+function get_number(prompt_text)
+    ask prompt_text into input
+    return float(input)
+end
+
+# Main calculator loop
+set running = true
+
+while running do
+    show_menu()
+    ask "Choose operation (1-7): " into choice
+    print ""
+    
+    if choice is "1" then
+        set a = get_number("Enter first number: ")
+        set b = get_number("Enter second number: ")
+        set result = a + b
+        print "Result: " + str(a) + " + " + str(b) + " = " + str(result)
+        
+    elif choice is "2" then
+        set a = get_number("Enter first number: ")
+        set b = get_number("Enter second number: ")
+        set result = a - b
+        print "Result: " + str(a) + " - " + str(b) + " = " + str(result)
+        
+    elif choice is "3" then
+        set a = get_number("Enter first number: ")
+        set b = get_number("Enter second number: ")
+        set result = a * b
+        print "Result: " + str(a) + " × " + str(b) + " = " + str(result)
+        
+    elif choice is "4" then
+        set a = get_number("Enter first number: ")
+        set b = get_number("Enter second number: ")
+        if b is 0 then
+            print "Error: Cannot divide by zero!"
+        else
+            set result = a / b
+            print "Result: " + str(a) + " ÷ " + str(b) + " = " + str(round(result, 4))
+        end
+        
+    elif choice is "5" then
+        set base = get_number("Enter base: ")
+        set exp = get_number("Enter exponent: ")
+        set result = base ** exp
+        print "Result: " + str(base) + " ^ " + str(exp) + " = " + str(result)
+        
+    elif choice is "6" then
+        set num = get_number("Enter number: ")
+        if num < 0 then
+            print "Error: Cannot take square root of negative number!"
+        else
+            set result = sqrt(num)
+            print "Result: √" + str(num) + " = " + str(round(result, 4))
+        end
+        
+    elif choice is "7" then
+        print "Thank you for using Quill Calculator!"
+        set running = false
+        
+    else
+        print "Invalid choice! Please select 1-7."
+    end
+    
+    print ""
+    print "--------------------------------"
+    print ""
+end

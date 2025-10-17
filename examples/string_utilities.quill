@@ -1,0 +1,105 @@
+# String Utilities Demo
+# Demonstrates comprehensive string manipulation capabilities
+
+print "================================"
+print "   STRING UTILITIES DEMO"
+print "================================"
+print ""
+
+# Case Conversion
+print "=== Case Conversion ==="
+set text = "hello world"
+print "Original: " + text
+print "Upper: " + upper(text)
+print "Lower: " + lower("HELLO WORLD")
+print "Capitalize: " + capitalize(text)
+print "Title: " + title(text)
+print ""
+
+# Whitespace Handling
+print "=== Whitespace Handling ==="
+set messy = "   too   many   spaces   "
+print "Original: '" + messy + "'"
+print "Trimmed: '" + trim(messy) + "'"
+print ""
+
+# Splitting and Joining
+print "=== Splitting & Joining ==="
+set csv = "apple,banana,cherry,date"
+print "CSV: " + csv
+set fruits = split(csv, ",")
+print "Split: " + str(fruits)
+set with_spaces = join(fruits, " | ")
+print "Joined: " + with_spaces
+print ""
+
+# Search and Replace
+print "=== Search & Replace ==="
+set sentence = "The quick brown fox jumps over the lazy dog"
+print "Original: " + sentence
+
+if starts_with(sentence, "The") then
+    print "✓ Starts with 'The'"
+end
+
+if ends_with(sentence, "dog") then
+    print "✓ Ends with 'dog'"
+end
+
+if contains(sentence, "fox") then
+    print "✓ Contains 'fox'"
+end
+
+set replaced = replace(sentence, "lazy", "energetic")
+print "Replaced: " + replaced
+print ""
+
+# String Reversal
+print "=== String Reversal ==="
+set word = "palindrome"
+print "Original: " + word
+print "Reversed: " + reverse(word)
+print ""
+
+# Practical Example: Email Validation
+print "=== Practical: Simple Email Check ==="
+
+function is_valid_email(email)
+    # Simple validation
+    if not contains(email, "@") then
+        return false
+    end
+    
+    if not contains(email, ".") then
+        return false
+    end
+    
+    if starts_with(email, "@") or ends_with(email, "@") then
+        return false
+    end
+    
+    return true
+end
+
+set test_emails = ["user@example.com", "invalid.email", "@bad.com", "good@mail.co"]
+
+for email in test_emails do
+    if is_valid_email(email) then
+        print "✓ Valid: " + email
+    else
+        print "✗ Invalid: " + email
+    end
+end
+print ""
+
+# Text Statistics
+print "=== Text Statistics ==="
+set sample = "The quick brown fox"
+set words = split(sample, " ")
+print "Text: " + sample
+print "Word Count: " + str(len(words))
+print "Character Count: " + str(len(sample))
+print "Longest Word: " + str(max(words))
+print ""
+
+print "✓ String utilities demo complete!"

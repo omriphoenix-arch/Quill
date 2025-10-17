@@ -2,7 +2,23 @@
 
 Get up and running with Quill in **5 minutes**! ⚡
 
-## Step 1: Install (1 minute)
+## What is Quill?
+
+Quill is a modern, beginner-friendly scripting language with:
+- 🎯 Simple, readable syntax (like Python)
+- 💡 Rich error messages with helpful hints
+- 📚 40+ built-in functions for common tasks
+- 🎮 Optional game development utilities
+
+Perfect for learning programming, automation, data processing, and interactive applications!
+
+## Step 1: Requirements
+
+- **Python 3.7+** (that's it!)
+- No external dependencies required for core language
+- Optional: Pillow for GUI/image support
+
+## Step 2: Install (1 minute)
 
 **Windows:**
 ```powershell
@@ -15,18 +31,19 @@ chmod +x install.sh
 ./install.sh
 ```
 
-The installer does everything: checks Python, installs dependencies, adds to PATH, and tests your setup.
+The installer does everything: checks Python, adds to PATH, and tests your setup.
 
-## Step 2: Create Your First Program (2 minutes)
+## Step 3: Your First Program (2 minutes)
 
 Create a file called `hello.quill`:
 
 ```python
-say "Hello! What's your name?"
+# Use say or print (they're the same!)
+print "Hello! What's your name?"
 ask "Name:" into name
 
-say "Nice to meet you, " + name + "!"
-say "Let me guess your age..."
+print "Nice to meet you, " + name + "!"
+print "Let me guess your age..."
 
 ask "Enter your age:" into age
 set years_to_100 = 100 - int(age)

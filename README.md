@@ -1,14 +1,15 @@
-# Quill - A Beginner-Friendly Programming Language
+# Quill - A Modern Scripting Language
 
-A complete programming language designed to help new programmers learn to code with simple, readable syntax! Perfect for beginners, text-based games, and general programming.
+A lightweight, beginner-friendly scripting language with rich error messages, comprehensive standard library, and optional game development utilities. Perfect for learning to code, automation, data processing, and interactive applications!
 
 ## Why Quill?
 
-- **Beginner-friendly** - Natural, readable syntax that's easy to understand
-- **Full-featured** - Functions, loops, lists, math, and more!
-- **No semicolons** - Clean, Python-like syntax without unnecessary punctuation
-- **Great error messages** - Helpful feedback when something goes wrong
-- **Perfect for games** - Built-in commands make text adventures easy
+- **🎯 Beginner-friendly** - Natural, readable syntax that's easy to understand
+- **💡 Rich error messages** - Contextual errors with hints and source excerpts
+- **📚 Comprehensive stdlib** - 40+ built-in functions for common tasks
+- **🧹 Clean syntax** - No semicolons, Python-like readability
+- **🎮 Game-ready** - Optional built-in utilities for game development
+- **⚡ Fast to learn** - Start coding in minutes
 
 ## Features
 
@@ -17,21 +18,33 @@ A complete programming language designed to help new programmers learn to code w
 - ✅ Arithmetic operations (+, -, *, /, %, **)
 - ✅ Comparison operators (==, !=, <, >, <=, >=)
 - ✅ Boolean logic (and, or, not)
-- ✅ Conditionals (if/else)
+- ✅ Conditionals (if/else/elif)
 - ✅ Loops (while, for)
 - ✅ Functions (with parameters and return values)
 - ✅ Lists and indexing
-- ✅ Built-in functions (len, min, max, sum, range, random, etc.)
+- ✅ 40+ built-in functions (math, string, list utilities)
 - ✅ Comments with #
 
-### Game-Focused Features
-- `say` - Display messages
-- `ask` - Get player input
+### Output & Input
+- `say` / `print` - Display output
+- `ask` - Get user input
+- Rich formatted output with color support
+
+### Game Development Utilities (Optional)
 - `choice` - Multiple choice selections
-- `goto` and `label` - Story branching
-- `wait()` - Pause execution for dramatic timing
+- `goto` and `label` - State management
+- `wait()` - Timed delays
+- Inventory system - Item management
+- Save/Load system - Persistent state
 
 ## Quick Start
+
+### Hello World
+```python
+say "Hello, World!"
+# or use standard print
+print "Hello, World!"
+```
 
 ### Variables and Math
 ```python
@@ -42,6 +55,27 @@ set name = "Alice"
 set sum = x + y         # 30
 set power = x ** 2      # 100
 say "Result: " + str(sum)
+```
+
+### Working with Lists
+```python
+set numbers = [3, 1, 4, 1, 5]
+say "Original: " + str(numbers)
+say "Sorted: " + str(sort(numbers))
+say "Min: " + str(min(numbers))
+say "Max: " + str(max(numbers))
+say "Average: " + str(average(numbers))
+```
+
+### String Processing
+```python
+set text = "  Hello World  "
+say "Trimmed: " + trim(text)
+say "Upper: " + upper(text)
+say "Lower: " + lower(text)
+
+set words = split("apple,banana,cherry", ",")
+say join(words, " - ")  # "apple - banana - cherry"
 ```
 
 ### Conditionals
@@ -80,46 +114,102 @@ function greet(name)
     say "Hello, " + name + "!"
 end
 
-function add(a, b)
-    return a + b
+function calculate_area(width, height)
+    return width * height
 end
 
-greet("Bob")
-set result = add(10, 20)
-say "Sum: " + str(result)
+greet("Alice")
+set area = calculate_area(10, 5)
+say "Area: " + str(area)
 ```
 
-### Lists
+### User Input
 ```python
-set numbers = [1, 2, 3, 4, 5]
-say numbers[0]           # First element: 1
-say len(numbers)         # Length: 5
+ask "What's your name?" into name
+say "Nice to meet you, " + name + "!"
 
-# Iterate through lists
-for num in numbers do
-    say num
+ask "Enter a number:" into num_str
+set num = int(num_str)
+say "Double: " + str(num * 2)
+```
+
+## Standard Library (40+ Functions)
+
+### Math & Numbers
+- `clamp(value, min, max)` - Constrain value between min and max
+- `min(...)` / `max(...)` - Find minimum/maximum
+- `sum(list)` - Sum all numbers
+- `average(list)` - Calculate mean
+- `round(n, decimals)` - Round number
+- `floor(n)` / `ceil(n)` - Round down/up
+- `sqrt(n)` - Square root
+- `abs(n)` - Absolute value
+
+### Random
+- `random_choice(...)` - Pick random item
+- `random_int(min, max)` - Random integer
+- `random_float()` - Random 0.0-1.0
+
+### String Utilities
+- `trim(s)` - Remove whitespace
+- `lower(s)` / `upper(s)` - Change case
+- `capitalize(s)` / `title(s)` - Capitalize
+- `split(s, delim)` - Split string
+- `join(list, sep)` - Join with separator
+- `replace(s, old, new)` - Replace text
+- `starts_with(s, prefix)` / `ends_with(s, suffix)`
+- `contains(s, substring)`
+
+### List Utilities
+- `reverse(list)` - Reverse order
+- `sort(list)` - Sort items
+- `len(list)` - Get length
+
+### Type Checking
+- `is_number(x)` / `is_string(x)` / `is_list(x)`
+- `is_empty(x)` - Check if empty
+- `type(x)` - Get type name
+
+See `tests/test_stdlib.quill` for examples of all functions!
+
+## Rich Error Messages
+
+Quill provides contextual error messages with source excerpts and hints:
+
+```
+✗ SyntaxError at line 4, column 10:
+  Expected THEN, got NEWLINE
+
+     4 | if x is 5
+                  ✗ ^
+
+  💡 Hint: An 'if' statement requires 'then' before the body
+```
+
+## Game Development Features
+
+Quill includes optional utilities perfect for text-based games and interactive fiction:
+
+### Multiple Choice
+```python
+choice "Attack" or "Defend" or "Run"
+# User's selection stored in 'answer' variable
+if answer is "Attack" then
+    say "You strike the enemy!"
 end
 ```
 
-## Built-in Functions
+### State Management
+```python
+# Jump to different sections
+goto town_entrance
 
-### Core Functions
-- `len(x)` - Get length of list or string
-- `str(x)` - Convert to string
-- `int(x)` - Convert to integer
-- `float(x)` - Convert to float
-- `min(...)` - Find minimum value
-- `max(...)` - Find maximum value
-- `sum(list)` - Sum all numbers in list
-- `range(start, end)` - Create list of numbers
-- `abs(x)` - Absolute value
-- `random()` - Random number 0-1
-- `randint(a, b)` - Random integer between a and b
+label town_entrance
+say "You arrive at the town gates."
+```
 
-### ⏱️ Timing Functions
-- `wait(seconds)` - Pause for specified seconds (can use decimals like 1.5)
-
-**Create dramatic pauses and control pacing!** See `docs/WAIT_FUNCTION.md` for details.
+### Timing & Effects
+- `wait(seconds)` - Pause execution (e.g., `wait(1.5)`)
 
 ### 🎒 Inventory System
 - `add_item(name)` - Add item to inventory

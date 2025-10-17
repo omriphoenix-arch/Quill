@@ -1,0 +1,7 @@
+# Quill Programming Language Dependencies
+
+# Optional: For GUI/image support
+# Pillow>=10.0.0
+
+# Core language requires only Python 3.7+ standard library
+# No mandatory dependencies!

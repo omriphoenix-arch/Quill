@@ -5,7 +5,15 @@ Handles window creation and widget rendering using Tkinter
 
 import tkinter as tk
 from tkinter import ttk, font as tkfont
-from PIL import Image, ImageTk
+
+# Optional PIL support for images
+try:
+    from PIL import Image, ImageTk
+    PIL_AVAILABLE = True
+except ImportError:
+    PIL_AVAILABLE = False
+    print("Note: PIL/Pillow not installed. Image support disabled.")
+    
 import os
 
 class GUIEngine:
@@ -206,6 +214,11 @@ class GUIEngine:
         
         x = int(self.evaluate(properties.get('x', 0)))
         y = int(self.evaluate(properties.get('y', 0)))
+        
+        if not PIL_AVAILABLE:
+            print(f"Warning: Cannot load image '{filepath}' - PIL/Pillow not installed")
+            print("Install with: pip install Pillow")
+            return
         
         try:
             # Load image
