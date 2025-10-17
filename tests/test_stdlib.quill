@@ -1,0 +1,53 @@
+# Test stdlib functions
+
+say "=== Math Utilities ==="
+set nums to [5, 2, 8, 1, 9]
+say "Numbers: " + str(nums)
+say "Min: " + str(min(nums))
+say "Max: " + str(max(nums))
+say "Sum: " + str(sum(nums))
+say "Average: " + str(average(nums))
+say ""
+say "Clamp 15 between 0-10: " + str(clamp(15, 0, 10))
+say "Round 3.7: " + str(round(3.7))
+say "Floor 3.7: " + str(floor(3.7))
+say "Ceil 3.2: " + str(ceil(3.2))
+say "Square root of 16: " + str(sqrt(16))
+
+say ""
+say "=== Random Utilities ==="
+say "Random choice from A,B,C: " + random_choice("A", "B", "C")
+say "Random int 1-10: " + str(random_int(1, 10))
+say "Random float 0-1: " + str(random_float())
+
+say ""
+say "=== String Utilities ==="
+set text to "  Hello World  "
+say "Original: '" + text + "'"
+say "Trimmed: '" + trim(text) + "'"
+say "Lower: " + lower(text)
+say "Upper: " + upper(text)
+say "Title: " + title(text)
+say ""
+set sentence to "one,two,three"
+say "Split '" + sentence + "': " + str(split(sentence, ","))
+set words to ["apple", "banana", "cherry"]
+say "Join with '-': " + join(words, "-")
+
+say ""
+say "=== List Utilities ==="
+set items to [3, 1, 4, 1, 5]
+say "Original: " + str(items)
+say "Sorted: " + str(sort(items))
+say "Reversed: " + str(reverse(items))
+
+say ""
+say "=== Type Checking ==="
+say "is_number(42): " + str(is_number(42))
+say "is_string('hi'): " + str(is_string("hi"))
+say "is_list([1,2]): " + str(is_list([1, 2]))
+say "is_empty(''): " + str(is_empty(""))
+say "is_empty('hello'): " + str(is_empty("hello"))
+
+say ""
+say "All stdlib tests passed!"

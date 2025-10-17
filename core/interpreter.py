@@ -40,8 +40,12 @@ class Interpreter:
         self.gui = GUIEngine(interpreter=self)  # GUI engine for desktop apps
         self.source = source  # Store source for error context
         
-        # Built-in functions
+        # Import standard library
+        from stdlib import get_stdlib_functions
+        
+        # Built-in functions (core + stdlib)
         self.builtins = {
+            # Basic type functions
             'len': lambda x: len(x),
             'str': lambda x: str(x),
             'int': lambda x: int(x),
@@ -49,12 +53,6 @@ class Interpreter:
             'type': lambda x: type(x).__name__,
             'range': lambda *args: list(range(*args)),
             'abs': lambda x: abs(x),
-            'min': lambda *args: min(args) if len(args) > 1 else min(args[0]),
-            'max': lambda *args: max(args) if len(args) > 1 else max(args[0]),
-            'sum': lambda x: sum(x),
-            'round': lambda x, n=0: round(x, n),
-            'random': lambda: random.random(),
-            'randint': lambda a, b: random.randint(a, b),
             # Timing functions
             'wait': lambda seconds: self._wait(seconds),
             # Inventory functions
@@ -70,6 +68,9 @@ class Interpreter:
             'has_save': lambda filename: self._has_save(filename),
             'delete_save': lambda filename: self._delete_save(filename),
         }
+        
+        # Add stdlib functions
+        self.builtins.update(get_stdlib_functions())
     
     def runtime_error(self, message, node=None, hint=None):
         """Raise a rich runtime error with context"""
