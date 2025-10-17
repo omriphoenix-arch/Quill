@@ -1,0 +1,8 @@
+# Test 1: Unterminated string
+say "Hello world
+
+# Test 2: Unknown character
+# set x @ 5
+
+# Test 3: Variable not defined (runtime)
+# say unknown_var

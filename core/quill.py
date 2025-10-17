@@ -48,14 +48,16 @@ def run_file(filename):
     except FileNotFoundError:
         print(error(f"File '{filename}' not found"))
         sys.exit(1)
-    except SyntaxError as e:
-        print(error(f"Syntax Error: {e}"))
-        sys.exit(1)
-    except RuntimeError as e:
-        print(error(f"Runtime Error: {e}"))
-        sys.exit(1)
     except Exception as e:
-        print(error(f"Error: {e}"))
+        # Check if it's a QuillError (has format_error method)
+        if hasattr(e, 'format_error'):
+            print(str(e))  # Already formatted
+        elif isinstance(e, SyntaxError):
+            print(error(f"Syntax Error: {e}"))
+        elif isinstance(e, RuntimeError):
+            print(error(f"Runtime Error: {e}"))
+        else:
+            print(error(f"Error: {e}"))
         sys.exit(1)
 
 def run_interactive():

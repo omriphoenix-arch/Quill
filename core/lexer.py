@@ -1,5 +1,5 @@
 """
-Lexer (Tokenizer) for StoryScript
+Lexer (Tokenizer) for Quill
 Breaks source code into tokens
 """
 
@@ -92,19 +92,22 @@ class TokenType(Enum):
     DOT = auto()
 
 class Token:
-    def __init__(self, type, value, line):
+    def __init__(self, type, value, line, column=0):
         self.type = type
         self.value = value
         self.line = line
+        self.column = column
     
     def __repr__(self):
-        return f"Token({self.type}, {self.value}, line {self.line})"
+        return f"Token({self.type}, {self.value}, line {self.line}, col {self.column})"
 
 class Lexer:
     def __init__(self, source):
         self.source = source
         self.pos = 0
         self.line = 1
+        self.column = 1
+        self.line_start_pos = 0  # Track start of current line for column calculation
         self.tokens = []
         
         # Keywords mapping
@@ -247,6 +250,10 @@ class Lexer:
     def advance(self):
         if self.pos < len(self.source) and self.source[self.pos] == '\n':
             self.line += 1
+            self.line_start_pos = self.pos + 1
+            self.column = 1
+        else:
+            self.column += 1
         self.pos += 1
     
     def skip_whitespace(self):
@@ -258,12 +265,35 @@ class Lexer:
             while self.current_char() and self.current_char() != '\n':
                 self.advance()
     
+    def get_column(self):
+        """Get current column (1-indexed)"""
+        return self.pos - self.line_start_pos + 1
+    
+    def add_token(self, token_type, value):
+        """Helper to add a token with current line and column"""
+        self.tokens.append(Token(token_type, value, self.line, self.get_column()))
+    
     def read_string(self):
+        start_line = self.line
+        start_col = self.get_column()
         quote_char = self.current_char()
         self.advance()  # Skip opening quote
         
         value = ''
         while self.current_char() and self.current_char() != quote_char:
+            # Strings cannot span multiple lines in Quill
+            if self.current_char() == '\n':
+                from errors import QuillSyntaxError, COMMON_HINTS
+                source_lines = self.source.split('\n')
+                source_line = source_lines[start_line - 1] if start_line <= len(source_lines) else ""
+                raise QuillSyntaxError(
+                    f"Unterminated string starting at column {start_col}",
+                    line=start_line,
+                    column=start_col,
+                    source_line=source_line,
+                    hint=COMMON_HINTS["unterminated_string"]
+                )
+            
             if self.current_char() == '\\':
                 self.advance()
                 if self.current_char() == 'n':
@@ -280,7 +310,16 @@ class Lexer:
         if self.current_char() == quote_char:
             self.advance()  # Skip closing quote
         else:
-            raise SyntaxError(f"Unterminated string at line {self.line}")
+            from errors import QuillSyntaxError, COMMON_HINTS
+            source_lines = self.source.split('\n')
+            source_line = source_lines[start_line - 1] if start_line <= len(source_lines) else ""
+            raise QuillSyntaxError(
+                f"Unterminated string (reached end of file)",
+                line=start_line,
+                column=start_col,
+                source_line=source_line,
+                hint=COMMON_HINTS["unterminated_string"]
+            )
         
         return value
     
@@ -312,122 +351,122 @@ class Lexer:
             
             # Newlines
             if self.current_char() == '\n':
-                self.tokens.append(Token(TokenType.NEWLINE, '\n', self.line))
+                self.add_token(TokenType.NEWLINE, '\n')
                 self.advance()
                 continue
             
             # Strings
             if self.current_char() in '"\'':
                 value = self.read_string()
-                self.tokens.append(Token(TokenType.STRING, value, self.line))
+                self.add_token(TokenType.STRING, value)
                 continue
             
             # Numbers
             if self.current_char().isdigit():
                 value = self.read_number()
-                self.tokens.append(Token(TokenType.NUMBER, value, self.line))
+                self.add_token(TokenType.NUMBER, value)
                 continue
             
             # Operators and punctuation
             if self.current_char() == '+':
-                self.tokens.append(Token(TokenType.PLUS, '+', self.line))
+                self.add_token(TokenType.PLUS, '+')
                 self.advance()
                 continue
             
             if self.current_char() == '-':
-                self.tokens.append(Token(TokenType.MINUS, '-', self.line))
+                self.add_token(TokenType.MINUS, '-')
                 self.advance()
                 continue
             
             if self.current_char() == '*':
                 if self.peek_char() == '*':
-                    self.tokens.append(Token(TokenType.POWER, '**', self.line))
+                    self.add_token(TokenType.POWER, '**')
                     self.advance()
                     self.advance()
                 else:
-                    self.tokens.append(Token(TokenType.MULTIPLY, '*', self.line))
+                    self.add_token(TokenType.MULTIPLY, '*')
                     self.advance()
                 continue
             
             if self.current_char() == '/':
-                self.tokens.append(Token(TokenType.DIVIDE, '/', self.line))
+                self.add_token(TokenType.DIVIDE, '/')
                 self.advance()
                 continue
             
             if self.current_char() == '%':
-                self.tokens.append(Token(TokenType.MODULO, '%', self.line))
+                self.add_token(TokenType.MODULO, '%')
                 self.advance()
                 continue
             
             if self.current_char() == '=':
                 if self.peek_char() == '=':
-                    self.tokens.append(Token(TokenType.EQUALS, '==', self.line))
+                    self.add_token(TokenType.EQUALS, '==')
                     self.advance()
                     self.advance()
                 else:
-                    self.tokens.append(Token(TokenType.ASSIGN, '=', self.line))
+                    self.add_token(TokenType.ASSIGN, '=')
                     self.advance()
                 continue
             
             if self.current_char() == '!':
                 if self.peek_char() == '=':
-                    self.tokens.append(Token(TokenType.NOT_EQUALS, '!=', self.line))
+                    self.add_token(TokenType.NOT_EQUALS, '!=')
                     self.advance()
                     self.advance()
                     continue
             
             if self.current_char() == '>':
                 if self.peek_char() == '=':
-                    self.tokens.append(Token(TokenType.GREATER_EQUAL, '>=', self.line))
+                    self.add_token(TokenType.GREATER_EQUAL, '>=')
                     self.advance()
                     self.advance()
                 else:
-                    self.tokens.append(Token(TokenType.GREATER, '>', self.line))
+                    self.add_token(TokenType.GREATER, '>')
                     self.advance()
                 continue
             
             if self.current_char() == '<':
                 if self.peek_char() == '=':
-                    self.tokens.append(Token(TokenType.LESS_EQUAL, '<=', self.line))
+                    self.add_token(TokenType.LESS_EQUAL, '<=')
                     self.advance()
                     self.advance()
                 else:
-                    self.tokens.append(Token(TokenType.LESS, '<', self.line))
+                    self.add_token(TokenType.LESS, '<')
                     self.advance()
                 continue
             
             if self.current_char() == ':':
-                self.tokens.append(Token(TokenType.COLON, ':', self.line))
+                self.add_token(TokenType.COLON, ':')
                 self.advance()
                 continue
             
             if self.current_char() == ',':
-                self.tokens.append(Token(TokenType.COMMA, ',', self.line))
+                self.add_token(TokenType.COMMA, ',')
                 self.advance()
                 continue
             
             if self.current_char() == '(':
-                self.tokens.append(Token(TokenType.LPAREN, '(', self.line))
+                self.add_token(TokenType.LPAREN, '(')
                 self.advance()
                 continue
             
             if self.current_char() == ')':
-                self.tokens.append(Token(TokenType.RPAREN, ')', self.line))
+                self.add_token(TokenType.RPAREN, ')')
                 self.advance()
                 continue
             
             if self.current_char() == '[':
-                self.tokens.append(Token(TokenType.LBRACKET, '[', self.line))
+                self.add_token(TokenType.LBRACKET, '[')
                 self.advance()
                 continue
             
             if self.current_char() == ']':
-                self.tokens.append(Token(TokenType.RBRACKET, ']', self.line))
+                self.add_token(TokenType.RBRACKET, ']')
                 self.advance()
                 continue
             
             if self.current_char() == '.':
-                self.tokens.append(Token(TokenType.DOT, '.', self.line))
+                self.add_token(TokenType.DOT, '.')
                 self.advance()
                 continue
             
@@ -435,10 +474,20 @@ class Lexer:
             if self.current_char().isalpha() or self.current_char() == '_':
                 value = self.read_identifier()
                 token_type = self.keywords.get(value.lower(), TokenType.IDENTIFIER)
-                self.tokens.append(Token(token_type, value, self.line))
+                self.add_token(token_type, value)
                 continue
             
-            raise SyntaxError(f"Unknown character '{self.current_char()}' at line {self.line}")
+            # Unknown character error
+            from errors import QuillSyntaxError
+            source_lines = self.source.split('\n')
+            source_line = source_lines[self.line - 1] if self.line <= len(source_lines) else ""
+            raise QuillSyntaxError(
+                f"Unknown character '{self.current_char()}'",
+                line=self.line,
+                column=self.get_column(),
+                source_line=source_line,
+                hint="Check for typos or unsupported characters"
+            )
         
-        self.tokens.append(Token(TokenType.EOF, None, self.line))
+        self.add_token(TokenType.EOF, None)
         return self.tokens
