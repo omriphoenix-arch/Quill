@@ -59,14 +59,31 @@ class QuillInstaller:
         
         # 2. Copy files
         print("📦 Copying files...")
+        
+        # Core directories (required)
         shutil.copytree(self.quill_dir / "core", install_dir / "core")
         shutil.copytree(self.quill_dir / "examples", install_dir / "examples")
         shutil.copytree(self.quill_dir / "docs", install_dir / "docs")
         
+        # Optional directories (copy if they exist)
+        if (self.quill_dir / "icons").exists():
+            shutil.copytree(self.quill_dir / "icons", install_dir / "icons")
+        if (self.quill_dir / "scripts").exists():
+            shutil.copytree(self.quill_dir / "scripts", install_dir / "scripts")
+        if (self.quill_dir / "tests").exists():
+            shutil.copytree(self.quill_dir / "tests", install_dir / "tests")
+        if (self.quill_dir / "games").exists():
+            shutil.copytree(self.quill_dir / "games", install_dir / "games")
+        
         # Copy launcher scripts
         shutil.copy(self.quill_dir / "quill.bat", install_dir / "quill.bat")
-        if (self.quill_dir / "README.md").exists():
-            shutil.copy(self.quill_dir / "README.md", install_dir / "README.md")
+        
+        # Copy documentation files
+        for doc_file in ["README.md", "QUICK_START.md", "LICENSE", "requirements.txt", "CHANGELOG.md"]:
+            if (self.quill_dir / doc_file).exists():
+                shutil.copy(self.quill_dir / doc_file, install_dir / doc_file)
+        
+        print(f"✓ Copied {len(list(install_dir.rglob('*')))} files")
         
         # 3. Add to PATH
         print("🔧 Adding to PATH...")
@@ -143,12 +160,28 @@ class QuillInstaller:
         
         # 2. Copy files
         print("📦 Copying files...")
+        
+        # Core directories (required)
         shutil.copytree(self.quill_dir / "core", install_dir / "core")
         shutil.copytree(self.quill_dir / "examples", install_dir / "examples")
         shutil.copytree(self.quill_dir / "docs", install_dir / "docs")
         
-        if (self.quill_dir / "README.md").exists():
-            shutil.copy(self.quill_dir / "README.md", install_dir / "README.md")
+        # Optional directories (copy if they exist)
+        if (self.quill_dir / "icons").exists():
+            shutil.copytree(self.quill_dir / "icons", install_dir / "icons")
+        if (self.quill_dir / "scripts").exists():
+            shutil.copytree(self.quill_dir / "scripts", install_dir / "scripts")
+        if (self.quill_dir / "tests").exists():
+            shutil.copytree(self.quill_dir / "tests", install_dir / "tests")
+        if (self.quill_dir / "games").exists():
+            shutil.copytree(self.quill_dir / "games", install_dir / "games")
+        
+        # Copy documentation files
+        for doc_file in ["README.md", "QUICK_START.md", "LICENSE", "requirements.txt", "CHANGELOG.md"]:
+            if (self.quill_dir / doc_file).exists():
+                shutil.copy(self.quill_dir / doc_file, install_dir / doc_file)
+        
+        print(f"✓ Copied {len(list(install_dir.rglob('*')))} files")
         
         # 3. Create launcher script
         print("🔧 Creating launcher script...")
@@ -329,6 +362,33 @@ main()
         
         return True
     
+    def check_requirements(self):
+        """Check if system meets requirements"""
+        print("🔍 Checking requirements...")
+        
+        # Check Python version
+        if sys.version_info < (3, 7):
+            print(f"❌ Python 3.7+ required, you have {sys.version.split()[0]}")
+            return False
+        print(f"✓ Python {sys.version.split()[0]}")
+        
+        # Check if core directory exists
+        if not (self.quill_dir / "core").exists():
+            print(f"❌ Core directory not found in {self.quill_dir}")
+            print("   Make sure you're running setup.py from the Quill root directory")
+            return False
+        print(f"✓ Core files found")
+        
+        # Optional: Check for PIL (not required)
+        try:
+            import PIL
+            print(f"✓ PIL/Pillow installed (optional - enables GUI features)")
+        except ImportError:
+            print(f"⚠ PIL/Pillow not installed (optional - GUI features disabled)")
+        
+        print()
+        return True
+    
     def run(self):
         """Run the installer"""
         self.print_banner()
@@ -336,6 +396,12 @@ main()
         print(f"System: {self.system}")
         print(f"Python: {sys.version.split()[0]}")
         print(f"Admin/Sudo: {'Yes' if self.is_admin else 'No'}")
+        print()
+        
+        # Check requirements first
+        if not self.check_requirements():
+            return False
+        
         print()
         
         # Show menu
