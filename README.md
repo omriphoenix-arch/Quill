@@ -1,12 +1,26 @@
 # Quill - A Modern Scripting Language
 
+**Version 1.0.2** - Now with modular imports and professional project structure!
+
 A lightweight, beginner-friendly scripting language with rich error messages, comprehensive standard library, and optional game development utilities. Perfect for learning to code, automation, data processing, and interactive applications!
+
+## ✨ What's New in v1.0.2
+
+- **🎯 Modular Import System** - Python-like `import` and `from ... import` syntax
+- **📁 Professional Structure** - Reorganized project with logical directory layout
+- **🔧 Critical Fixes** - Installer license correction, path resolution, VS Code integration
+- **⚡ Backward Compatible** - Legacy mode available with `--legacy` flag
+
+[See full changelog](CHANGELOG.md) | [Upgrade guide](#upgrading-from-101)
+
+---
 
 ## Why Quill?
 
 - **🎯 Beginner-friendly** - Natural, readable syntax that's easy to understand
 - **💡 Rich error messages** - Contextual errors with hints and source excerpts
 - **📚 Comprehensive stdlib** - 40+ built-in functions for common tasks
+- **🧩 Modular Design** - Import only what you need (NEW in v1.0.2!)
 - **🧹 Clean syntax** - No semicolons, Python-like readability
 - **🎮 Game-ready** - Optional built-in utilities for game development
 - **⚡ Fast to learn** - Start coding in minutes
@@ -15,6 +29,7 @@ A lightweight, beginner-friendly scripting language with rich error messages, co
 
 ### Core Language Features
 - ✅ Variables and data types (numbers, strings, booleans, lists)
+- ✅ **Modular imports** - `import game`, `from io import read_text` (NEW!)
 - ✅ Arithmetic operations (+, -, *, /, %, **)
 - ✅ Comparison operators (==, !=, <, >, <=, >=)
 - ✅ Boolean logic (and, or, not)
@@ -25,17 +40,22 @@ A lightweight, beginner-friendly scripting language with rich error messages, co
 - ✅ 40+ built-in functions (math, string, list utilities)
 - ✅ Comments with #
 
+### Available Modules (v1.0.2)
+- **`game`** - Inventory system, save/load, wait, choices
+- **`io`** - File operations (read, write, append, etc.)
+- Import what you need or use `--legacy` for auto-imports!
+
 ### Output & Input
 - `say` / `print` - Display output
 - `ask` - Get user input
 - Rich formatted output with color support
 
-### Game Development Utilities (Optional)
-- `choice` - Multiple choice selections
+### Game Development Utilities
+- `choice` - Multiple choice selections (from `game` module)
 - `goto` and `label` - State management
-- `wait()` - Timed delays
-- Inventory system - Item management
-- Save/Load system - Persistent state
+- `wait()` - Timed delays (from `game` module)
+- Inventory system - Item management (from `game` module)
+- Save/Load system - Persistent state (from `game` module)
 
 ## Quick Start
 
@@ -44,6 +64,23 @@ A lightweight, beginner-friendly scripting language with rich error messages, co
 say "Hello, World!"
 # or use standard print
 print "Hello, World!"
+```
+
+### Using Modules (NEW in v1.0.2!)
+```python
+# Import specific functions
+from io import read_text, write_text
+
+# Write and read a file
+write_text("message.txt", "Hello from Quill!")
+set content = read_text("message.txt")
+say content
+
+# Import entire module
+import game
+game.add_item("sword")
+game.add_item("shield")
+game.show_inventory()
 ```
 
 ### Variables and Math
@@ -477,6 +514,92 @@ That's it! No installers, no complex setup needed.
 - [documentation/documentation/QUICK_START.md](documentation/documentation/QUICK_START.md) - Get started quickly
 - [documentation/documentation/INSTALLATION_GUIDE.md](documentation/documentation/INSTALLATION_GUIDE.md) - Complete guide
 - [documentation/documentation/INSTALLER_OPTIONS.md](documentation/documentation/INSTALLER_OPTIONS.md) - Compare installers
+
+---
+
+## Upgrading from v1.0.1
+
+### No Breaking Changes! 🎉
+
+Quill v1.0.2 is **fully backward compatible** with v1.0.1. Your existing programs will continue to work!
+
+### Two Migration Options
+
+#### Option 1: Modern Import Syntax (Recommended)
+Update your programs to use explicit imports for better clarity and performance:
+
+```python
+# Add imports at the top of your file
+from game import wait, add_item, show_inventory, save_game, load_game
+from io import read_text, write_text
+
+# Then use functions as before
+add_item("sword")
+show_inventory()
+wait(2)
+```
+
+**Benefits:**
+- ✅ Clear dependencies
+- ✅ Better performance (lazy loading)
+- ✅ Easier to maintain
+- ✅ Modern best practice
+
+#### Option 2: Legacy Mode (Quick & Easy)
+Run existing programs with the `--legacy` flag:
+
+```bash
+quill --legacy your_program.quill
+# or
+python core/quill.py --legacy your_program.quill
+```
+
+**Use legacy mode if:**
+- You have many existing programs
+- You want minimal changes right now
+- You're not ready to refactor yet
+
+### What's Different?
+
+| Feature | v1.0.1 | v1.0.2 | v1.0.2 Legacy Mode |
+|---------|--------|--------|-------------------|
+| `wait()` | Auto-available | Needs `from game import wait` | Auto-available |
+| `add_item()` | Auto-available | Needs `from game import add_item` | Auto-available |
+| File I/O | Not available | Needs `from io import read_text` | Not available |
+| Performance | Good | Better (lazy loading) | Good |
+
+### Migration Example
+
+**Old code (v1.0.1):**
+```python
+add_item("sword")
+add_item("shield")
+show_inventory()
+wait(2)
+```
+
+**New code (v1.0.2):**
+```python
+from game import add_item, show_inventory, wait
+
+add_item("sword")
+add_item("shield")
+show_inventory()
+wait(2)
+```
+
+**Or run old code with:**
+```bash
+quill --legacy old_program.quill
+```
+
+### Need Help?
+
+- Check [examples/module_system_demo.quill](examples/module_system_demo.quill) for comprehensive import examples
+- See [CHANGELOG.md](CHANGELOG.md) for complete list of changes
+- All example files have been updated to show modern syntax
+
+---
 
 ## Project Structure
 

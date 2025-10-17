@@ -1,17 +1,17 @@
-# Quill v1.0.1-beta
+# Quill v1.0.2
 
-**Version:** 1.0.1-beta  
-**Release Date:** October 16, 2025  
-**Status:** Beta (Patch Release)  
+**Version:** 1.0.2  
+**Release Date:** October 17, 2025  
+**Status:** Stable Release  
 **License:** Custom (See LICENSE)  
 
 ---
 
 ## Version Information
 
-### Current Version: 1.0.1-beta
+### Current Version: 1.0.2
 
-This is a beta patch release focusing on bug fixes and minor improvements based on initial testing of v1.0.0.
+This is a major feature release introducing a modular import system and professional project reorganization.
 
 ### Version Format
 
@@ -28,14 +28,59 @@ Quill follows [Semantic Versioning](https://semver.org/) (MAJOR.MINOR.PATCH):
 
 ---
 
+## What's New in v1.0.2
+
+### 🎉 Major Features
+
+#### 1. Modular Import System
+- Python-like `import` and `from ... import` syntax
+- Lazy module loading for better performance
+- Namespace management
+- Backward compatible with `--legacy` flag
+
+#### 2. Professional Project Structure
+- Reorganized 83 files into logical directories
+- `installer/` - All installation tools
+- `documentation/` - Project documentation
+- `resources/` - Icons and assets
+- `tools/` - Development utilities
+- 67% reduction in root directory clutter
+
+#### 3. Enhanced Installers
+- Fixed Win Error 3 (path resolution)
+- Correct Quill license display (NOT MIT)
+- Better error handling and logging
+- Updated for new directory structure
+
+#### 4. Updated Examples
+- All examples now use modern import syntax
+- New comprehensive module system demo
+- Backward compatibility maintained
+
+### 🛠️ Bug Fixes
+- Fixed installer path resolution issues
+- Corrected license display in GUI installer
+- Fixed VS Code task handling for .py files
+- Updated all internal paths for new structure
+
+---
+
 ## What's in This Release
 
-### Core Language (v1.0.0)
+### Core Language (v1.0.2)
 - Complete interpreter with all core features
+- Modular import system (NEW!)
 - Variables, operators, control flow, functions
 - Built-in functions for common tasks
 - Error handling with helpful messages
 - Cross-platform support (Windows, macOS, Linux)
+- Legacy mode for backward compatibility (NEW!)
+
+### Modules (v1.0.2 - NEW!)
+- **game module**: Inventory, save/load, wait, etc.
+- **io module**: File operations (read, write, append, etc.)
+- Lazy loading for performance
+- Clear error messages
 
 ### VS Code Extension (v1.2.1)
 - Full syntax highlighting
@@ -43,11 +88,7 @@ Quill follows [Semantic Versioning](https://semver.org/) (MAJOR.MINOR.PATCH):
 - 3 color themes
 - Auto-indentation
 - Code folding
-
-### Documentation (v1.0.0)
-- Complete language reference
-- Keywords guide
-- Beginner tutorial
+- Smart build tasks (NEW!)
 - Example programs
 - Error messages guide
 
