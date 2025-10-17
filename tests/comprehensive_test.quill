@@ -1,6 +1,9 @@
 # QUILL COMPREHENSIVE FEATURE TEST
 # Testing ALL major language features at once
 
+# Import required game module functions (v1.0.2+)
+from game import add_item, has_item, remove_item, wait, save_game
+
 say "================================================================"
 say "           QUILL COMPREHENSIVE FEATURE TEST"
 say "================================================================"
