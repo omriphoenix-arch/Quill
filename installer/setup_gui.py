@@ -39,8 +39,16 @@ class QuillInstallerGUI:
         
         # Installer state
         self.system = platform.system()
-        # Get project root (parent of installer directory)
-        self.quill_dir = Path(__file__).parent.parent.absolute()
+        
+        # Get project root - handle both PyInstaller and normal Python execution
+        if getattr(sys, 'frozen', False):
+            # Running as compiled .exe (PyInstaller)
+            # sys._MEIPASS is the temp folder where PyInstaller extracts files
+            self.quill_dir = Path(sys._MEIPASS).absolute()
+        else:
+            # Running as normal Python script (parent of installer directory)
+            self.quill_dir = Path(__file__).parent.parent.absolute()
+            
         self.install_dir = None
         self.current_page = 0
         
@@ -64,28 +72,44 @@ class QuillInstallerGUI:
     
     def create_widgets(self):
         """Create main UI layout"""
-        # Header
-        header_frame = tk.Frame(self.root, bg="#4A148C", height=80)
+        # Modern color scheme
+        PRIMARY_COLOR = "#6A1B9A"  # Purple
+        SECONDARY_COLOR = "#9C27B0"  # Light purple
+        ACCENT_COLOR = "#E1BEE7"  # Very light purple
+        BG_COLOR = "#FAFAFA"  # Off-white
+        
+        # Header with gradient effect
+        header_frame = tk.Frame(self.root, bg=PRIMARY_COLOR, height=100)
         header_frame.pack(fill=tk.X)
         header_frame.pack_propagate(False)
         
+        # Title with better typography
         title_label = tk.Label(
             header_frame, 
-            text="Quill Language Installer",
-            font=("Arial", 20, "bold"),
-            bg="#4A148C",
+            text="🪶 Quill Programming Language",
+            font=("Segoe UI", 24, "bold"),
+            bg=PRIMARY_COLOR,
             fg="white"
         )
-        title_label.pack(pady=20)
+        title_label.pack(pady=15)
+        
+        subtitle_label = tk.Label(
+            header_frame,
+            text="Installation Wizard v1.0.2",
+            font=("Segoe UI", 11),
+            bg=PRIMARY_COLOR,
+            fg=ACCENT_COLOR
+        )
+        subtitle_label.pack()
         
         # Main content area with scrollbar
-        content_container = tk.Frame(self.root, bg="white")
-        content_container.pack(fill=tk.BOTH, expand=True, padx=20, pady=20)
+        content_container = tk.Frame(self.root, bg=BG_COLOR)
+        content_container.pack(fill=tk.BOTH, expand=True, padx=30, pady=25)
         
         # Create canvas and scrollbar for scrollable content
-        self.canvas = tk.Canvas(content_container, bg="white", highlightthickness=0)
+        self.canvas = tk.Canvas(content_container, bg=BG_COLOR, highlightthickness=0)
         scrollbar = tk.Scrollbar(content_container, orient=tk.VERTICAL, command=self.canvas.yview)
-        self.content_frame = tk.Frame(self.canvas, bg="white")
+        self.content_frame = tk.Frame(self.canvas, bg=BG_COLOR)
         
         # Configure scrolling
         self.content_frame.bind(
@@ -108,57 +132,62 @@ class QuillInstallerGUI:
             self.canvas.yview_scroll(int(-1*(event.delta/120)), "units")
         self.canvas.bind_all("<MouseWheel>", _on_mousewheel)
         
-        # Footer with buttons
-        footer_frame = tk.Frame(self.root, bg="#f0f0f0", height=80)
+        # Modern footer with shadow effect
+        footer_frame = tk.Frame(self.root, bg="#EEEEEE", height=80)
         footer_frame.pack(fill=tk.X, side=tk.BOTTOM)
         footer_frame.pack_propagate(False)
         
-        # Buttons
-        button_frame = tk.Frame(footer_frame, bg="#f0f0f0")
-        button_frame.pack(side=tk.RIGHT, padx=20, pady=10)
+        # Buttons with modern styling
+        button_frame = tk.Frame(footer_frame, bg="#EEEEEE")
+        button_frame.pack(side=tk.RIGHT, padx=30, pady=15)
         
         self.back_button = tk.Button(
             button_frame,
-            text="< Back",
+            text="← Back",
             command=self.go_back,
-            width=12,
+            width=14,
             height=2,
             state=tk.DISABLED,
-            font=("Arial", 10),
-            relief=tk.RAISED,
-            bd=2
+            font=("Segoe UI", 11),
+            bg="white",
+            fg="#424242",
+            relief=tk.FLAT,
+            bd=1,
+            cursor="hand2"
         )
-        self.back_button.pack(side=tk.LEFT, padx=5)
+        self.back_button.pack(side=tk.LEFT, padx=8)
         
         self.next_button = tk.Button(
             button_frame,
-            text="Next >",
+            text="Next →",
             command=self.go_next,
-            width=12,
+            width=14,
             height=2,
-            bg="#6A1B9A",  # Lighter purple for better visibility
+            bg=SECONDARY_COLOR,
             fg="white",
-            font=("Arial", 10, "bold"),
-            relief=tk.RAISED,
-            bd=2,
-            activebackground="#8E24AA",  # Even lighter when clicked
-            activeforeground="white",
-            cursor="hand2"
+            font=("Segoe UI", 11, "bold"),
+            relief=tk.FLAT,
+            bd=0,
+            cursor="hand2",
+            activebackground="#8E24AA",
+            activeforeground="white"
         )
-        self.next_button.pack(side=tk.LEFT, padx=5)
+        self.next_button.pack(side=tk.LEFT, padx=8)
         
         self.cancel_button = tk.Button(
             button_frame,
             text="Cancel",
             command=self.cancel_install,
-            width=12,
+            width=14,
             height=2,
-            font=("Arial", 10),
-            relief=tk.RAISED,
-            bd=2,
+            bg="white",
+            fg="#424242",
+            font=("Segoe UI", 11),
+            relief=tk.FLAT,
+            bd=1,
             cursor="hand2"
         )
-        self.cancel_button.pack(side=tk.LEFT, padx=5)
+        self.cancel_button.pack(side=tk.LEFT, padx=8)
     
     def clear_content(self):
         """Clear content frame"""
@@ -170,42 +199,65 @@ class QuillInstallerGUI:
         self.clear_content()
         self.current_page = 0
         self.back_button.config(state=tk.DISABLED)
-        self.next_button.config(state=tk.NORMAL, text="Next >")
+        self.next_button.config(state=tk.NORMAL, text="Next →")
         
-        # Welcome message
+        # Welcome message with modern styling
         welcome_label = tk.Label(
             self.content_frame,
-            text="Welcome to the Quill Language Setup Wizard",
-            font=("Arial", 14, "bold"),
-            bg="white"
+            text="Welcome to Quill Setup",
+            font=("Segoe UI", 18, "bold"),
+            bg="#FAFAFA",
+            fg="#4A148C"
         )
-        welcome_label.pack(pady=20)
+        welcome_label.pack(pady=(20, 10))
         
-        # Description
-        desc_text = """This wizard will guide you through the installation of Quill, 
-a modern scripting language with rich error messages and 
-comprehensive standard library.
+        # Version subtitle
+        version_label = tk.Label(
+            self.content_frame,
+            text="Version 1.0.2 - October 2025",
+            font=("Segoe UI", 10),
+            bg="#FAFAFA",
+            fg="#757575"
+        )
+        version_label.pack(pady=(0, 20))
+        
+        # Description with better formatting
+        desc_text = """This wizard will guide you through installing Quill,
+a modern, beginner-friendly programming language.
 
-Quill includes:
-• Full interpreter with module system
-• 40+ built-in utility functions
-• File I/O and game development modules
-• Complete documentation and examples
-• Zero external dependencies
+✨ What's Included:
+  • Full interpreter with Python-like module system
+  • 40+ built-in utility functions
+  • File I/O and game development modules
+  • Complete documentation and examples
+  • Zero external dependencies - pure Python!
 
-Click Next to continue."""
+📦 Installation Size: ~1.3 MB
+⏱️ Installation Time: < 30 seconds
+
+Click Next to begin the installation."""
         
         desc_label = tk.Label(
             self.content_frame,
             text=desc_text,
-            font=("Arial", 10),
-            bg="white",
-            justify=tk.LEFT
+            font=("Segoe UI", 10),
+            bg="#FAFAFA",
+            fg="#424242",
+            justify=tk.LEFT,
+            wraplength=550
         )
-        desc_label.pack(pady=10, padx=20)
+        desc_label.pack(pady=20, padx=30)
         
-        # System info
-        info_frame = tk.LabelFrame(self.content_frame, text="System Information", bg="white")
+        # System info card
+        info_frame = tk.LabelFrame(
+            self.content_frame, 
+            text="  System Information  ",
+            bg="white",
+            font=("Segoe UI", 10, "bold"),
+            fg="#6A1B9A",
+            relief=tk.FLAT,
+            bd=2
+        )
         info_frame.pack(pady=20, padx=20, fill=tk.X)
         
         tk.Label(info_frame, text=f"Operating System: {self.system}", bg="white", anchor="w").pack(fill=tk.X, padx=10, pady=2)
